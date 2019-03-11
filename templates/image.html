@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% block title %}
+    Image
+{% endblock %}
+
+{% block body %}
+
+    <!--Listing all images...-->
+    <div>
+        <h3>All images...</h3>
+        <ul class="list-group">
+            {% for img in images.listAllImages() %}
+            <li class="list-group-item"><a href="images/{{img.id}}"> Image id: {{img.id}}</a></li>
+            {% endfor %}
+        </ul>
+        <br><br>
+    </div>
+
+{% endblock %}

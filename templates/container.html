@@ -21,14 +21,14 @@
             <button type="submit" name="my_btn" class="btn btn-primary" value="add">Add Container</button>
         </div>
         <!--# search bar-->
-        <div class="container-fluid well col-md-12">
-            <input type="text" name="search" placeholder="Search...">
-        </div>
-
+       <div class="searchBar">
+        <i class="fa fa-search searchIcon" aria-hidden="true"></i>
+        <input type="text" class="searchInput ng-pristine ng-valid ng-empty ng-touched" ng-model="$ctrl.state.textFilter" ng-change="$ctrl.onTextFilterChange()" placeholder="Search..." auto-focus="">
+      </div>
         <!--table-->
         <div class="table-responsive">
 
-            <table class="container table table-hover table-dark">
+            <table class="container table table-hover table-filters nowrap-cells table-dark">
                 <thead>
                 <tr>
                     <th scope="col">

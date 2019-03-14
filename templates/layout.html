@@ -2,6 +2,9 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
+         <meta http-equiv="X-UA-Compatible" content="IE=edge">
+         <meta name="description" content="">
+        <meta name="author" content="">
         <title>
             {% block title %}
             {% endblock %} Monitoring
@@ -9,6 +12,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}" >
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico')}}" >
+    <!-- Favicon icon -->
+        <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='/assets/images/favicon.png')}}">
+        <link href="{{url_for('static', filename='/assets/libs/flot/css/float-chart.css')}}" rel="stylesheet">
+    <!-- Custom CSS -->
+        <link href="{{url_for('static', filename='/assets/css/style.min.css')}}" rel="stylesheet">
     </head>
     <body class="container-fluid">
 
@@ -29,6 +37,32 @@
         </div>
     <script src="{{url_for('static', filename='jquery.min.js')}}"></script>
     <script type="text/javascript" href="{{url_for('static', filename='js/bootstrap.min.js')}}" ></script>
+        <script src="{{url_for('static', filename='/assets/libs/jquery/dist/jquery.min.js')}}"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="{{url_for('static', filename='/assets/libs/popper.js/dist/umd/popper.min.js')}}"></script>
+    <script src="{{url_for('static', filename='/assets/libs/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static', filename='/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='/assets/extra-libs/sparkline/sparkline.js')}}"></script>
+    <!--Wave Effects -->
+    <script src="{{url_for('static', filename='js/waves.js')}}"></script>
+    <!--Menu sidebar -->
+    <script src="{{url_for('static', filename='js/sidebarmenu.js')}}"></script>
+    <!--Custom JavaScript -->
+    <script src="{{url_for('static', filename='js/custom.min.js')}}"></script>
+    <!--This page JavaScript -->
+    <!-- <script src="../../dist/js/pages/dashboards/dashboard1.js"></script> -->
+    <!-- Charts js Files -->
+    <script src="{{url_for('static', filename='/assets/libs/flot/excanvas.js')}}"></script>
+    <script src="{{url_for('static', filename='/assets/libs/flot/jquery.flot.js')}}"></script>
+    <script src="{{url_for('static', filename='/assets/libs/flot/jquery.flot.pie.js')}}"></script>
+    <script src="{{url_for('static', filename='/assets/libs/flot/jquery.flot.time.js')}}"></script>
+
+
+    <script src="{{url_for('static', filename='/assets/libs/flot/jquery.flot.stack.js')}}"></script>
+    <script src="{{url_for('static', filename='/assets/libs/flot/jquery.flot.crosshair.js')}}"></script>
+    <script src="{{url_for('static', filename='/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js')}}"></script>
+    <!--<script src="{{url_for('static', filename='/assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js')}}"></script>-->
+    <script src="{{url_for('static', filename='js/pages/chart/chart-page-init.js')}}"></script>
         {% block scripts %}
 
 

@@ -2,8 +2,6 @@ import docker
 
 
 class Container:
-
-
     client = docker.from_env()
     resourceID = base_url = 'unix://var/run/docker.sock'
 
@@ -15,12 +13,12 @@ class Container:
         print("Printing stats")
         response = docker.APIClient(self.resourceID).stats(containerID, stream=False)
         print(response['cpu_stats'])
+
     #
     # def calculateCPUPercentUnix (previousCPU, previousSystemuint64, StatsJSON):
     #     cpuPercent = 0.0
     #     cpuDelta = v.CPUStats.CPUUsage.TotalUsage - previousCPU
     #     pass
-
 
     def stream(self):
         for container in self.client.containers.list():
@@ -54,7 +52,7 @@ class Container:
 
     def removeContainer(self, containerID):
         print("Removing container " + containerID)
-        docker.api.APIClient(containerID).remove_container(containerID)
+        docker.api.APIClient(self.resourceID).remove_container(containerID)
 
     def containerRunningProcesses(self, containerID):
         print("Displaying running processes")
@@ -73,9 +71,8 @@ class Container:
         docker.APIClient(self.resourceID).rename(containerID, newName)
 
     def inspectContainer(self, containerID):
-        print("Printing detailed information of " +  containerID)
+        print("Printing detailed information of " + containerID)
         print(docker.APIClient(self.resourceID).inspect_container(containerID))
-
 
     def listRunningContainer(self):
         return self.client.containers.list()

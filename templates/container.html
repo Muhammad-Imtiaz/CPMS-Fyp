@@ -5,150 +5,181 @@
 {% block body %}
 
 
-<div class="container">
+    <div class="container">
 
-    <form action="" method="post">
-        <div class="well col-md-12 field is-grouped ">
-            <div class="control btn-group">
-                <button type="submit" name="my_btn" id="start" class="btn btn-success" value="start" disabled>Start</button>
-                <button type="submit" name="my_btn" id="stop" class="btn btn-danger" value="stop" disabled>Stop</button>
-                <button type="submit" name="my_btn" id="kill" class="btn btn-danger" value="kill" disabled>Kill</button>
-                <button type="submit" name="my_btn" id="restart" class="btn btn-primary" value="restart" disabled>Restart</button>
-                <button type="submit" name="my_btn" id="pause" class="btn btn-primary" value="pause" disabled>Pause</button>
-                <button type="submit" name="my_btn" id="resume" class="btn btn-primary" value="resume" disabled>Resume</button>
-                <button type="submit" name="my_btn" id="remove" class="btn btn-danger" value="remove" disabled>Remove</button>
+        <form action="" method="post">
+
+            <div class="myrow">
+
+                <div class="well col-md-12 field is-grouped ">
+                    <div class="control btn-group">
+                        <button type="submit" name="my_btn" id="start" class="btn btn-success" value="start" disabled>
+                            Start
+                        </button>
+                        <button type="submit" name="my_btn" id="stop" class="btn btn-danger" value="stop" disabled>Stop
+                        </button>
+                        <button type="submit" name="my_btn" id="kill" class="btn btn-danger" value="kill" disabled>Kill
+                        </button>
+                        <button type="submit" name="my_btn" id="restart" class="btn btn-primary" value="restart" disabled>
+                            Restart
+                        </button>
+                        <button type="submit" name="my_btn" id="pause" class="btn btn-primary" value="pause" disabled>
+                            Pause
+                        </button>
+                        <button type="submit" name="my_btn" id="resume" class="btn btn-primary" value="resume" disabled>
+                            Resume
+                        </button>
+                        <button type="submit" name="my_btn" id="remove" class="btn btn-danger" value="remove" disabled>
+                            Remove
+                        </button>
+                    </div>
+                    <button type="submit" name="my_btn" class="btn btn-primary" value="add">Add Container</button>
+                </div>
+
             </div>
-            <button type="submit" name="my_btn" class="btn btn-primary" value="add">Add Container</button>
-        </div>
-        <!--# search bar-->
-       <div class="searchBar">
-        <i class="fa fa-search searchIcon" aria-hidden="true"></i>
-        <input type="text" class="searchInput ng-pristine ng-valid ng-empty ng-touched" ng-model="$ctrl.state.textFilter" ng-change="$ctrl.onTextFilterChange()" placeholder="Search..." auto-focus="">
-      </div>
-        <!--table-->
-        <div class="table-responsive">
+            <!--# search bar-->
+            <div class="myrow searchBar">
+                <i class="fa fa-search searchIcon" aria-hidden="true"></i>
+                <input type="text" class="searchInput ng-pristine ng-valid ng-empty ng-touched"
+                       ng-model="$ctrl.state.textFilter" ng-change="$ctrl.onTextFilterChange()" placeholder="Search..."
+                       auto-focus="">
+            </div>
+            <!--table-->
+            <div class="table-responsive">
 
-            <table class="container table table-hover table-filters nowrap-cells table-dark">
-                <thead>
-                <tr>
-                    <th scope="col">
-                        <div class="form-check">
-                            <input type="checkbox" class="js-selectall form-check-input" id="exampleCheck" data-target=".js-selectall1" />
-                            <label class="form-check-label" for="exampleCheck"></label>
-                        </div>
-                    </th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Quick actions</th>
-                    <th scope="col">Stack</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Created</th>
-                    <th scope="col">IP Address</th>
-                    <th scope="col">Published Ports</th>
-                    <th scope="col">Ownership</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for container in containers.listAllContainers() %}
-                {% set dict = container.attrs %}
-                <tr>
-                    <th scope="row">
-                        <div class="form-check">
-                            <input type="checkbox" name="container" class="form-check-input js-selectall1" id="{{container.short_id}}"
-                                   value="{{container.short_id}}">
-                            <label class="form-check-label" for="{{container.short_id}}"></label>
-                        </div>
-                    </th>
-                    <td>{{container.attrs.get('Name')}}</td>
-                    <td>{{ dict['State']['Status'] }}</td>
-                    <td>@mdo</td>
-                    <td>Mark</td>
-                    <td>{{dict['Config']['Image']}}</td>
-                    <td>{{container.attrs.get('Created').rsplit('.', 1)[0]}}</td>
-                    <td>{{dict['NetworkSettings']['Networks']['bridge']['IPAddress']}}</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                </tbody>
+                <table class="container table table-hover table-filters nowrap-cells table-dark">
+                    <thead>
+                    <tr>
+                        <th scope="col">
+                            <div class="form-check">
+                                <input type="checkbox" class="js-selectall form-check-input" id="exampleCheck"
+                                       data-target=".js-selectall1"/>
+                                <label class="form-check-label" for="exampleCheck"></label>
+                            </div>
+                        </th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Quick actions</th>
+                        <th scope="col">Stack</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">IP Address</th>
+                        <th scope="col">Published Ports</th>
+                        <th scope="col">Ownership</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for container in containers.listAllContainers() %}
+                    {% set dict = container.attrs %}
+                    <tr>
+                        <th scope="row">
+                            <div class="form-check">
+                                <input type="checkbox" name="container" class="form-check-input js-selectall1"
+                                       id="{{container.short_id}}"
+                                       value="{{container.short_id}}">
+                                <label class="form-check-label" for="{{container.short_id}}"></label>
+                            </div>
+                        </th>
+                        <td> {{container.attrs.get('Name')}}</td>
+                        <td>{{ dict['State']['Status'] }} </td>
+                        <td>@mdo</td>
+                        <td>Mark</td>
+                        <td>{{dict['Config']['Image']}}</td>
+                        <td>{{container.attrs.get('Created').rsplit('.', 1)[0]}}</td>
+                        <td>{{dict['NetworkSettings']['Networks']['bridge']['IPAddress']}}</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    </tbody>
 
-                        {% block scripts %}
-                        {{ super() }}
-                        <script type="text/javascript">
+                    {% block scripts %}
+                    {{ super() }}
+                    <script type="text/javascript">
 
-                             $('.js-selectall').on('change', function() {
-                              var isChecked = $(this).prop("checked");
-                              var selector = $(this).data('target');
-                              $(selector).prop("checked", isChecked);
-                               if (isChecked == true){
-                                $('#start').prop('disabled', false);
-                                $('#resume').prop('disabled', true);
-                                $('#stop').prop('disabled', false);
-                                $('#restart').prop('disabled', false);
-                                $('#kill').prop('disabled', false);
-                                $('#pause').prop('disabled', false);
-                                $('#remove').prop('disabled', false);
-                               }else{
-                                    $('#start').prop('disabled', true);
-                                    $('#resume').prop('disabled', true);
-                                    $('#stop').prop('disabled', true);
-                                    $('#restart').prop('disabled', true);
-                                    $('#kill').prop('disabled', true);
-                                    $('#pause').prop('disabled', true);
-                                    $('#remove').prop('disabled', true);
-                               }
-                            });
-
-                            $(document).ready(function(){
-                                $('input[type="checkbox"]').click(function(){
-
-                                var id = $(this).closest("tr").find('td:eq(1)').text();
-
-                                if($(this).prop("checked") == true && id === 'running'){
-
-                                    $('#start').prop('disabled', true);
+                                 $('.js-selectall').on('change', function() {
+                                  var isChecked = $(this).prop("checked");
+                                  var selector = $(this).data('target');
+                                  $(selector).prop("checked", isChecked);
+                                   if (isChecked == true){
+                                    $('#start').prop('disabled', false);
                                     $('#resume').prop('disabled', true);
                                     $('#stop').prop('disabled', false);
                                     $('#restart').prop('disabled', false);
                                     $('#kill').prop('disabled', false);
                                     $('#pause').prop('disabled', false);
                                     $('#remove').prop('disabled', false);
-                                }
-                                else if($(this).prop("checked") == true && (id === 'exited' || id === 'created')){
-                                    $('#stop').prop('disabled', true);
-                                    $('#pause').prop('disabled', true);
-                                    $('#resume').prop('disabled', true);
+                                   }else{
+                                        $('#start').prop('disabled', true);
+                                        $('#resume').prop('disabled', true);
+                                        $('#stop').prop('disabled', true);
+                                        $('#restart').prop('disabled', true);
+                                        $('#kill').prop('disabled', true);
+                                        $('#pause').prop('disabled', true);
+                                        $('#remove').prop('disabled', true);
+                                   }
+                                });
 
-                                    $('#start').prop('disabled', false);
-                                    $('#restart').prop('disabled', false);
-                                    $('#kill').prop('disabled', false);
-                                    $('#restart').prop('disabled', false);
-                                    $('#remove').prop('disabled', false);
+                                $(document).ready(function(){
+                                    $('input[type="checkbox"]').click(function(){
+
+                                    var id = $(this).closest("tr").find('td:eq(1)').text();
+
+                                    if($(this).prop("checked") == true && id === 'running'){
+
+                                        $('#start').prop('disabled', true);
+                                        $('#resume').prop('disabled', true);
+                                        $('#stop').prop('disabled', false);
+                                        $('#restart').prop('disabled', false);
+                                        $('#kill').prop('disabled', false);
+                                        $('#pause').prop('disabled', false);
+                                        $('#remove').prop('disabled', false);
+                                    }
+                                    else if($(this).prop("checked") == true && (id === 'exited' || id === 'created')){
+                                        $('#stop').prop('disabled', true);
+                                        $('#pause').prop('disabled', true);
+                                        $('#resume').prop('disabled', true);
+
+                                        $('#start').prop('disabled', false);
+                                        $('#restart').prop('disabled', false);
+                                        $('#kill').prop('disabled', false);
+                                        $('#remove').prop('disabled', false);
+
+                                     }
+                                     else if($(this).prop("checked") == true && id === 'paused' ){
+                                        $('#stop').prop('disabled', true);
+                                        $('#pause').prop('disabled', true);
+                                        $('#start').prop('disabled', true);
+
+                                        $('#resume').prop('disabled', false);
+                                        $('#restart').prop('disabled', false);
+                                        $('#kill').prop('disabled', false);
+                                        $('#remove').prop('disabled', false);
+                                    }
+                                    else{
+                                        $('#start').prop('disabled', true);
+                                        $('#resume').prop('disabled', true);
+                                        $('#stop').prop('disabled', true);
+                                        $('#restart').prop('disabled', true);
+                                        $('#kill').prop('disabled', true);
+                                        $('#pause').prop('disabled', true);
+                                        $('#remove').prop('disabled', true);
+                                    }
+
+                                });
+                                });
 
 
-                                }else{
-                                    $('#start').prop('disabled', true);
-                                    $('#resume').prop('disabled', true);
-                                    $('#stop').prop('disabled', true);
-                                    $('#restart').prop('disabled', true);
-                                    $('#kill').prop('disabled', true);
-                                    $('#pause').prop('disabled', true);
-                                    $('#remove').prop('disabled', true);
-                                }
-
-                            });
-                            });
-
-                        </script>
+                    </script>
 
                     {% endblock %}
 
 
-                {% endfor %}
-            </table>
-        </div>
+                    {% endfor %}
+                </table>
+            </div>
 
-    </form>
+        </form>
 
 
-</div>
+    </div>
 {% endblock %}

@@ -80,7 +80,7 @@
                                 <label class="form-check-label" for="{{container.short_id}}"></label>
                             </div>
                         </th>
-                        <td> {{container.attrs.get('Name')}}</td>
+                        <td> <a href="/container/{{container.short_id}}">{{container.attrs.get('Name')}}</a> </td>
                         <td>{{ dict['State']['Status'] }} </td>
                         <td>@mdo</td>
                         <td>Mark</td>
@@ -120,6 +120,7 @@
                                 });
 
                                 $(document).ready(function(){
+
                                     $('input[type="checkbox"]').click(function(){
 
                                     var id = $(this).closest("tr").find('td:eq(1)').text();
@@ -166,8 +167,7 @@
                                     }
 
                                 });
-                                });
-
+                               });
 
                     </script>
 

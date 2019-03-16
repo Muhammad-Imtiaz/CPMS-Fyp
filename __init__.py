@@ -1,14 +1,13 @@
-from flask import Flask
+from flask import Flask, render_template
 
 
 def create_app():
 
     app = Flask(__name__)
 
-    @app.route('/hello')
-    def hello():
-        return 'hello, world!'
-
+    @app.route('/')
+    def home():
+        return render_template('index.html')
 
     from .container_blueprint import bp
 

@@ -10,7 +10,7 @@ bp = Blueprint('process', __name__, url_prefix='/container')
 
 @bp.route('/')
 def containers():
-    return render_template('container.html', containers=containerObj)
+    return render_template('containers/container.html', containers=containerObj)
 
 
 # container buttons functions
@@ -53,8 +53,8 @@ def start_containers():
             for i in con_ids:
                 containerObj.restartContainer(i)
 
-        return render_template("container.html", containers=containerObj)
+        return render_template("containers/container.html", containers=containerObj)
 
-
-def restart_containers():
-    pass
+@bp.route('/')
+def get_attr(id):
+    return id

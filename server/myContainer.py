@@ -63,8 +63,9 @@ class Container:
 
     def logprint(self, containerID):
         print("Printing log of " + containerID)
-        print(docker.APIClient(self.resourceID).logs(containerID))
+        # print(docker.APIClient(self.resourceID).logs(containerID))
         print("\n")
+        return docker.APIClient(self.resourceID).logs(containerID)
 
     def renameContainer(self, containerID, newName):
         print("renaming container")
@@ -72,7 +73,8 @@ class Container:
 
     def inspectContainer(self, containerID):
         print("Printing detailed information of " + containerID)
-        print(docker.APIClient(self.resourceID).inspect_container(containerID))
+        # print(docker.APIClient(self.resourceID).inspect_container(containerID))
+        return docker.APIClient(self.resourceID).inspect_container(containerID)
 
     def listRunningContainer(self):
         return self.client.containers.list()
@@ -132,7 +134,4 @@ class Container:
 
 
 # #
-con = Container()
-con.dockerstats('4b3fc1b461ec')
-con.dockerstats('8b3d488e255c')
 # con.runningContainer()

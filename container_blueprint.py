@@ -55,6 +55,8 @@ def start_containers():
 
         return render_template("containers/container.html", containers=containerObj)
 
-@bp.route('/')
-def get_attr(id):
-    return id
+@bp.route('/<con_id>')
+def get_container_by_id(con_id):
+    inspect = containerObj.inspectContainer(con_id)
+    log = containerObj.logprint(con_id)
+    return render_template('containers/container_id.html', container_inspect=inspect, container_log=log)

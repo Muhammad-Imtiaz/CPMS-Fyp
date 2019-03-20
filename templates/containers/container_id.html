@@ -1,0 +1,135 @@
+{% extends 'layout.html' %}
+{% block title %}Container - {% endblock %}
+
+{% block body %}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <span class="glyphicon glyphicon-search"></span> Actions
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12 field is-grouped ">
+                        <div class="control btn-group">
+                            <button type="submit" name="my_btn" id="start" class="btn btn-success" value="start"
+                                    disabled>
+                                Start
+                            </button>
+                            <button type="submit" name="my_btn" id="stop" class="btn btn-danger" value="stop" disabled>
+                                Stop
+                            </button>
+                            <button type="submit" name="my_btn" id="kill" class="btn btn-danger" value="kill" disabled>
+                                Kill
+                            </button>
+                            <button type="submit" name="my_btn" id="restart" class="btn btn-primary" value="restart"
+                                    disabled>
+                                Restart
+                            </button>
+                            <button type="submit" name="my_btn" id="pause" class="btn btn-primary" value="pause"
+                                    disabled>
+                                Pause
+                            </button>
+                            <button type="submit" name="my_btn" id="resume" class="btn btn-primary" value="resume"
+                                    disabled>
+                                Resume
+                            </button>
+                            <button type="submit" name="my_btn" id="remove" class="btn btn-danger" value="remove"
+                                    disabled>
+                                Remove
+                            </button>
+                            <button type="submit" name="my_btn" id="duplicate" class="btn btn-primary" value="duplicate"
+                                    disabled>
+                                Duplicate
+                            </button>
+                        </div>
+                        <button type="submit" name="my_btn" class="btn btn-primary" value="add">Add Container</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    Container Status
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <table class="table table-responsive"   >
+                            <thead></thead>
+                            <tbody>
+                                <tr role="row" class="odd">
+                                    <td scope="row">ID</td>
+                                    <td>290e5dc7f12b9ec2d40a3104f01f8f14103eacd0680a0eadde572145b7b22f7e</td>
+                                </tr>
+                                <tr role="row" class="odd">
+                                    <td>Name</td>
+                                    <!---->
+                                    <td>
+                                        some-wordpress
+                                    </td><!---->
+                                    <!---->
+                                </tr>
+                                <!---->
+                                <tr role="row" class="odd">
+                                    <td>IP address</td>
+                                    <td>IP address</td>
+                                </tr><!---->
+                                <tr role="row" class="odd">
+                                    <td>Status</td>
+                                    <td>
+                                        Created for 19 hours<!---->
+                                    </td>
+                                </tr>
+                                <tr role="row" class="odd">
+                                    <td scope="row">Created</td>
+                                    <td>2019-03-19 12:29:24</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Container Log
+                        </div>
+                        <div class="card-body">
+
+                            {{ container_log }}
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Container Inspect
+                        </div>
+                        <div class="card-body">
+
+                            {{ container_inspect }}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        {% endblock %}

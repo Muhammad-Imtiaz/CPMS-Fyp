@@ -79,6 +79,57 @@ class Container:
     def listRunningContainer(self):
         return self.client.containers.list()
 
+    def container_status(self, containerID):
+        dictionary = docker.APIClient(self.resourceID).inspect_container(containerID)
+
+        # print(dictionary)
+        # print("Mounts " + str(dictionary['Mounts'][0]))
+        # print("Mounts " + str(dictionary['Mounts']))
+        # # print("Name: " + str(dictionary['Mounts'][0].get('Name')))
+        # print("Destination " + str(dictionary['Mounts'][0].get('Destination')))
+        #
+        # print("Mounts2 " + str(dictionary['Mounts'][1]))
+        # print("Source " + str(dictionary['Mounts'][1].get('Source')))
+        # print("Destination " + str(dictionary['Mounts'][1].get('Destination')))
+
+        ID = dictionary['Id']
+        container_name = dictionary['Name']
+        created = dictionary['Created'].rsplit('.', 1)[0]
+        start_time = dictionary['State']['StartedAt'].rsplit('.', 1)[0]
+        status = dictionary['State']['Status']
+        image_name = dictionary['Config']['Image']
+        cmd = dictionary['Config']['Cmd']
+        env = dictionary['Config']['Env']
+        IPAddress = dictionary['NetworkSettings']['Networks']['bridge']['IPAddress']
+
+        try:
+            vol_name = dictionary['Mounts'][0].get('Name')
+        except IndexError:
+            vol_name = None
+
+        try:
+            vol_destination = dictionary['Mounts'][0].get('Destination')
+        except IndexError:
+            vol_destination = None
+
+        try:
+            vol_host = dictionary['Mounts'][1].get('Source')
+
+        except IndexError:
+            vol_host = None
+
+        try:
+            vol_container = dictionary['Mounts'][1].get('Destination')
+        except IndexError:
+            vol_container = None
+
+        myDictionary = {'ID': ID, 'Created': created, 'Start_time': start_time, 'Status': status,
+                        'Image_name': image_name,
+                        'Cmd': cmd, 'Env': env, 'IPAddress': IPAddress, 'Container_name': container_name,
+                        'Vol_name': vol_name, 'Vol_destination': vol_destination, 'Vol_host': vol_host,
+                        'Vol_container': vol_container}
+        return myDictionary
+
     def runningContainer(self):
         totoalContainers = 0
         print("All Running containers")
@@ -134,4 +185,8 @@ class Container:
 
 
 # #
+con = Container()
+con.container_status('15ec352cd1e1')
+# con.container_status('9fd5257092ac')
+# con.logprint('15ec352cd1e1')
 # con.runningContainer()

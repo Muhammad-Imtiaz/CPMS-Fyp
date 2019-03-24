@@ -5,16 +5,16 @@ from .server.myContainer import Container
 
 containerObj = Container()
 
-bp = Blueprint('process', __name__, url_prefix='/container')
+con_bp = Blueprint('container', __name__, url_prefix='/container')
 
 
-@bp.route('/')
+@con_bp.route('/')
 def containers():
     return render_template('containers/container.html', containers=containerObj)
 
 
 # container buttons functions
-@bp.route("/", methods=('GET', 'POST'))
+@con_bp.route("/", methods=('GET', 'POST'))
 def start_containers():
     if request.method == "GET":
         return render_template("container.html")
@@ -55,8 +55,11 @@ def start_containers():
 
         return render_template("containers/container.html", containers=containerObj)
 
-@bp.route('/<con_id>')
+
+@con_bp.route('/<con_id>')
 def get_container_by_id(con_id):
     inspect = containerObj.inspectContainer(con_id)
     log = containerObj.logprint(con_id)
-    return render_template('containers/container_id.html', container_inspect=inspect, container_log=log)
+    container_status = containerObj.container_status(con_id)
+    return render_template('containers/container_id.html', container_inspect=inspect, container_log=log,
+                           container_status=container_status)

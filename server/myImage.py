@@ -1,11 +1,12 @@
 import docker
 
-class Image:
 
+class Image:
     client = docker.from_env()
 
     def listAllImages(self):
-        return  self.client.images.list()
+        return self.client.images.list()
+
         # totalImages = 0
         # print("Listing all images")
         # for image in self.client.images.list():
@@ -22,7 +23,7 @@ class Image:
         self.client.images.remove(imageName, forceRemoval, noprune)
         print("image successfully removed...")
 
-    def pushImage(self, imageName,  repository, auth_config,imageTag = '', stream=True, decode=True):
+    def pushImage(self, imageName, repository, auth_config, imageTag='', stream=True, decode=True):
         for line in self.client.images.push(imageName + imageTag, repository, stream, decode):
             print(line)
         print("image successfully pushed...")
@@ -44,7 +45,3 @@ class Image:
     def image_details(self, image_name):
         image = self.client.images.get(image_name)
         print(image.attrs)
-
-
-
-

@@ -1,19 +1,359 @@
 {% extends 'index.html' %}
 {% block title %}
-    Image -
+Image -
 {% endblock %}
 
 {% block body %}
 
-    <!--Listing all images...-->
-    <div>
-        <h3>All images...</h3>
-        <ul class="list-group">
-            {% for img in images.listAllImages() %}
-            <li class="list-group-item"><a href="images/{{img.id}}"> Image id: {{img.id}}</a></li>
-            {% endfor %}
-        </ul>
-        <br><br>
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <div class="card">
+                    <div class="card-header">
+                        <b>Pull Image</b>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-sm-12">
+                                            <span class="medium text-muted">
+                                            Note: if you don't specify the tag in the image name, latest will be used.
+
+                                            </span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 form-group">
+                                <label class="control-label text-left col-sm-1">Image</label>
+                                <div class="col-md-5 margin-sm-top col-sm-11">
+
+                                    <input type="text"
+                                           class="form-control"
+                                           name="image_name" placeholder="e.g. myImage:myTag"
+                                           required=""
+                                           aria-autocomplete="list" aria-expanded="false"
+                                    >
+                                    <ul class="dropdown-menu"
+                                        role="listbox"
+                                        aria-hidden="true" id="typeahead-388-654"
+                                        matches="matches" active="activeIdx"
+                                        move-in-progress="moveInProgress"
+                                        query="query" position="position" debounce="debounceUpdate">
+                                        <!---->
+                                    </ul>
+                                </div>
+                                <label for="image_registry"
+                                       class="margin-sm-top control-label text-right col-sm-1">
+                                    Registry
+                                </label>
+                                <div class="margin-sm-top col-sm-11 col-md-3">
+
+                                    <select id="image_registry" class="form-control n">
+                                        <option label="DockerHub" value="object:482"
+                                                selected="selected">
+                                            DockerHub
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-12">
+                                                        <span class="medium text-muted">Note: if you don't specify the tag in the image name, <span
+                                                                class="label label-default">latest</span> will be used.</span>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button type="button" class="btn btn-primary btn-sm"
+                                                disabled="disabled">Pull the image
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
     </div>
+
+    <div class="row">
+
+        <form action="" method="post">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            Images
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="well col-md-12 field is-grouped ">
+                                    <div class="control">
+                                        <button type="submit" name="my_btn" id="remove" class="btn btn-success"
+                                                value="remove"
+                                                disabled>
+                                            Remove
+                                        </button>
+                                        <button type="submit" name="my_btn" id="build" class="btn btn-danger"
+                                                value="build"
+                                                >
+                                            Build a new image
+                                        </button>
+                                        <button type="submit" name="my_btn" id="import" class="btn btn-danger"
+                                                value="import"
+                                                >
+                                            Import
+                                        </button>
+                                        <button type="submit" name="my_btn" id="export" class="btn btn-primary"
+                                                value="export"
+                                                disabled>
+                                            Export
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row col-md-12">
+                                <div class="table-responsive">
+                                    <div id="zero_config_wrapper"
+                                         class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6">
+                                                <div class="dataTables_length" id="zero_config_length"><label>Show
+                                                    <select
+                                                            name="zero_config_length" aria-controls="zero_config"
+                                                            class="form-control form-control-sm">
+                                                        <option value="10">10</option>
+                                                        <option value="25">25</option>
+                                                        <option value="50">50</option>
+                                                        <option value="100">100</option>
+                                                    </select> entries</label></div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-6">
+                                                <div id="zero_config_filter" class="dataTables_filter">
+                                                    <label>Search:<input
+                                                            type="search"
+                                                            class="form-control form-control-sm"
+                                                            placeholder=""
+                                                            aria-controls="zero_config"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <table id="zero_config"
+                                                       class="table table-dark table-hoverd table-striped table-bordered dataTable"
+                                                       role="grid"
+                                                       aria-describedby="zero_config_info">
+
+                                                    <thead>
+
+                                                    <tr role="row">
+
+                                                        <th>
+                                                            <label class="customcheckbox">
+                                                                <input type="checkbox"
+                                                                       class="js-selectall form-check-input"
+                                                                       id="exampleCheck"
+                                                                       data-target=".js-selectall">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </th>
+
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="zero_config"
+                                                            rowspan="1"
+                                                            colspan="1"
+                                                            aria-sort="ascending"
+                                                            aria-label="Name: activate to sort column descending"
+                                                            style="width: 130px;">Id
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="zero_config"
+                                                            rowspan="1"
+                                                            colspan="1"
+                                                            aria-label="Position: activate to sort column ascending"
+                                                            style="width: 214px;">
+                                                            Tags
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="zero_config"
+                                                            rowspan="1"
+                                                            colspan="1"
+                                                            aria-label="Office: activate to sort column ascending"
+                                                            style="width: 98px;">
+                                                            Size
+                                                        </th>
+                                                        <th class="sorting" tabindex="0" aria-controls="zero_config"
+                                                            rowspan="1"
+                                                            colspan="1"
+                                                            aria-label="Age: activate to sort column ascending"
+                                                            style="width: 38px;">
+                                                            Created
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    {% for image in images.listAllImages() %}
+                                                    <tr role="row" class="odd">
+                                                        <td scope="row">
+                                                            <label class="customcheckbox">
+                                                                <input type="checkbox" name="image"
+                                                                       class="form-check-input js-selectall"
+                                                                       id="{{image['Id']}}"
+                                                                       value="{{image['Id']}}">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </td>
+                                                        <td>
+                                                            <a href="/images/{{image['Id']}}">{{image['Id']}}</a>
+                                                        </td>
+                                                        <td>{{ image['RepoTags'][0]}}</td>
+                                                        <td>{{image['Size'] / 1024 }}</td>
+                                                        <td>{{image['Created']}}</td>
+                                                    </tr>
+                                                    </tbody>
+
+                                                    {% block scripts %}
+                                                    {{ super() }}
+                                                    <script type="text/javascript">
+
+                                 $('.js-selectall').on('change', function() {
+                                  var isChecked = $(this).prop("checked");
+                                  var selector = $(this).data('target');
+                                  $(selector).prop("checked", isChecked);
+                                   if (isChecked == true){
+                                    $('#remove').prop('disabled', false);
+                                    $('#export').prop('disabled', false);
+                                    $('#build').prop('disabled', false);
+                                    $('#import').prop('disabled', false);
+
+                                   }else{
+                                        $('#export').prop('disabled', false);
+                                        $('#build').prop('disabled', true);
+                                        $('#import').prop('disabled', true);
+                                        $('#remove').prop('disabled', false);
+                                   }
+                                });
+
+                                $(document).ready(function(){
+
+                                    $('input[type="checkbox"]').click(function(){
+
+                                    var id = $(this).closest("tr").find('td:eq(1)').text();
+
+                                    if($(this).prop("checked") == true){
+
+                                        $('#remove').prop('disabled', false);
+                                        $('#export').prop('disabled', false);
+                                        $('#build').prop('disabled', false);
+                                        $('#import').prop('disabled', false);
+
+                                    }
+
+                                    else{
+                                        $('#remove').prop('disabled', true);
+                                        $('#export').prop('disabled', true);
+                                        $('#build').prop('disabled', false);
+                                        $('#import').prop('disabled', false);
+
+                                    }
+
+                                });
+                               });
+
+                                                    </script>
+
+                                                    {% endblock %}
+
+
+                                                    {% endfor %}
+
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-5">
+                                                <div class="dataTables_info" id="zero_config_info" role="status"
+                                                     aria-live="polite">
+                                                    Showing 11
+                                                    to 20 of 57 entries
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-7">
+                                                <div class="dataTables_paginate paging_simple_numbers"
+                                                     id="zero_config_paginate">
+                                                    <ul class="pagination">
+                                                        <li class="paginate_button page-item previous"
+                                                            id="zero_config_previous"><a
+                                                                href="#"
+                                                                aria-controls="zero_config"
+                                                                data-dt-idx="0"
+                                                                tabindex="0"
+                                                                class="page-link">Previous</a>
+                                                        </li>
+                                                        <li class="paginate_button page-item "><a href="#"
+                                                                                                  aria-controls="zero_config"
+                                                                                                  data-dt-idx="1"
+                                                                                                  tabindex="0"
+                                                                                                  class="page-link">1</a>
+                                                        </li>
+                                                        <li class="paginate_button page-item active"><a href="#"
+                                                                                                        aria-controls="zero_config"
+                                                                                                        data-dt-idx="2"
+                                                                                                        tabindex="0"
+                                                                                                        class="page-link">2</a>
+                                                        </li>
+                                                        <li class="paginate_button page-item "><a href="#"
+                                                                                                  aria-controls="zero_config"
+                                                                                                  data-dt-idx="3"
+                                                                                                  tabindex="0"
+                                                                                                  class="page-link">3</a>
+                                                        </li>
+                                                        <li class="paginate_button page-item "><a href="#"
+                                                                                                  aria-controls="zero_config"
+                                                                                                  data-dt-idx="4"
+                                                                                                  tabindex="0"
+                                                                                                  class="page-link">4</a>
+                                                        </li>
+                                                        <li class="paginate_button page-item "><a href="#"
+                                                                                                  aria-controls="zero_config"
+                                                                                                  data-dt-idx="5"
+                                                                                                  tabindex="0"
+                                                                                                  class="page-link">5</a>
+                                                        </li>
+                                                        <li class="paginate_button page-item "><a href="#"
+                                                                                                  aria-controls="zero_config"
+                                                                                                  data-dt-idx="6"
+                                                                                                  tabindex="0"
+                                                                                                  class="page-link">6</a>
+                                                        </li>
+                                                        <li class="paginate_button page-item next"
+                                                            id="zero_config_next"><a
+                                                                href="#"
+                                                                aria-controls="zero_config"
+                                                                data-dt-idx="7"
+                                                                tabindex="0"
+                                                                class="page-link">Next</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
 
 {% endblock %}

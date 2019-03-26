@@ -6,8 +6,8 @@ def create_app():
     app = Flask(__name__)
 
     @app.route('/')
-    def home():
-        return render_template('index.html')
+    def index():
+        return render_template('/index.html')
 
     from .container_bp import con_bp
     from .imge_bp import img_bp

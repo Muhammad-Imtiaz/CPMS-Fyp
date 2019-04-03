@@ -6,6 +6,23 @@
 
 <div class="container-fluid">
 
+
+    <div class="row col-md-12">
+        <div class="col-md-6" align="left">
+            <embed type="image/svg+xml" src="{{graph_data1|safe}}" style="max-width:500px; max-height:300px"/>
+        </div>
+        <div class="col-md-6" align="right">
+            <embed type="image/svg+xml" src="{{graph_data2|safe}}" style="max-width:500px; max-height:300px"/>
+        </div>
+    </div>
+    <div class="row col-md-12">
+        <div class="col-md-6" align="left">
+            <embed type="image/svg+xml" src="{{graph_data3|safe}}" style="max-width:500px; max-height:300px"/>
+        </div>
+        <div class="col-md-6" align="right">
+            <embed type="image/svg+xml" src="{{graph_data4|safe}}" style="max-width:500px; max-height:300px"/>
+        </div>
+    </div>
     <form action="" method="post">
 
         <div class="row">
@@ -127,12 +144,6 @@
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1"
                                                     colspan="1"
-                                                    aria-label="Age: activate to sort column ascending"
-                                                    style="width: 38px;">
-                                                    Stack
-                                                </th>
-                                                <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1"
-                                                    colspan="1"
                                                     aria-label="Start date: activate to sort column ascending"
                                                     style="width: 80px;">
                                                     Image
@@ -176,7 +187,6 @@
                                                 </td>
                                                 <td>{{ dict['State']['Status'] }}</td>
                                                 <td>@mdo</td>
-                                                <td>Mark</td>
                                                 <td>{{dict['Config']['Image']}}</td>
                                                 <td>{{container.attrs.get('Created').rsplit('.', 1)[0]}}</td>
                                                 <td>{{dict['NetworkSettings']['Networks']['bridge']['IPAddress']}}</td>

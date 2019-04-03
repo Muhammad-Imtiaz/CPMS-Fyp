@@ -5,20 +5,36 @@ class Image:
     client = docker.from_env()
     resourceID = base_url = 'unix://var/run/docker.sock'
 
-    def detail(self):
-        pass
+    def image_detail(self, image_name):
+        dictionary = docker.APIClient(self.resourceID).inspect_image(image_name)
+
+        id = dictionary['Id']
+        created = dictionary['Created']
+        size = dictionary['Size']
+        cmd = dictionary['ContainerConfig']['Cmd'][3].rsplit(' ', 1)[1]
+        entry_point = dictionary['ContainerConfig']['Entrypoint'][0]
+        volumes = dictionary['ContainerConfig']['Volumes']
+        expose_port = dictionary['ContainerConfig']['ExposedPorts']
+        env = dictionary['ContainerConfig']['Env']
+        #
+        # print(size/(1024*2))
+        # print(size)
+        # print(entry_point)
+        # print(cmd)
+        # print(volumes)
+        # print(expose_port)
+        # print(env)
+
+        myDictionary = {'ID': id, 'Created': created, 'Size': size,
+                        'Cmd': cmd, 'Env': env, 'Entry_point' : entry_point,
+                        'Vol_name': volumes, 'Expose_ports': expose_port}
+        return myDictionary
+
 
 
     def listAllImages(self):
         return docker.APIClient(self.resourceID).images()
-        # print(dictionary)
-        # id = dictionary['Id']
-        # tags = dictionary['RepoTags']
-        # size = str(dictionary['Size']/1024)
-        # created = dictionary['Created'].rsplit('.', 1)[0]
-        # image_detail = {'Id': id, 'Tags': tags, 'Size': size, 'Created': created}
-        # print(image_detail)
-        # return image_detail
+
 
     def pullImage(self, repository, auth_config=None, platform=None):
         print('pulling image')
@@ -48,9 +64,8 @@ class Image:
             print(image)
         print('\n')
 
-    def image_details(self, image_name):
-        image = self.client.images.get(image_name)
-        print(image.attrs)
-
-img = Image()
-img.listAllImages()
+#
+# img = Image()
+# # # # img.listAllImages()jupyter/scipy-notebook:latest
+# # img.image_detail('wordpress')
+# img.image_detail('sha256:a1dc251941519ee661b262a34c741740bcaee3667804c805c26253b141952b8d')

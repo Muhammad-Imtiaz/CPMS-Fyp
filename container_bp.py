@@ -1,5 +1,7 @@
 from flask import Blueprint, flash, g, redirect, render_template, session, url_for
 from flask import request
+import pygal
+from pygal.style import DarkColorizedStyle, NeonStyle, CleanStyle, LightStyle, DefaultStyle
 
 from .server.myContainer import Container
 
@@ -10,14 +12,66 @@ con_bp = Blueprint('container', __name__, url_prefix='/container')
 
 @con_bp.route('/')
 def containers():
-    return render_template('containers/container.html', containers=containerObj)
+    graph_data1 = get_graph_1()
+    graph_data2 = get_graph_2()
+    graph_data3 = get_graph_3()
+    graph_data4 = get_graph_4()
+
+    return render_template('containers/container.html', containers=containerObj, graph_data1=graph_data1,
+                           graph_data2=graph_data2, graph_data3=graph_data3,
+                           graph_data4=graph_data4)
+
+
+def get_graph_1():
+    line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=LightStyle)
+    line_chart.title = 'CPU usage evolution (in %)'
+    line_chart.x_labels = map(str, range(2002, 2013))
+    line_chart.add('CPU', [1, 3, 5, 16, 13, 3, 7])
+    line_chart.render()
+    graph_data = line_chart.render_data_uri()
+    return graph_data
+
+
+def get_graph_2():
+    line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=DefaultStyle)
+    line_chart.title = 'Memory usage evolution (in %)'
+    line_chart.x_labels = map(str, range(2002, 2013))
+    line_chart.add('Memory', [5, 2, 3, 2, 5, 7, 17])
+    line_chart.render()
+    graph_data = line_chart.render_data_uri()
+    return graph_data
+
+
+def get_graph_3():
+    line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=DefaultStyle)
+    line_chart.title = 'Hard Disk usage evolution (in %)'
+    line_chart.x_labels = map(str, range(2002, 2013))
+    line_chart.add('Hard Disk', [6, 10, 9, 7, 3, 1, 0])
+    line_chart.render()
+    graph_data = line_chart.render_data_uri()
+    return graph_data
+
+
+def get_graph_4():
+    line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=LightStyle)
+    line_chart.title = 'Networks usage evolution (in %)'
+    line_chart.x_labels = map(str, range(2002, 2013))
+    line_chart.add('Networks', [2, 3, 5, 9, 12, 9, 5])
+    line_chart.render()
+    graph_data = line_chart.render_data_uri()
+    return graph_data
 
 
 # container buttons functions
 @con_bp.route("/", methods=('GET', 'POST'))
 def start_containers():
+    graph_data1 = get_graph_1()
+    graph_data2 = get_graph_2()
+    graph_data3 = get_graph_3()
+    graph_data4 = get_graph_4()
+
     if request.method == "GET":
-        return render_template("container.html")
+        return render_template("containers/container.html", containers=containerObj, )
     elif request.method == "POST":
         if request.form['my_btn'] == 'start':
             con_ids = request.form.getlist('container')
@@ -53,7 +107,9 @@ def start_containers():
             for i in con_ids:
                 containerObj.restartContainer(i)
 
-        return render_template("containers/container.html", containers=containerObj)
+        return render_template("containers/container.html", containers=containerObj, graph_data1=graph_data1,
+                               graph_data2=graph_data2, graph_data3=graph_data3,
+                               graph_data4=graph_data4)
 
 
 @con_bp.route('/<con_id>')

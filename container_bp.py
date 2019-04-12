@@ -4,8 +4,10 @@ import pygal
 from pygal.style import DarkColorizedStyle, NeonStyle, CleanStyle, LightStyle, DefaultStyle
 
 from .server.myContainer import Container
+from .server.myImage import Image
 
 containerObj = Container()
+imageObj = Image()
 
 con_bp = Blueprint('container', __name__, url_prefix='/container')
 
@@ -106,6 +108,9 @@ def start_containers():
             print(con_ids)
             for i in con_ids:
                 containerObj.restartContainer(i)
+        elif request.form['my_btn'] == 'add':
+            images = imageObj.listAllImages()
+            return render_template('containers/add_container.html', images=images)
 
         return render_template("containers/container.html", containers=containerObj, graph_data1=graph_data1,
                                graph_data2=graph_data2, graph_data3=graph_data3,

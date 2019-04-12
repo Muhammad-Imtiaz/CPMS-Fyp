@@ -1,0 +1,133 @@
+{% extends 'layout.html' %}
+{% block title%}
+add-container
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+    <div class="col-md-12">
+        <form action="" method="post">
+            <div class="row card">
+                <div class="card-header">
+                    Build your container here..
+                </div>
+                <div class="card-body">
+                    <div class="row col-md-12">
+                        <label class="control-label" align="left"><b>Name</b></label>
+                        <input class="form-control" id="con_name" name="container_name" align="right"
+                               placeholder="e.g my container">
+                    </div>
+                    <br>
+                    <div class="col-sm-12 col-md-12">
+                        Image configuration
+                        <hr>
+                    </div>
+                    <div class="row col-md-12" align="left">
+                        <div class="col-md-6" role="combobox">
+                            <label class="control-label" align="left"><b>Image</b></label>
+                            <select id="image_name" class="form-control ">
+                                {%for img in images %}
+                                <option label="{{img['RepoTags'][0]}}">
+
+                                </option>
+                                {% endfor %}
+
+                            </select>
+                        </div>
+                        <div class="col-md-6" role="combobox">
+                            <div class="form-group">
+                                <label for="image_registry"
+                                       class="control-label ">
+                                    <b>Registry</b>
+                                </label>
+                                <select id="image_registry" class="form-control ">
+                                    <option label="DockerHub"
+                                            selected="selected">
+                                        DockerHub
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-12 row">
+                        Ports configuration
+                        <hr>
+                    </div>
+                    <div class="form-group row">
+                        <label class="control-label col-md-2" align="left"><b>Port mapping</b></label>
+                        <button type="button" class="col-md-2 btn btn-primary">Add additional ports</button>
+                    </div>
+                    <br>
+
+                    <div class="row col-md-12">
+                        <button type="button" class="btn btn-primary" align="left">Deploy the container</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </form>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Advance Container Settings
+                    </div>
+                    <div class="card-body">
+
+                        <div role="tabpanel">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#basics" aria-controls="basics"
+                                                                          role="tab" data-toggle="tab">
+                                    basics
+                                </a></li>
+                                <li role="presentation" class=""><a href="#basics" aria-controls="test" role="tab"
+                                                                    data-toggle="tab">
+                                    test
+                                </a></li>
+                                <li role="presentation" class=""><a href="#analysis" aria-controls="analysis" role="tab"
+                                                                    data-toggle="tab">
+                                    DataAnyliis
+                                </a></li>
+                            </ul>
+
+
+                            <div class="tab-content">
+                                <div class="tab-pane fade" role="tabpanel" id="basics">
+                                    Basics
+                                </div>
+                                <div class="tab-pane fade in active" role="tabpanel" id="webdiv">
+                                    Webdiv
+                                </div>
+                                <div class="tab-pane fade" role="tabpanel" id="tst">
+                                    test
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    {% block scripts %}
+    {{super() }}
+    <script>
+
+
+    </script>
+
+    {% endblock %}
+</div>
+
+
+{% endblock %}

@@ -25,9 +25,10 @@ def containers():
 
 
 def get_graph_1():
-    line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=LightStyle)
+    line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=DefaultStyle)
     line_chart.title = 'CPU usage evolution (in %)'
-    line_chart.x_labels = map(str, range(2002, 2013))
+    # line_chart.x_labels = map(str, range(0, 100))
+    line_chart.y_labels = map(str, range(200, 400))
     line_chart.add('CPU', [1, 3, 5, 16, 13, 3, 7])
     line_chart.render()
     graph_data = line_chart.render_data_uri()
@@ -37,8 +38,9 @@ def get_graph_1():
 def get_graph_2():
     line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=DefaultStyle)
     line_chart.title = 'Memory usage evolution (in %)'
-    line_chart.x_labels = map(str, range(2002, 2013))
-    line_chart.add('Memory', [5, 2, 3, 2, 5, 7, 17])
+    # line_chart.x_labels = map(str, range(0, 100))
+    line_chart.y_labels = map(str, range(100, 200))
+    line_chart.add('Memory', [5, 25, 73, 2, 5, 7, 17, 100, 33, 75, 16, 13, 37, 7])
     line_chart.render()
     graph_data = line_chart.render_data_uri()
     return graph_data
@@ -47,18 +49,20 @@ def get_graph_2():
 def get_graph_3():
     line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=DefaultStyle)
     line_chart.title = 'Hard Disk usage evolution (in %)'
-    line_chart.x_labels = map(str, range(2002, 2013))
-    line_chart.add('Hard Disk', [6, 10, 9, 7, 3, 1, 0])
+    line_chart.x_labels = map(str, range(0, 100))
+    line_chart.y_labels = map(str, range(0, 100))
+    line_chart.add('Hard Disk', [6, 10, 9, 7, 3, 1, 0, 1, 3, 5, 16, 13, 3, 7])
     line_chart.render()
     graph_data = line_chart.render_data_uri()
     return graph_data
 
 
 def get_graph_4():
-    line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=LightStyle)
+    line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=DefaultStyle)
     line_chart.title = 'Networks usage evolution (in %)'
-    line_chart.x_labels = map(str, range(2002, 2013))
-    line_chart.add('Networks', [2, 3, 5, 9, 12, 9, 5])
+    line_chart.x_labels = map(str, range(0, 100))
+    line_chart.y_labels = map(str, range(0, 100))
+    line_chart.add('Networks', [2, 3, 5, 9, 12, 9, 5, 1, 3, 5, 16, 13, 3, 7])
     line_chart.render()
     graph_data = line_chart.render_data_uri()
     return graph_data

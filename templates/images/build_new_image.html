@@ -3,21 +3,136 @@
 {% block title %} Build new image {% endblock %}
 {% block body %}
 
-    <div class="container-fluid">
+<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
 
-        <form action="" method="post">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        Build your new image
-                    </div>
-                    <div class="card-body">
-                        <p> here we will build new image..</p>
+    <form action="" method="post">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    Build your new image
+                </div>
+                <div class="card-body">
+                    <div class="row col-md-12">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="image_builder" data-toggle="tab"
+                                   href="#builder" role="tab"
+                                   aria-controls="image_builder" aria-selected="true">Builder</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="output-tab" data-toggle="tab" href="#output" role="tab"
+                                   aria-controls="output" aria-selected="lse">Output</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content col-md-12" id="myTabContent">
+
+
+                            <div class="tab-pane de show active" id="builder" role="tabpanel"
+                                 aria-labelledby="image_builder-tab">
+                                <br>
+                                <div class="col-md-12">
+
+                                    <label class="control-label" align="left">Naming</label>
+                                    <br>
+                                    <span> You can specify multiple names to your image.</span><br>
+                                    <br>
+                                    <p>A name must be specified in one of the following formats: name:tag,
+                                        repository/name:tag or registryfqdn:port/repository/name:tag format. If you omit
+                                        the
+                                        tag the deult latest value is assumed.</p>
+                                </div>
+
+                                <div class="row col-md-12">
+                                    <div class="col-md-3">
+                                        <label class="control-label" align="left">Image Name</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="text"
+                                               class="form-control"
+                                               name="network_host" placeholder="e.g. myimage:mytag"
+                                               align="right">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row col-md-12 ">
+                                    Build methods
+                                </div>
+                                <hr>
+                                <div class="col-md-12">
+                                    <div class="form-group" style="margin-bottom: 0">
+                                        <div class="boxselector_wrapper">
+                                            <div class="col-md-4">
+                                                <div class="col-md-1">
+                                                    <input type="radio" id="method_editor"
+                                                           value="editor"
+                                                           name="2092">
+                                                </div>
+                                                <div class="col-md-11">
+                                                    <label for="method_editor">
+                                                        <div class="boxselector_header">
+                                                            <i class="" aria-hidden="true"
+                                                               ></i>
+                                                            Web editor
+                                                        </div>
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                            <div  class="col-md-4">
+                                                <div class="col-md-1">
+                                                    <input type="radio" id="method_upload"
+                                                           value="upload"
+                                                           name="2093">
+                                                </div>
+                                                <div class="col-md-11">
+                                                    <label for="method_upload">
+                                                        <div class="boxselector_header">
+                                                            <i aria-hidden="true"
+                                                               ></i>
+                                                            Upload
+                                                        </div>
+                                                    </label>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="col-md-1">
+                                                    <input type="radio" id="method_url" value="url"
+                                                           name="2094">
+                                                </div>
+                                                <div class="col-md-11">
+                                                    <label for="method_url">
+                                                        <div class="boxselector_header">
+                                                            <i aria-hidden="true"
+                                                               ></i>
+                                                            URL
+                                                        </div>
+
+                                                    </label>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="tab-pane de" id="output" role="tabpanel" aria-labelledby="output">
+                                ...
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
+    </form>
 
-    </div>
+</div>
 
 {% endblock %}

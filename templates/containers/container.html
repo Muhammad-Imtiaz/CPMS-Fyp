@@ -6,23 +6,41 @@
 
 <div class="container-fluid">
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <b>Resource Consumption</b>
+                </div>
+                <div class="card-body">
+                    <div class="row col-md-12">
+                        <div class="col-md-6" align="left">
+                            <embed type="image/svg+xml" src="{{graph_data1|safe}}"
+                                   style="max-width:500px; max-height:300px"/>
+                        </div>
+                        <div class="col-md-6" align="right">
+                            <embed type="image/svg+xml" src="{{graph_data2|safe}}"
+                                   style="max-width:500px; max-height:300px"/>
+                        </div>
 
-    <div class="row col-md-12">
-        <div class="col-md-6" align="left">
-            <embed type="image/svg+xml" src="{{graph_data1|safe}}" style="max-width:500px; max-height:300px"/>
-        </div>
-        <div class="col-md-6" align="right">
-            <embed type="image/svg+xml" src="{{graph_data2|safe}}" style="max-width:500px; max-height:300px"/>
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="col-md-6" align="left">
+                            <embed type="image/svg+xml" src="{{graph_data3|safe}}"
+                                   style="max-width:500px; max-height:300px"/>
+                        </div>
+                        <div class="col-md-6" align="right">
+                            <embed type="image/svg+xml" src="{{graph_data4|safe}}"
+                                   style="max-width:500px; max-height:300px"/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row col-md-12">
-        <div class="col-md-6" align="left">
-            <embed type="image/svg+xml" src="{{graph_data3|safe}}" style="max-width:500px; max-height:300px"/>
-        </div>
-        <div class="col-md-6" align="right">
-            <embed type="image/svg+xml" src="{{graph_data4|safe}}" style="max-width:500px; max-height:300px"/>
-        </div>
-    </div>
+
+
     <form action="" method="post">
 
         <div class="row">
@@ -33,38 +51,38 @@
                     </div>
                     <div class="card-body">
                         <div class="well col-md-12 field is-grouped ">
-                            <div class="control btn-group">
+                            <div class="control btn-group" style="margin-left:10px">
                                 <button type="submit" name="my_btn" id="start" class="btn btn-success" value="start"
-                                        disabled>
+                                        disabled style="margin-left:10px">
                                     Start
                                 </button>
                                 <button type="submit" name="my_btn" id="stop" class="btn btn-danger" value="stop"
-                                        disabled>
+                                        disabled style="margin-left:10px">
                                     Stop
                                 </button>
                                 <button type="submit" name="my_btn" id="kill" class="btn btn-danger" value="kill"
-                                        disabled>
+                                        disabled style="margin-left:10px">
                                     Kill
                                 </button>
                                 <button type="submit" name="my_btn" id="restart" class="btn btn-primary" value="restart"
-                                        disabled>
+                                        disabled style="margin-left:10px">
                                     Restart
                                 </button>
                                 <button type="submit" name="my_btn" id="pause" class="btn btn-primary" value="pause"
-                                        disabled>
+                                        disabled style="margin-left:10px">
                                     Pause
                                 </button>
                                 <button type="submit" name="my_btn" id="resume" class="btn btn-primary" value="resume"
-                                        disabled>
+                                        disabled style="margin-left:10px">
                                     Resume
                                 </button>
                                 <button type="submit" name="my_btn" id="remove" class="btn btn-danger" value="remove"
-                                        disabled>
+                                        disabled style="margin-left:10px">
                                     Remove
                                 </button>
                             </div>
-                            <button type="submit" name="my_btn" class="btn btn-primary" value="add">Add Container
-                            </button>
+                            <button type="submit" name="my_btn" class="btn btn-primary" value="add" style="margin-left:15px">Add Container
+                            </button >
                         </div>
                     </div>
                 </div>
@@ -270,6 +288,12 @@
 
                                 });
                                });
+
+
+
+
+
+
 
 
 

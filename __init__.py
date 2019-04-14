@@ -1,16 +1,24 @@
 from flask import Flask, render_template
 
-def create_app():
 
+def create_app():
     app = Flask(__name__)
 
     @app.route('/')
     def index():
-        return render_template('/index.html')\
+        return render_template('/index.html')
 
     @app.route('/test')
     def tst():
         return render_template('/test.html')
+
+    @app.route('/login')
+    def login():
+        return render_template('/authentication/login.html')
+
+    @app.route('/register')
+    def register():
+        return render_template('/authentication/register.html')
 
     from .container_bp import con_bp
     from .imge_bp import img_bp
@@ -19,5 +27,5 @@ def create_app():
 
     app.register_blueprint(img_bp)
 
-    app.debug=True
+    app.debug = True
     return app

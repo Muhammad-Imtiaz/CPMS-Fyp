@@ -19,49 +19,55 @@ add-container
                         <input class="form-control" id="con_name" name="container_name" align="right"
                                placeholder="e.g my container">
                     </div>
+
                     <br>
-                    <div class="col-sm-12 col-md-12">
+                    <div class="row col-md-12 col-sm-12 ">
                         Image configuration
-                        <hr>
                     </div>
-                    <div class="row col-md-12" align="left">
-                        <div class="col-md-6" role="combobox">
-                            <label class="control-label" align="left"><b>Image</b></label>
-                            <select id="image_name" class="form-control ">
-                                {%for img in images %}
-                                <option label="{{img['RepoTags'][0]}}">
+                    <hr>
 
-                                </option>
-                                {% endfor %}
+                    <div class="col-md-12">
+                        <div class="row col-md-12" align="left">
+                            <div class="col-md-6" role="combobox">
+                                <label class="control-label" align="left"><b>Image</b></label>
+                                <select id="image_name" class="form-control ">
+                                    {%for img in images %}
+                                    <option label="{{img['RepoTags'][0]}}">
 
-                            </select>
-                        </div>
-                        <div class="col-md-6" role="combobox">
-                            <div class="form-group">
-                                <label for="image_registry"
-                                       class="control-label ">
-                                    <b>Registry</b>
-                                </label>
-                                <select id="image_registry" class="form-control ">
-                                    <option label="DockerHub"
-                                            selected="selected">
-                                        DockerHub
                                     </option>
+                                    {% endfor %}
+
                                 </select>
+                            </div>
+                            <div class="col-md-6" role="combobox">
+                                <div class="form-group">
+                                    <label for="image_registry"
+                                           class="control-label ">
+                                        <b>Registry</b>
+                                    </label>
+                                    <select id="image_registry" class="form-control ">
+                                        <option label="DockerHub"
+                                                selected="selected">
+                                            DockerHub
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
-
+                    <br>
                     <div class="col-sm-12 col-md-12 row">
                         Ports configuration
-                        <hr>
+
                     </div>
+                    <hr>
                     <div class="form-group row">
                         <label class="control-label col-md-2" align="left"><b>Port mapping</b></label>
-                        <button type="button" class="col-md-2 btn btn-primary">Add additional ports</button>
+                        <button type="button" class="col-md-2 btn">Add additional ports</button>
                     </div>
                     <br>
 
+                    <hr>
                     <div class="row col-md-12">
                         <button type="button" class="btn btn-primary" align="left">Deploy the container</button>
                     </div>
@@ -71,58 +77,321 @@ add-container
             </div>
         </form>
 
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        Advance Container Settings
-                    </div>
-                    <div class="card-body">
+    <div class="col-md-12">
+        <div class="row card">
+            <div class="card-header">
+                Advance Container Settings
+            </div>
+            <div class="card-body">
 
-                        <div role="tabpanel">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#basics" aria-controls="basics"
-                                                                          role="tab" data-toggle="tab">
-                                    basics
-                                </a></li>
-                                <li role="presentation" class=""><a href="#basics" aria-controls="test" role="tab"
-                                                                    data-toggle="tab">
-                                    test
-                                </a></li>
-                                <li role="presentation" class=""><a href="#analysis" aria-controls="analysis" role="tab"
-                                                                    data-toggle="tab">
-                                    DataAnyliis
-                                </a></li>
-                            </ul>
+                <div class="row col-md-12">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="command" data-toggle="tab"
+                               href="#command_and_logging" role="tab"
+                               aria-controls="command_and_logging" aria-selected="true">Command & Logging</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="volume-tab" data-toggle="tab" href="#volume" role="tab"
+                               aria-controls="volume" aria-selected="false">Volumes</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="network-tab" data-toggle="tab" href="#network" role="tab"
+                               aria-controls="network" aria-selected="false">Network</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="env-tab" data-toggle="tab" href="#env" role="tab"
+                               aria-controls="env" aria-selected="false">Env</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="labels-tab" data-toggle="tab" href="#labels" role="tab"
+                               aria-controls="labels" aria-selected="false">Labels</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="restart-tab" data-toggle="tab" href="#restart_policy"
+                               role="tab"
+                               aria-controls="restart" aria-selected="false">Restart Policy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="runtime-tab" data-toggle="tab" href="#runtime" role="tab"
+                               aria-controls="runtime" aria-selected="false">Runtime & Resources</a>
+                        </li>
+                    </ul>
 
 
-                            <div class="tab-content">
-                                <div class="tab-pane fade" role="tabpanel" id="basics">
-                                    Basics
+                    <div class="tab-content col-md-12" id="myTabContent">
+                        <div class="tab-pane fade show active col-md-12" id="command_and_logging"
+                             role="tabpanel"
+                             aria-labelledby="command-tab">
+                            <br>
+                            <div class="row col-md-12">
+                                <div class="col-md-2">
+                                    <label class="control-label" align="left">Command</label>
                                 </div>
-                                <div class="tab-pane fade in active" role="tabpanel" id="webdiv">
-                                    Webdiv
+                                <div class="col-md-10">
+                                    <input type="text"
+                                           class="form-control"
+                                           name="command" placeholder="e.g. /usr/bin/nginx -t -c /mynginx.conf"
+                                           required="" align="right"
+                                           aria-autocomplete="list">
                                 </div>
-                                <div class="tab-pane fade" role="tabpanel" id="tst">
-                                    test
+                            </div>
+                            <br>
+                            <div class="row col-md-12">
+                                <div class="col-md-2">
+                                    <label class="control-label" align="left">Entry Point</label>
                                 </div>
+                                <div class="col-md-10">
+                                    <input type="text"
+                                           class="form-control"
+                                           name="command" placeholder="e.g. /bin/sh -c"
+                                           required="" align="right">
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <label class="control-label" align="left">Working Dir</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           name="command" placeholder="e.g. /myapp"
+                                           required="" align="right">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label" align="left">User</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           name="command" placeholder="e.g. /nginx"
+                                           required="" align="right">
+
+                                </div>
+
+                            </div>
+
+                            <br>
+                            <div class="row col-md-12">
+                                <div class="form-group col-md-12">
+                                    <div class="row col-md-12">
+                                        <label class="control-label text-left">Console</label>
+                                    </div>
+
+                                    <div class="row col-md-12">
+                                        <div class="col-md-6">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="container_console"
+                                                       value="both"> Interactive &amp; TTY <span
+                                                    class="small text-muted">(-i -t)</span>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="container_console"
+                                                       value="interactive">
+                                                Interactive <span class="small text-muted">(-i)</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row col-md-12">
+                                        <div class="col-md-6 ">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="container_console"
+                                                       value="tty">
+                                                TTY <span class="small text-muted">(-t)</span>
+                                            </label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="radio-inline">
+                                                <input type="radio" name="container_console"
+                                                       value="none">
+                                                None
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <!-- VOlumes-->
+
+                        <div class="tab-pane fade" id="volume" role="tabpanel" aria-labelledby="volume-tab">
+                            <br>
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <label class="control-label" align="left">Container</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           name="container_folder" placeholder="e.g. /path/in/Container"
+                                           align="right">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label" align="left">Host</label>
+                                    <input type="text"
+                                           class="form-control"
+                                           name="container_folder" placeholder="e.g. /path/in/host"
+                                           align="right">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <!--Lables-->
+
+                        <div class="tab-pane fade" id="labels" role="tabpanel" aria-labelledby="labels-tab">
+                            Nulla est ullamco ut irure incididu
+                        </div>
+                        <div class="tab-pane fade" id="env" role="tabpanel" aria-labelledby="env-tab">
+                            ...
+                        </div>
+
+
+                        <!--Restart Policies..-->
+                        <div class="tab-pane fade" id="restart_policy" role="tabpanel"
+                             aria-labelledby="restart-tab">
+                            <div class="row col-md-12">
+                                <div class="form-group col-md-12">
+                                    <div class="col-md-3" align="left">
+                                        <label class="control-label text-left">
+                                            Restart policy
+                                        </label>
+                                    </div>
+                                    <div class="col-md-9 btn-group btn-group-md">
+                                        <label class="btn btn-primary "
+                                               uib-btn-radio="'no'">
+                                            Never
+                                        </label>
+                                        <label class="btn btn-primary"
+                                               uib-btn-radio="'always'">
+                                            Always
+                                        </label>
+                                        <label class="btn btn-primary"
+                                               uib-btn-radio="'on-failure'">
+                                            On failure
+                                        </label>
+                                        <label class="btn btn-primary"
+                                               uib-btn-radio="'unless-stopped'">
+                                            Unless stopped
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Networks...-->
+
+                        <div class="tab-pane fade" id="network" role="tabpanel"
+                             aria-labelledby="network-tab">
+                            <div class="col-md-12">
+                                <div class="row col-md-12">
+                                    <div class="col-md-2">
+                                        <label class="control-label" align="left">Network</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select class="form-control"
+                                                id="container_network">
+                                            <option selected="" disabled="" hidden="" value="">Select a
+                                                network
+                                            </option>
+                                            <!---->
+                                            <option value="bridge">bridge
+                                            </option><!---->
+                                            <option value="container">container
+                                            </option><!---->
+                                            <option value="docker_gwbridge">docker_gwbridge
+                                            </option><!---->
+                                            <option value="host">host
+                                            </option><!---->
+                                            <option value="none">none
+                                            </option><!---->
+                                        </select>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row col-md-12">
+                                    <div class="col-md-2">
+                                        <label class="control-label" align="left">Hostname</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               name="network_host" placeholder="e.g. /web01"
+                                               align="right">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row col-md-12">
+                                    <div class="col-md-2">
+                                        <label class="control-label" align="left">Domain name</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               name="network_host" placeholder="e.g. /example.com"
+                                               align="right">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row col-md-12">
+                                    <div class="col-md-2">
+                                        <label class="control-label" align="left">Mac Address</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               name="network_host" placeholder="e.g. 12-34-56-78-9a-bc"
+                                               align="right">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row col-md-12">
+                                    <div class="col-md-2">
+                                        <label class="control-label" align="left">IPV4</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               name="network_ipv4" placeholder="e.g. 172.16.0.2"
+                                               align="right">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row col-md-12">
+                                    <div class="col-md-2">
+                                        <label class="control-label" align="left">IPV6</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text"
+                                               class="form-control"
+                                               name="network_ipv6" placeholder="e.g. a.b.c.d::1234"
+                                               align="right">
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>
 
 
+                        <div class="tab-pane fade" id="runtime" role="tabpanel"
+                             aria-labelledby="runtime-tab">
+                            ...
+                        </div>
                     </div>
                 </div>
+                <br>
+
+
             </div>
-
         </div>
-
     </div>
+
     {% block scripts %}
     {{super() }}
     <script>
-
 
     </script>
 

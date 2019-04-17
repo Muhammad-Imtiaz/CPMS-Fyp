@@ -1,20 +1,58 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify, request
 import pygal
 from pygal.style import DarkColorizedStyle, NeonStyle, CleanStyle, LightStyle, DefaultStyle
+from bokeh.plotting import figure
+from bokeh.embed import components
+from bokeh.models.sources import AjaxDataSource
+from .server.myContainer import Container
 
 
 def create_app():
     app = Flask(__name__)
+
+    container = Container()
+
+    x = 0
+
+    @app.route('/data/', methods=['POST'])
+    def data():
+        global x
+        x += 1
+        y = 2 ** x
+        return jsonify(x=x, y=y)
+
+    @app.route('/test/')
+    def show_dashboard():
+        plots = []
+        plots.append(make_ajax_plot())
+
+        return render_template('test.html', plots=plots)
+
+    def make_ajax_plot():
+        source = AjaxDataSource(data_url=request.url_root + 'data/',
+                                polling_interval=2000, mode='append')
+
+        source.data = dict(x=[], y=[])
+
+        plot = figure(plot_height=300, sizing_mode='scale_width')
+        plot.line('x', 'y', source=source, line_width=4)
+
+        script, div = components(plot)
+        return script, div
 
     def get_graph_1():
         line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=DefaultStyle)
         line_chart.title = 'CPU usage evolution (in %)'
         line_chart.x_labels = map(str, range(2002, 2012))
         # line_chart.y_labels = map(str, range(200, 400))
-        line_chart.add('CPU', [1, 3, 5, 16, 13, 3, 7, 46, 12])
-        line_chart.render()
-        graph_data = line_chart.render_data_uri()
-        return graph_data
+        cpu = []
+        while True:
+            cpu_data = container.calculate_cpu_percent('15ec352cd1e1')
+            cpu.append(cpu_data * 15 + 15)
+            line_chart.add('CPU', cpu)
+            line_chart.render()
+            graph_data = line_chart.render_data_uri()
+            return graph_data
 
     def get_graph_2():
         line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=CleanStyle)
@@ -55,10 +93,6 @@ def create_app():
         return render_template('/index.html', graph_data1=graph_data1,
                                graph_data2=graph_data2, graph_data3=graph_data3,
                                graph_data4=graph_data4)
-
-    @app.route('/test')
-    def tst():
-        return render_template('/test.html')
 
     @app.route('/login')
     def login():

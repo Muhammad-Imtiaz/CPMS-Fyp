@@ -9,21 +9,86 @@ class Container:
     #                                   , name='myPortainerMonitor1',
     #                                   volumes={'/var/run/docker.sock': {'bind': '/var/run/docker.sock'}})
 
+    # create container
+    def createContainer(self, image, command, hostname, user, tty, ports, environment, volume, name, entrypoint,
+                        working_dir,
+                        domainname, host_config, mac_address, labels):
+        return docker.APIClient(self.resourceID).create_container(image=image, command=command, hostname=hostname,
+                                                                  user=user,
+                                                                  tty=tty, ports=ports, environment=environment,
+                                                                  volumes=volume, name=name,
+                                                                  entrypoint=entrypoint, working_dir=working_dir,
+                                                                  domainname=domainname,
+                                                                  host_config=host_config, mac_address=mac_address,
+                                                                  labels=labels)
+
     def dockerstats(self, containerID=None):
         print("Printing stats")
         response = docker.APIClient(self.resourceID).stats(containerID, stream=False)
         print(response['cpu_stats'])
 
-    #
-    # def calculateCPUPercentUnix (previousCPU, previousSystemuint64, StatsJSON):
-    #     cpuPercent = 0.0
-    #     cpuDelta = v.CPUStats.CPUUsage.TotalUsage - previousCPU
-    #     pass
+    def calculate_cpu_percent(self, containerID=None):
+        print("Printing CUP stats")
+        response = docker.APIClient(self.resourceID).stats(containerID, stream=False)
+        # print(response['cpu_stats'])
+        cpu_count = len(response["cpu_stats"]["cpu_usage"]["percpu_usage"])
+        cpu_percent = 0.0
+        cpu_delta = float(response["cpu_stats"]["cpu_usage"]["total_usage"]) - \
+                    float(response["precpu_stats"]["cpu_usage"]["total_usage"])
+        system_delta = float(response["cpu_stats"]["system_cpu_usage"]) - \
+                       float(response["precpu_stats"]["system_cpu_usage"])
+        if system_delta > 0.0:
+            cpu_percent = cpu_delta / system_delta * 100.0 * cpu_count
+        return cpu_percent
 
-    def stream(self):
-        for container in self.client.containers.list():
-            stats = container.stats(stream=False)
-        print(stats)
+    def calculate_memory_percent(self, containerID=None):
+        print("Printing Memory stats")
+        response = docker.APIClient(self.resourceID).stats(containerID, stream=False)
+        if response['memory_stats']['limit'] is not 0:
+            memPercent = float(response['memory_stats']['limit']) / float(response['memory_stats']['usage']) * 100.0
+        print(memPercent)
+
+    def calculate_network_IO(self, containerID=None):
+        print("Printing network I/O")
+        response = docker.APIClient(self.resourceID).stats(containerID, stream=False)
+        rx = response['networks']['eth0']['rx_bytes']
+        tx = response['networks']['eth0']['tx_bytes']
+        print(rx)
+        print(tx)
+
+    def calculate_disk_usage(self, containerID=None):
+        print("Printing disk usage")
+        response = docker.APIClient(self.resourceID).stats(containerID, stream=False)
+        usage = response['storage_stats']
+
+        print(usage)
+
+    def total_cpu_percent(self):
+        total_cpu = 0
+        all_containers = self.listRunningContainer()
+        for each in all_containers:
+            total_cpu += self.calculate_cpu_percent(each.id)
+        return total_cpu
+
+    def total_memory_percent(self):
+        total_memory = 0
+        all_containers = self.listRunningContainer()
+        for each in all_containers:
+            total_memory += self.calculate_memory_percent(each.id)
+        return total_memory
+
+    def total_network_IO(self):
+        total_rx = 0
+        total_tx = 0
+        all_containers = self.listRunningContainer()
+        for each in all_containers:
+            rx, tx = self.calculate_memory_percent(each.id)
+            total_rx += rx
+            total_tx += tx
+        return total_rx, total_tx
+
+    def total_disk_usage(self):
+        pass
 
     def stopContainer(self, containerID):
         print("stoping container " + containerID)
@@ -73,7 +138,6 @@ class Container:
 
     def inspectContainer(self, containerID):
         print("Printing detailed information of " + containerID)
-        # print(docker.APIClient(self.resourceID).inspect_container(containerID))
         return docker.APIClient(self.resourceID).inspect_container(containerID)
 
     def listRunningContainer(self):
@@ -183,10 +247,22 @@ class Container:
         #
         # print("\n")
 
-
-# #
-con = Container()
-con.container_status('15ec352cd1e1')
+# # #
+# con = Container()
+# con.calculate_network_IO('15ec352cd1e1')
+# con.calculate_disk_usage('15ec352cd1e1')
+# con.calculate_memory_percent('15ec352cd1e1')
+# print(con.calculate_cpu_percent('15ec352cd1e1'))
+#
+# con.calculate_network_IO('64ff7546650f')
+# con.calculate_disk_usage('64ff7546650f')
+# con.calculate_memory_percent('64ff7546650f')
+# print(con.calculate_cpu_percent('64ff7546650f'))
+# print(con.inspectContainer('15ec352cd1e1'))
+# while True:
+#
+# while True:
+#
 # con.container_status('9fd5257092ac')
 # con.logprint('15ec352cd1e1')
 # con.runningContainer()

@@ -14,7 +14,6 @@ con_bp = Blueprint('container', __name__, url_prefix='/container')
 
 @con_bp.route('/')
 def containers():
-
     graph_data1 = get_graph_1()
     graph_data2 = get_graph_2()
     graph_data3 = get_graph_3()
@@ -61,7 +60,7 @@ def get_graph_3():
 def get_graph_4():
     line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=DarkColorizedStyle)
     line_chart.title = 'Networks usage evolution (in %)'
-    line_chart.x_labels = map(str, range(2002, 2012 ))
+    line_chart.x_labels = map(str, range(2002, 2012))
     # line_chart.y_labels = map(str, range(0, 100))
     line_chart.add('Networks', [2, 3, 5, 9, 12, 9, 5, 1, 3, 5, 16, 13, 3, 7])
     line_chart.render()
@@ -113,13 +112,60 @@ def start_containers():
             print(con_ids)
             for i in con_ids:
                 containerObj.restartContainer(i)
-        elif request.form['my_btn'] == 'add':
-            images = imageObj.listAllImages()
-            return render_template('containers/add_container.html', images=images)
 
         return render_template("containers/container.html", containers=containerObj, graph_data1=graph_data1,
                                graph_data2=graph_data2, graph_data3=graph_data3,
                                graph_data4=graph_data4)
+
+
+@con_bp.route('/add_container/')
+def add_container():
+    images = imageObj.listAllImages()
+    return render_template('containers/add_container.html', images=images)
+
+
+@con_bp.route("/add_container/", methods=('GET', 'POST'))
+def deploy_container():
+    images = imageObj.listAllImages()
+    if request.method == "POST":
+        if request.form['deploy'] == 'deploy_container':
+            con_name = request.form.get('container_name')
+
+            # commands and logging
+            command = request.form.get('command')
+            entry = request.form.get('entry')
+            workingdir = request.form.get('working')
+            user = request.form.get('user')
+            console = request.form.get('console')
+
+            # volumes
+
+            # networks
+            net_host = request.form.get('network_host')
+            net_domain = request.form.get('network_domain')
+            net_mac = request.form.get('network_mac')
+            net_ipv4 = request.form.get('network_ipv4')
+            net_ipv6 = request.form.get('network_ipv6')
+
+            # ENV
+
+            # labels
+
+            # Restart policy
+            restart = request.form.get('restart_btn')
+
+
+        print(con_name)
+        print(command)
+        print(entry)
+        print(net_host)
+        print(con_name)
+        print(net_domain)
+        print(net_ipv6)
+        print(restart)
+        print(console)
+        print(workingdir)
+        return render_template('containers/add_container.html', images=images)
 
 
 @con_bp.route('/<con_id>')

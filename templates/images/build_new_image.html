@@ -3,7 +3,7 @@
 {% block title %} Build new image {% endblock %}
 {% block body %}
 
-<div class="container-fluid" xmlns="http://www.w3.org/1999/html">
+<div class="container-fluid">
 
     <form action="" method="post">
         <div class="col-md-12">
@@ -21,7 +21,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="output-tab" data-toggle="tab" href="#output" role="tab"
-                                   aria-controls="output" aria-selected="lse">Output</a>
+                                   aria-controls="output" aria-selected="false">Output</a>
                             </li>
                         </ul>
 
@@ -33,7 +33,7 @@
                                 <br>
                                 <div class="col-md-12">
 
-                                    <label class="control-label" align="left">Naming</label>
+                                    <label class="control-label" align="left"><b> Naming</b></label>
                                     <br>
                                     <span> You can specify multiple names to your image.</span><br>
                                     <br>
@@ -44,10 +44,10 @@
                                 </div>
 
                                 <div class="row col-md-12">
-                                    <div class="col-md-3">
-                                        <label class="control-label" align="left">Image Name</label>
+                                    <div class="col-md-2">
+                                        <label class="control-label" align="left"> <b> Image Name</b></label>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-10">
                                         <input type="text"
                                                class="form-control"
                                                name="network_host" placeholder="e.g. myimage:mytag"
@@ -59,71 +59,126 @@
                                     Build methods
                                 </div>
                                 <hr>
-                                <div class="col-md-12">
-                                    <div class="form-group" style="margin-bottom: 0">
-                                        <div class="boxselector_wrapper">
-                                            <div class="col-md-4">
-                                                <div class="col-md-1">
-                                                    <input type="radio" id="method_editor"
-                                                           value="editor"
-                                                           name="2092">
-                                                </div>
-                                                <div class="col-md-11">
-                                                    <label for="method_editor">
-                                                        <div class="boxselector_header">
-                                                            <i class="" aria-hidden="true"
-                                                               ></i>
-                                                            Web editor
-                                                        </div>
-                                                    </label>
-                                                </div>
+                                <div class="row col-md-12">
+                                    <ul class="nav nav-tabs nav-pills" id="builder_tabs" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="web_editor" data-toggle="tab"
+                                               href="#editor" role="tab"
+                                               aria-controls="image_builder" aria-selected="true"><b> Builder </b><br>Use
+                                                our Web editor<br></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="upload-tab" data-toggle="tab" href="#upload"
+                                               role="tab"
+                                               aria-controls="upload" aria-selected="false"> <b> Upload</b>
+                                                <p>Upload a tarball or a Dockerfile from your computer</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="url-tab" data-toggle="tab" href="#url"
+                                               role="tab"
+                                               aria-controls="output" aria-selected="false"> <b> URL </b><br>Specify
+                                                an URL to a file</a>
+                                        </li>
 
+                                    </ul>
+
+                                    <div class="tab-content col-md-12" id="myTabBuilderContent">
+                                        <div class="tab-pane de show active" id="editor" role="tabpanel"
+                                             aria-labelledby="image_builder-tab">
+                                            <br>
+                                            <div class="col-md-12">
+                                                <div class="row col-md-12">
+                                                    <label class="control-label"> <b> Web editor</b></label>
+                                                </div>
+                                                <div class="row col-md-12">
+                                                    <textarea class="col-md-12" style="margin-bottom:15px;
+                                                    border-right-width: 10px; min-height: 28px; min-width: 7px;
+                                                    "
+                                                              placeholder="Define or paste the content of your docker file here... "
+                                                              rows="20"></textarea>
+                                                </div>
                                             </div>
-                                            <div  class="col-md-4">
-                                                <div class="col-md-1">
-                                                    <input type="radio" id="method_upload"
-                                                           value="upload"
-                                                           name="2093">
+                                        </div>
+                                        <div class="tab-pane de " id="upload" role="tabpanel"
+                                             aria-labelledby="image_upload-tab">
+                                            <br>
+                                            <div class="col-md-12">
+                                                <div class="row col-md-12">
+                                                    <label class="control-label"> <b> Upload</b></label>
                                                 </div>
-                                                <div class="col-md-11">
-                                                    <label for="method_upload">
-                                                        <div class="boxselector_header">
-                                                            <i aria-hidden="true"
-                                                               ></i>
-                                                            Upload
-                                                        </div>
-                                                    </label>
+                                                <br>
+                                                <div class="col-md-12">
+                                                    You can upload a Dockerfile or a tar archive containing a
+                                                    Dockerfile from your computer. When using an tarball, the root
+                                                    folder will be used as the build context.
+
                                                 </div>
-
-
                                             </div>
-                                            <div class="col-md-4">
-                                                <div class="col-md-1">
-                                                    <input type="radio" id="method_url" value="url"
-                                                           name="2094">
+                                        </div>
+                                        <div class="tab-pane de" id="url" role="tabpanel"
+                                             aria-labelledby="image_url-tab">
+                                            <br>
+                                            <div class="col-md-12">
+                                                <div class="row col-md-12">
+                                                    <label class="control-label"> <b> URL</b></label>
                                                 </div>
-                                                <div class="col-md-11">
-                                                    <label for="method_url">
-                                                        <div class="boxselector_header">
-                                                            <i aria-hidden="true"
-                                                               ></i>
-                                                            URL
+                                                <div class="row col-md-12">
+                                                    Specify the URL to a Dockerfile, a tarball or a public Git
+                                                    repository (suffixed by .git). When using a tarball or a Git
+                                                    repository URL, the root folder will be used as the build context.
+                                                </div>
+                                                <br>
+                                                <div class="row col-md-12">
+                                                    <div class="row col-md-12">
+                                                        <div class="col-md-2">
+                                                            <label class="control-label"><b>URL </b></label>
                                                         </div>
-
-                                                    </label>
+                                                        <div class="col-md-10">
+                                                            <input type="text" class="form-control"
+                                                                   name="network_host"
+                                                                   placeholder="https://myhost.mydomain/myimage.tar.gz"
+                                                                   align="right">
+                                                        </div>
+                                                    </div>
+                                                    <br>
+                                                    <br>
+                                                    <div class="row col-md-12">
+                                                        <div class="col-md-2">
+                                                            <label class="control-label"><b>Dockerfile Path</b></label>
+                                                        </div>
+                                                        <div class="col-md-10">
+                                                            <input type="text" class="form-control"
+                                                                   name="network_host"
+                                                                   placeholder="Indicate the path to the Dockerfile within the tarball/repository (ignored when using a Dockerfile)."
+                                                                   align="right">
+                                                        </div>
+                                                    </div>
                                                 </div>
-
 
                                             </div>
                                         </div>
                                     </div>
+
+                                </div>
+
+
+                                <div class="row col-md-12">
+                                    <label class="control-label"> <b> Actions</b></label>
+                                </div>
+
+                                <hr>
+                                <div class="row col-md-12">
+                                    <button type="submit" class="btn btn-primary" value="">Build the
+                                        image
+                                    </button>
                                 </div>
 
                             </div>
 
 
                             <div class="tab-pane de" id="output" role="tabpanel" aria-labelledby="output">
-                                ...
+                                Output of the image goes here....
                             </div>
 
                         </div>

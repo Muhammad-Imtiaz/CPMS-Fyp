@@ -4,43 +4,13 @@
 
 {% block body %}
 
-<div class="container">
+    <h1> SHowing graphs but not showing..</h1>
 
-    <canvas id="lineChart"></canvas>
+    {% for plot in plots %}
+        {% for part in plot %}
+            {{ part|safe }}
+            {{part}}
+        {% endfor %}
+    {% endfor %}
 
-</div>
-
-{% block scripts %}
-{{ super() }}
-<script>
-  //line
-  var ctxL = document.getElementById("lineChart").getContext('2d');
-  var myLineChart = new Chart(ctxL, {
-    type: 'line',
-    data: {
-      labels: ["January", "February", "March", "April", "May", "June", "July"],
-      datasets: [
-        {
-          label: "My Second dataset",
-          data: [90, 48, 40, 19, 86, 27, 90],
-          backgroundColor: [
-            'rgba(0, 137, 132, .2)',
-          ],
-          borderColor: [
-            'rgba(0, 10, 130, .7)',
-          ],
-          borderWidth: 2
-        }
-      ]
-    },
-    options: {
-      responsive: true
-    }
-  });
-
-</script>
-{% endblock %}
-
-
-
-{% endblock %}
+ {% endblock %}

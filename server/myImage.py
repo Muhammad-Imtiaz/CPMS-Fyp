@@ -35,6 +35,10 @@ class Image:
     def listAllImages(self):
         return docker.APIClient(self.resourceID).images()
 
+    def exportImage(self, images):
+        for i in images:
+            print('exporting image' + i)
+            docker.APIClient(self.resourceID).export(i)
 
     def pullImage(self, repository, auth_config=None, platform=None):
         print('pulling image')

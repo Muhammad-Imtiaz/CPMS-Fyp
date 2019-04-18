@@ -26,19 +26,12 @@ class Image:
         # print(env)
 
         myDictionary = {'ID': id, 'Created': created, 'Size': size,
-                        'Cmd': cmd, 'Env': env, 'Entry_point' : entry_point,
+                        'Cmd': cmd, 'Env': env, 'Entry_point': entry_point,
                         'Vol_name': volumes, 'Expose_ports': expose_port}
         return myDictionary
 
-
-
     def listAllImages(self):
         return docker.APIClient(self.resourceID).images()
-
-    def exportImage(self, images):
-        for i in images:
-            print('exporting image' + i)
-            docker.APIClient(self.resourceID).export(i)
 
     def pullImage(self, repository, auth_config=None, platform=None):
         print('pulling image')
@@ -49,10 +42,10 @@ class Image:
         self.client.images.remove(imageName, forceRemoval, noprune)
         print("image successfully removed...")
 
-    def pushImage(self, imageName, repository, auth_config, imageTag='', stream=True, decode=True):
-        for line in self.client.images.push(imageName + imageTag, repository, stream, decode):
+    def pushImage(self, repository):
+        for line in self.client.images.push(repository, stream=True, decode=True):
             print(line)
-        print("image successfully pushed...")
+            print("image successfully pushed...")
 
     def delete_unused(self, filter=None):
         output = self.client.images.prune(filter)
@@ -68,8 +61,16 @@ class Image:
             print(image)
         print('\n')
 
+    def buildImage(self, path):
+        output = docker.APIClient(self.resourceID).build(path=path)
+        print(output)
+        return output
+
+
 #
-# img = Image()
+img = Image()
 # # # # img.listAllImages()jupyter/scipy-notebook:latest
 # # img.image_detail('wordpress')
 # img.image_detail('sha256:a1dc251941519ee661b262a34c741740bcaee3667804c805c26253b141952b8d')
+
+img.pushImage('wordpress:namal')

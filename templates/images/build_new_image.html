@@ -5,7 +5,7 @@
 
 <div class="container-fluid">
 
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -114,7 +114,27 @@
                                                     folder will be used as the build context.
 
                                                 </div>
+                                                <br>
+                                                <div class="col-md-12">
+                                                    <form action="" method="POST"
+                                                          enctype="multipart/form-data">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"
+                                                                      id="inputGroupFileAddon01">Upload</span>
+                                                            </div>
+                                                            <div class="custom-file">
+                                                                <input type="file" class="custom-file-input"
+                                                                       id="inputGroupFile01" name="file"
+                                                                       aria-describedby="inputGroupFileAddon01">
+                                                                <label class="custom-file-label" for="inputGroupFile01">Choose
+                                                                    file</label>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
+                                            <br><br>
                                         </div>
                                         <div class="tab-pane de" id="url" role="tabpanel"
                                              aria-labelledby="image_url-tab">
@@ -188,6 +208,16 @@
         </div>
     </form>
 
+    {% block scripts %}
+    {{super() }}
+    <script>
+            function
+
+
+
+    </script>
+
+    {% endblock %}
 </div>
 
 {% endblock %}

@@ -100,19 +100,15 @@ Image -
                                     >
                                         Build a new image
                                     </button></a>
-                                    <a href="/images/import/"> <button type="button" name="my_btn" id="import" class="btn btn-danger"
-                                            value="import"
+                                    <a href="/images/push/"> <button type="button" name="my_btn" id="push" class="btn btn-danger"
+                                            value="push" disabled
                                     >
-                                        Import
+                                        Push an Image
                                     </button></a>
-                                   <button type="submit" name="my_btn" id="export" class="btn btn-primary"
-                                            value="export"
-                                            disabled>
-                                        Export
-                                    </button>
                                 </div>
                             </div>
                         </div>
+                        <br>
                         <div class="row col-md-12">
                             <div class="table-responsive col-md-12">
                                 <div id="zero_config_wrapper"
@@ -222,14 +218,13 @@ Image -
                                   $(selector).prop("checked", isChecked);
                                    if (isChecked == true){
                                     $('#remove').prop('disabled', false);
-                                    $('#export').prop('disabled', false);
                                     $('#build').prop('disabled', false);
-                                    $('#import').prop('disabled', false);
+                                    $('#push').prop('disabled', false);
 
                                    }else{
-                                        $('#export').prop('disabled', false);
+
                                         $('#build').prop('disabled', true);
-                                        $('#import').prop('disabled', true);
+                                        $('#push').prop('disabled', true);
                                         $('#remove').prop('disabled', false);
                                    }
                                 });
@@ -243,17 +238,15 @@ Image -
                                     if($(this).prop("checked") == true){
 
                                         $('#remove').prop('disabled', false);
-                                        $('#export').prop('disabled', false);
                                         $('#build').prop('disabled', false);
-                                        $('#import').prop('disabled', false);
+                                        $('#push').prop('disabled', false);
 
                                     }
 
                                     else{
                                         $('#remove').prop('disabled', true);
-                                        $('#export').prop('disabled', true);
                                         $('#build').prop('disabled', false);
-                                        $('#import').prop('disabled', false);
+                                        $('#push').prop('disabled', false);
 
                                     }
 

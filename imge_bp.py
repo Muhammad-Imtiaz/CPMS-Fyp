@@ -44,9 +44,10 @@ def remove_img():
             all_images = request.form.getlist('image')
             for i in all_images:
                 imageObj.removeImage(i, True)
-        elif request.form['my_btn'] == 'export':
+
+        elif request.form['my_btn'] == 'push':
             all_images = request.form.getlist('image')
-            imageObj.exportImage(all_images)
+            imageObj.pushImage(all_images)
 
     return render_template("images/image.html", images=imageObj)
 
@@ -76,8 +77,3 @@ def build():
                 imageObj.buildImage(os.path.realpath(os.path.realpath(UPLOAD_FOLDER)))
             print(os.path.realpath(UPLOAD_FOLDER))
     return redirect(url_for('image.images'))
-
-
-@img_bp.route('/import/')
-def import_image():
-    return render_template('/images/import_image.html')

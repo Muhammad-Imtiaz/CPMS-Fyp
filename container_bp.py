@@ -1,5 +1,6 @@
 from flask import Blueprint, flash, g, redirect, render_template, session, url_for
 from flask import request
+from flask import jsonify
 import pygal
 from pygal.style import DarkColorizedStyle, NeonStyle, CleanStyle, LightStyle, DefaultStyle
 
@@ -22,6 +23,15 @@ def containers():
     return render_template('containers/container.html', containers=containerObj, graph_data1=graph_data1,
                            graph_data2=graph_data2, graph_data3=graph_data3,
                            graph_data4=graph_data4)
+
+
+@con_bp.route('/cpu', methods=('GET', 'POST'))
+def get_cpu():
+    return jsonify(cpu=containerObj.calculate_cpu_percent('15ec352cd1e1'))
+
+@con_bp.route('/test')
+def getCPU():
+    return render_template('test.html')
 
 
 def get_graph_1():
@@ -153,7 +163,6 @@ def deploy_container():
 
             # Restart policy
             restart = request.form.get('restart_btn')
-
 
         print(con_name)
         print(command)

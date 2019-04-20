@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, request
 import pygal
 from pygal.style import DarkColorizedStyle, NeonStyle, CleanStyle, LightStyle, DefaultStyle
 from bokeh.plotting import figure
@@ -12,47 +12,15 @@ def create_app():
 
     container = Container()
 
-    x = 0
-
-    @app.route('/data/', methods=['POST'])
-    def data():
-        global x
-        x += 1
-        y = 2 ** x
-        return jsonify(x=x, y=y)
-
-    @app.route('/test/')
-    def show_dashboard():
-        plots = []
-        plots.append(make_ajax_plot())
-
-        return render_template('test.html', plots=plots)
-
-    def make_ajax_plot():
-        source = AjaxDataSource(data_url=request.url_root + 'data/',
-                                polling_interval=2000, mode='append')
-
-        source.data = dict(x=[], y=[])
-
-        plot = figure(plot_height=300, sizing_mode='scale_width')
-        plot.line('x', 'y', source=source, line_width=4)
-
-        script, div = components(plot)
-        return script, div
-
     def get_graph_1():
         line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=DefaultStyle)
         line_chart.title = 'CPU usage evolution (in %)'
         line_chart.x_labels = map(str, range(2002, 2012))
         # line_chart.y_labels = map(str, range(200, 400))
-        cpu = []
-        while True:
-            cpu_data = container.calculate_cpu_percent('15ec352cd1e1')
-            cpu.append(cpu_data * 15 + 15)
-            line_chart.add('CPU', cpu)
-            line_chart.render()
-            graph_data = line_chart.render_data_uri()
-            return graph_data
+        line_chart.add('CPU', [ 25, 73, 2, 5, 7, 17, 100, 33,])
+        line_chart.render()
+        graph_data = line_chart.render_data_uri()
+        return graph_data
 
     def get_graph_2():
         line_chart = pygal.StackedLine(fill=True, interpolate='cubic', style=CleanStyle)
@@ -104,10 +72,11 @@ def create_app():
 
     from .container_bp import con_bp
     from .imge_bp import img_bp
+    from .volume_bp import vol_bp
 
     app.register_blueprint(con_bp)
-
     app.register_blueprint(img_bp)
+    app.register_blueprint(vol_bp)
 
     app.debug = True
     return app

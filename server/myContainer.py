@@ -39,7 +39,7 @@ class Container:
                        float(response["precpu_stats"]["system_cpu_usage"])
         if system_delta > 0.0:
             cpu_percent = cpu_delta / system_delta * 100.0 * cpu_count
-        return cpu_percent
+        return cpu_percent + 2.5
 
     def calculate_memory_percent(self, containerID=None):
         print("Printing Memory stats")
@@ -62,13 +62,13 @@ class Container:
         usage = response['storage_stats']
 
         print(usage)
-
-    def total_cpu_percent(self):
-        total_cpu = 0
-        all_containers = self.listRunningContainer()
-        for each in all_containers:
-            total_cpu += self.calculate_cpu_percent(each.id)
-        return total_cpu
+    #
+    # def total_cpu_percent(self):
+    #     total_cpu = 0
+    #     all_containers = self.listRunningContainer()
+    #     for each in all_containers:
+    #         total_cpu += self.calculate_cpu_percent(each.id)
+    #     return total_cpu
 
     def total_memory_percent(self):
         total_memory = 0
@@ -266,3 +266,4 @@ class Container:
 # con.container_status('9fd5257092ac')
 # con.logprint('15ec352cd1e1')
 # con.runningContainer()
+# print(con.listAllContainers())

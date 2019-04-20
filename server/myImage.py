@@ -42,10 +42,17 @@ class Image:
         self.client.images.remove(imageName, forceRemoval, noprune)
         print("image successfully removed...")
 
-    def pushImage(self, repository):
-        for line in self.client.images.push(repository, stream=True, decode=True):
-            print(line)
-            print("image successfully pushed...")
+    # def pushImage(self, images):
+    #     auth = {'username': 'fypdocker', 'password':'Millionaire5'}
+    #     for i in images:
+    #         tag = self.get(i)
+    #         repository = tag
+    #         repository + 'fypdocker/testimage'
+    #     for line in docker.APIClient(self.resourceID).push('yourname/app', stream=True, decode=True):
+    #         print(line)
+    #     for i in images:
+    #
+    #         docker.APIClient(self.resourceID).push(repository=repository, auth_config=auth)
 
     def delete_unused(self, filter=None):
         output = self.client.images.prune(filter)
@@ -53,7 +60,7 @@ class Image:
 
     def get(self, imageID):
         image = self.client.images.get(imageID)
-        return image
+        print(image.tags[0])
 
     def searchImage(self, term):
         images = self.client.images.search(term)
@@ -73,4 +80,4 @@ img = Image()
 # # img.image_detail('wordpress')
 # img.image_detail('sha256:a1dc251941519ee661b262a34c741740bcaee3667804c805c26253b141952b8d')
 
-img.pushImage('wordpress:namal')
+# img.pushImage('sha256:4456f3d84674248f83245dc11b2f0394b0a175f63726647f1396c229a6feac79')

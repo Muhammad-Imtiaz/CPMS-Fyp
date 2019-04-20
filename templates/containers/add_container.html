@@ -61,9 +61,11 @@ add-container
 
                     </div>
                     <hr>
-                    <div class="form-group row">
+                    <div class="form-group row  col-md-12">
                         <label class="control-label col-md-2" align="left"><b>Port mapping</b></label>
-                        <button type="button" class="col-md-2 btn">Add additional ports</button>
+                        <button type="button" class="col-md-2 btn btn-default" onclick="addPortsItems()">Add additional ports</button>
+                    </div>
+                    <div class="row portsItems col-md-12">
 
                     </div>
                     <br>
@@ -409,6 +411,24 @@ add-container
         {% block scripts %}
         {{super() }}
         <script>
+
+            function addPortsItems(){
+                <!--$(".portsItems").append("<div class='row col-md-12'>-->
+                                    <!--<div class='col-md-2'>-->
+                                        <!--<label class='control-label' align='left'>Command</label>-->
+                                    <!--</div>-->
+                                    <!--<div class='col-md-10'>-->
+                                        <!--<input type='text'-->
+                                               <!--class='form-control'-->
+                                               <!--name='command' id='command_logging'-->
+                                               <!--placeholder='e.g. /usr/bin/nginx -t -c /mynginx.conf'-->
+                                               <!--align='right'>-->
+                                    <!--</div>-->
+                                <!--</div>");-->
+                 $(".portsItems").append("<br> <label class='control-label' class='col-md-5' align='left'>Ports</label>");
+                 $(".portsItems").append("<input type='text' class='col-md-5' align='right' 'placeholder='Add ports here'>");
+
+            }
 
         </script>
 

@@ -6,90 +6,48 @@
 
 <div class="container-fluid">
 
-    <!--<div class="row">-->
-        <!--<div class="col-md-12">-->
-            <!--<div class="card">-->
-                <!--<div class="card-header">-->
-                    <!--<b>Resource Consumption</b>-->
-                <!--</div>-->
-                <!--<div class="card-body">-->
-                    <!--<div class="row col-md-12">-->
-                        <!--<div class="col-md-3" align="left">-->
-                            <!--<embed type="image/svg+xml" src="{{graph_data1|safe}}"-->
-                                   <!--style="max-width:300px; max-height:200px"/>-->
-                        <!--</div>-->
-                        <!--<div class="col-md-3" align="right">-->
-                            <!--<embed type="image/svg+xml" src="{{graph_data2|safe}}"-->
-                                   <!--style="max-width:300px; max-height:200px"/>-->
-                        <!--</div>-->
-                        <!--<div class="col-md-3" align="left">-->
-                            <!--<embed type="image/svg+xml" src="{{graph_data3|safe}}"-->
-                                   <!--style="max-width:300px; max-height:200px"/>-->
-                        <!--</div>-->
-                        <!--<div class="col-md-3" align="right">-->
-                            <!--<embed type="image/svg+xml" src="{{graph_data4|safe}}"-->
-                                   <!--style="max-width:300px; max-height:200px"/>-->
-                        <!--</div>-->
-
-                    <!--</div>-->
-                    <!--&lt;!&ndash;<div class="row col-md-12">-->
-                        <!--<div class="col-md-6" align="left">-->
-                            <!--<embed type="image/svg+xml" src="{{graph_data3|safe}}"-->
-                                   <!--style="max-width:500px; max-height:200px"/>-->
-                        <!--</div>-->
-                        <!--<div class="col-md-6" align="right">-->
-                            <!--<embed type="image/svg+xml" src="{{graph_data4|safe}}"-->
-                                   <!--style="max-width:500px; max-height:200px"/>-->
-                        <!--</div>&ndash;&gt;-->
-
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-
-
     <form action="" method="post">
 
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Actions
+                        <span class="fas fa-server"></span>  Containers
                     </div>
                     <div class="card-body">
                         <div class="well col-md-12 field is-grouped ">
                             <div class="control btn-group" style="margin-left:10px">
                                 <button type="submit" name="my_btn" id="start" class="btn btn-success" value="start"
                                         disabled style="margin-left:10px">
-                                    Start
+                                    <span class="fas fa-play space-right"></span> Start
                                 </button>
                                 <button type="submit" name="my_btn" id="stop" class="btn btn-danger" value="stop"
                                         disabled style="margin-left:10px">
-                                    Stop
+                                    <span class="fa fa-stop space-right"></span> Stop
                                 </button>
                                 <button type="submit" name="my_btn" id="kill" class="btn btn-danger" value="kill"
                                         disabled style="margin-left:10px">
-                                    Kill
+                                   <span class="fa fa-bomb space-right"></span> Kill
                                 </button>
                                 <button type="submit" name="my_btn" id="restart" class="btn btn-primary" value="restart"
                                         disabled style="margin-left:10px">
-                                    Restart
+                                    <span class="fa fa-sync space-right"></span> Restart
                                 </button>
                                 <button type="submit" name="my_btn" id="pause" class="btn btn-primary" value="pause"
                                         disabled style="margin-left:10px">
-                                    Pause
+                                    <span class="fa fa-pause space-right"></span> Pause
                                 </button>
                                 <button type="submit" name="my_btn" id="resume" class="btn btn-primary" value="resume"
                                         disabled style="margin-left:10px">
-                                    Resume
+                                    <span class="fa fa-play space-right"></span> Resume
                                 </button>
                                 <button type="submit" name="my_btn" id="remove" class="btn btn-danger" value="remove"
                                         disabled style="margin-left:10px">
-                                    Remove
+                                    <span class="fa fa-trash-alt space-right"></span> Remove
                                 </button>
                             </div>
                             <a href="/container/add_container"><button type="button" name="my_btn" class="btn btn-primary" value="add" style="margin-left:15px">
-                                Add Container
+                                <span class="fa fa-plus space-right"></span>  Add Container
                             </button ></a>
                         </div>
                     </div>
@@ -104,7 +62,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        Container's Table
+                        <span class="fas fa-server"></span> Container's Table
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">

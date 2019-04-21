@@ -29,6 +29,7 @@ def containers():
 def get_cpu():
     return jsonify(cpu=containerObj.calculate_cpu_percent('15ec352cd1e1'))
 
+
 @con_bp.route('/test')
 def getCPU():
     return render_template('test.html')
@@ -140,6 +141,11 @@ def deploy_container():
     if request.method == "POST":
         if request.form['deploy'] == 'deploy_container':
             con_name = request.form.get('container_name')
+            image_name = request.form.get('selected_image')  # still not working
+
+            # Ports
+            con_port = request.form.get('container_port')
+            host_port = request.form.get('host_port')
 
             # commands and logging
             command = request.form.get('command')
@@ -147,10 +153,11 @@ def deploy_container():
             workingdir = request.form.get('working')
             user = request.form.get('user')
             console = request.form.get('console')
-
             # volumes
-
+            con_vol = request.form.get('volume_c')
+            host_vol = request.form.get('volume_h')
             # networks
+            network = request.form.get('')  # will get item from list...still not working
             net_host = request.form.get('network_host')
             net_domain = request.form.get('network_domain')
             net_mac = request.form.get('network_mac')
@@ -158,11 +165,26 @@ def deploy_container():
             net_ipv6 = request.form.get('network_ipv6')
 
             # ENV
+            env1 = request.form.get('env_1')
+            env2 = request.form.get('env_2')
+            en3 = request.form.get('env_3')
+            en4 = request.form.get('env_4')
+            env5 = request.form.get('env_5')
+            env6 = request.form.get('env_6')
 
             # labels
+            lable1 = request.form.get('lable1')
+            lable2 = request.form.get('lable2')
+            lable3 = request.form.get('lable3')
+            lable4 = request.form.get('lable4')
 
             # Restart policy
             restart = request.form.get('restart_btn')
+
+            # Resources allocation
+            memory_soft = request.form.get('memory_soft_limit')
+            memory_limit = request.form.get('memory_limit')
+            cpu_usage = request.form.get('cpu_limit')
 
         print(con_name)
         print(command)
@@ -174,6 +196,10 @@ def deploy_container():
         print(restart)
         print(console)
         print(workingdir)
+        print(lable1)
+        print(memory_limit)
+        print(env1)
+        print(host_port)
         return render_template('containers/add_container.html', images=images)
 
 

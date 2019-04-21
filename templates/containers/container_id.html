@@ -74,46 +74,47 @@
         <form>
             <div class="card">
                 <div class="card-header">
-                    <span class="glyphicon glyphicon-search"></span> Actions
+                    <span class="fa fa-server"></span> Actions
                 </div>
                 <div class="card-body">
                     <div class="col-md-12 field is-grouped ">
                         <div class="control btn-group">
                             <button type="submit" name="my_btn" id="start" class="btn btn-success" value="start"
                                     disabled>
-                                Start
+                                <span class="fas fa-play space-right"></span> Start
                             </button>
                             <button type="submit" name="my_btn" id="stop" class="btn btn-danger" value="stop"
                                     disabled>
-                                Stop
+                               <span class="fas fa-stop space-right"></span> Stop
                             </button>
                             <button type="submit" name="my_btn" id="kill" class="btn btn-danger" value="kill"
                                     disabled>
-                                Kill
+                                <span class="fas fa-bomb space-right"></span> Kill
                             </button>
                             <button type="submit" name="my_btn" id="restart" class="btn btn-primary" value="restart"
                                     disabled>
-                                Restart
+                                <span class="fas fa-sync space-right"></span> Restart
                             </button>
                             <button type="submit" name="my_btn" id="pause" class="btn btn-primary" value="pause"
                                     disabled>
-                                Pause
+                                <span class="fas fa-pause space-right"></span> Pause
                             </button>
                             <button type="submit" name="my_btn" id="resume" class="btn btn-primary" value="resume"
                                     disabled>
-                                Resume
+                               <span class="fas fa-play space-right"></span> Resume
                             </button>
 
                         </div>
                         <button type="submit" name="my_btn" id="remove" class="btn btn-danger" value="remove"
                                 disabled>
-                            Remove
+                           <span class="fas fa-trash-alt space-right"></span> Remove
                         </button>
                         <button type="submit" name="my_btn" id="duplicate" class="btn btn-primary" value="duplicate"
                                 disabled>
-                            Duplicate
+                           <span class="fas fa-duplicate space-right"></span> Duplicate
                         </button>
-                        <button type="submit" name="my_btn" class="btn btn-primary" value="add">Recreate</button>
+                        <button type="submit" name="my_btn" class="btn btn-primary" value="add">
+                            <span class="fas fa-play space-right"></span> Recreate</button>
                     </div>
                 </div>
             </div>
@@ -320,11 +321,11 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                Container Status
+                 <span class="fa fa-server"></span> Container Status
             </div>
             <div class="card-body">
                 <div class="col-md-12">
-                    <table class="table table-responsive table-bordered table-hover table-striped">
+                    <table class="table table-responsive table-bordered table-hover table-striped" style="width:100%">
                         <tbody>
                         <tr role="row" class="odd">
                             <td scope="row"><b>ID</b></td>
@@ -371,12 +372,12 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                Container Details
+                <span class="fa fa-server"></span> Container Details
             </div>
             <div class="card-body">
 
                 <div class="col-md-12">
-                    <table class="table table-responsive table-bordered table-hover table-striped">
+                    <table class="table table-responsive table-bordered table-hover table-striped" style="width:100%">
                         <thead></thead>
                         <tbody>
                         <tr role="row" class="odd">
@@ -395,13 +396,12 @@
                         <tr role="row">
                             <td><b>ENV</b></td>
                             <td>
-                                <table class
-                                               ="table table-responsive">
+                                <table class="table table-bordered table-responsive">
                                     <thead></thead>
                                     <tbody>
                                     {% for i in container_status['Env'] %}
                                     <tr role="row" class="odd">
-                                        <td scope="row">{{i.rsplit('=', 1)[0]}}</td>
+                                        <td scope="row" class="row-borderd">{{i.rsplit('=', 1)[0]}}</td>
                                         <td>
                                             {{i.rsplit('=', 1)[1]}}
                                         </td>
@@ -427,7 +427,7 @@
         <form>
             <div class="card">
                 <div class="card-header">
-                    <b>Create Image</b>
+                   <span class="fa fa-clone"></span>  <b>Create Image</b>
                 </div>
                 <div class="card-body">
                     <div class="row col-sm-12">
@@ -486,7 +486,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
-                Volumes
+                <span class="fa fa-cubes"></span>  Volumes
             </div>
             <div class="card-body">
 

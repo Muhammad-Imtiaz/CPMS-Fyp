@@ -11,7 +11,7 @@ add-container
 
             <div class="row card">
                 <div class="card-header">
-                    Build your container here..
+                    <span class="fas fa-server"></span> Build your container
                 </div>
                 <div class="card-body">
                     <div class="row col-md-12">
@@ -21,18 +21,15 @@ add-container
                     </div>
 
                     <br>
-                    <div class="row col-md-12 col-sm-12 ">
-                        Image configuration
-                    </div>
                     <hr>
 
                     <div class="col-md-12">
                         <div class="row col-md-12" align="left">
                             <div class="col-md-6" role="combobox">
                                 <label class="control-label" align="left"><b>Image</b></label>
-                                <select id="image_name" class="form-control ">
+                                <select id="image_name" class="form-control" name="selected_image"  onchange="getImage()">
                                     {%for img in images %}
-                                    <option label="{{img['RepoTags'][0]}}">
+                                    <option label="{{img['RepoTags'][0]}}"  value="{{img['RepoTags'][0]}}">
 
                                     </option>
                                     {% endfor %}
@@ -55,20 +52,22 @@ add-container
                             </div>
                         </div>
                     </div>
-                    <br>
-                    <div class="col-sm-12 col-md-12 row">
-                        Ports configuration
-
-                    </div>
                     <hr>
                     <div class="form-group row  col-md-12">
-                        <label class="control-label col-md-2" align="left"><b>Port mapping</b></label>
-                        <button type="button" class="col-md-2 btn btn-default" onclick="addPortsItems()">Add additional ports</button>
+                        <label class="control-label col-md-12" align="left"><b>Port mapping</b></label>
+                        <div class="col-md-12 row">
+                            <div class="col-md-6">
+                                <label class="control-label col-md-3" align="left">Host</label>
+                                <input type="text" class="form-control"
+                                       name="host_port" placeholder="e.g. 80 or 1.2.3.4:80 (optional)">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label col-md-3" align="left">Container</label>
+                                <input type="text" class="form-control"
+                                       name="container_port" placeholder="e.g. 80 or 1.2.3.4:80 (optional)">
+                            </div>
+                        </div>
                     </div>
-                    <div class="row portsItems col-md-12">
-
-                    </div>
-                    <br>
 
                     <hr>
                     <div class="row col-md-12">
@@ -76,8 +75,6 @@ add-container
                                 value="deploy_container">Deploy the container
                         </button>
                     </div>
-
-
                 </div>
             </div>
 
@@ -87,7 +84,7 @@ add-container
         <div class="col-md-12">
             <div class="row card">
                 <div class="card-header">
-                    Advance Container Settings
+                    <span class="fas fa-cog"></span> Advance Container Settings
                 </div>
                 <div class="card-body">
 
@@ -249,10 +246,70 @@ add-container
                             <!--Lables-->
 
                             <div class="tab-pane fade" id="labels" role="tabpanel" aria-labelledby="labels-tab">
-                                Nulla est ullamco ut irure incididu
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label class="control-label col-md-3" align="left">Name</label>
+                                        <input type="text" class="form-control"
+                                               name="lable1" placeholder="e.g. example.com.foo">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label col-md-3" align="left">Value</label>
+                                        <input type="text" class="form-control"
+                                               name="lable2" placeholder="e.g.example.com.bar">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label class="control-label col-md-3" align="left">Name</label>
+                                        <input type="text" class="form-control"
+                                               name="lable3" placeholder="e.g. foo">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label col-md-3" align="left">Value</label>
+                                        <input type="text" class="form-control"
+                                               name="lable4" placeholder="e.g. example.com.bar">
+                                    </div>
+                                </div>
                             </div>
+
+                            <!--ENV settings-->
                             <div class="tab-pane fade" id="env" role="tabpanel" aria-labelledby="env-tab">
-                                ...
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label class="control-label col-md-3" align="left">Name</label>
+                                        <input type="text" class="form-control"
+                                               name="env1" placeholder="foo">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label col-md-3" align="left">Value</label>
+                                        <input type="text" class="form-control"
+                                               name="env2" placeholder="bar">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label class="control-label col-md-3" align="left">Name</label>
+                                        <input type="text" class="form-control"
+                                               name="env3" placeholder="e.g. foo">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label col-md-3" align="left">Value</label>
+                                        <input type="text" class="form-control"
+                                               name="env4" placeholder="e.g. bar">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-6">
+                                        <label class="control-label col-md-3" align="left">Name</label>
+                                        <input type="text" class="form-control"
+                                               name="env5" placeholder="e.g. foo">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label col-md-3" align="left">Value</label>
+                                        <input type="text" class="form-control"
+                                               name="env6" placeholder="e.g. bar">
+                                    </div>
+                                </div>
                             </div>
 
 
@@ -384,18 +441,43 @@ add-container
 
                             <div class="tab-pane fade" id="runtime" role="tabpanel"
                                  aria-labelledby="runtime-tab">
-                                <div class="form-group">
-                                    <label class="col-sm-3 col-lg-2 control-label text-left"
-                                           style="margin-top: 20px;">
-                                        Memory reservation
-                                    </label>
-                                    <div class="col-sm-3">
-                                        <!---->
+                                <div class="col-md-12 row">
+                                    <div class="col-md-4">
+                                        <label class="control-label" align="left"><b> Memory Reservation</b></label>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <p class="small text-muted" style="margin-top: 7px;">
-                                            Memory soft limit (<b>MB</b>)
-                                        </p>
+                                    <div class="col-md-4">
+                                        <input class="form-control" id="memory_soft_limit" name="memory_soft_limit"
+                                               align="center"
+                                               placeholder="e.g. nMB">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="control-label" align="right">Memory soft limit <b>(MB)</b></label>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-4">
+                                        <label class="control-label" align="left"><b> Memory Limit</b></label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input class="form-control" id="memory_limit" name="memory_limit" align="center"
+                                               placeholder="e.g. nMB">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="control-label" align="right">Memory limit <b>(MB)</b></label>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="col-md-12 row">
+                                    <div class="col-md-4">
+                                        <label class="control-label" align="left"><b> CPU limit</b></label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input class="form-control" id="cpu_limit" name="cpu_limit" align="center"
+                                               placeholder="e.g. 1-4 cores">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="control-label" align="right">Maximum CPU Usage</label>
                                     </div>
                                 </div>
                             </div>
@@ -411,6 +493,12 @@ add-container
         {% block scripts %}
         {{super() }}
         <script>
+
+            function getImage(){
+                var value = document.getElementById("image_name").val();
+                window.alert(value);
+
+            }
 
             function addPortsItems(){
                 <!--$(".portsItems").append("<div class='row col-md-12'>-->
@@ -429,6 +517,13 @@ add-container
                  $(".portsItems").append("<input type='text' class='col-md-5' align='right' 'placeholder='Add ports here'>");
 
             }
+
+
+
+
+
+
+
 
         </script>
 

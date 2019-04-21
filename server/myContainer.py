@@ -10,17 +10,16 @@ class Container:
     #                                   volumes={'/var/run/docker.sock': {'bind': '/var/run/docker.sock'}})
 
     # create container
-    def createContainer(self, image, command, hostname, user, tty, ports, environment, volume, name, entrypoint,
-                        working_dir,
-                        domainname, host_config, mac_address, labels):
-        return docker.APIClient(self.resourceID).create_container(image=image, command=command, hostname=hostname,
-                                                                  user=user,
-                                                                  tty=tty, ports=ports, environment=environment,
-                                                                  volumes=volume, name=name,
-                                                                  entrypoint=entrypoint, working_dir=working_dir,
-                                                                  domainname=domainname,
-                                                                  host_config=host_config, mac_address=mac_address,
-                                                                  labels=labels)
+    def createContainer(self, name, image, command=None, hostname=None, user=None, tty=None, ports=None, environment=None, volume=None,  entrypoint=None,
+                        domainname=None, mac_address=None, labels=None):
+        return self.client.containers.run(image=image, command=command, hostname=hostname,
+                                          user=user,
+                                          tty=tty, ports=ports, environment=environment,
+                                          volumes=volume, name=name,
+                                          entrypoint=entrypoint,
+                                          domainname=domainname,
+                                          mac_address=mac_address,
+                                          labels=labels)
 
     def dockerstats(self, containerID=None):
         print("Printing stats")
@@ -62,6 +61,7 @@ class Container:
         usage = response['storage_stats']
 
         print(usage)
+
     #
     # def total_cpu_percent(self):
     #     total_cpu = 0

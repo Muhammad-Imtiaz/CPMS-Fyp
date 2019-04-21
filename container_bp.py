@@ -142,10 +142,12 @@ def deploy_container():
         if request.form['deploy'] == 'deploy_container':
             con_name = request.form.get('container_name')
             image_name = request.form.get('selected_image')  # still not working
+            print(image_name)
 
             # Ports
             con_port = request.form.get('container_port')
             host_port = request.form.get('host_port')
+            ports = {host_port: con_port}
 
             # commands and logging
             command = request.form.get('command')
@@ -156,8 +158,10 @@ def deploy_container():
             # volumes
             con_vol = request.form.get('volume_c')
             host_vol = request.form.get('volume_h')
+            volumes = {host_vol: con_vol}
             # networks
-            network = request.form.get('')  # will get item from list...still not working
+            network = request.form.get('network_dropdown')  # will get item from list...still not working
+            print(network)
             net_host = request.form.get('network_host')
             net_domain = request.form.get('network_domain')
             net_mac = request.form.get('network_mac')
@@ -167,16 +171,18 @@ def deploy_container():
             # ENV
             env1 = request.form.get('env_1')
             env2 = request.form.get('env_2')
-            en3 = request.form.get('env_3')
-            en4 = request.form.get('env_4')
+            env3 = request.form.get('env_3')
+            env4 = request.form.get('env_4')
             env5 = request.form.get('env_5')
             env6 = request.form.get('env_6')
+            environment = {env1: env2, env3: env4, env5: env6}
 
             # labels
             lable1 = request.form.get('lable1')
             lable2 = request.form.get('lable2')
             lable3 = request.form.get('lable3')
             lable4 = request.form.get('lable4')
+            labels = {lable1: lable2, lable3: lable4}
 
             # Restart policy
             restart = request.form.get('restart_btn')
@@ -186,21 +192,25 @@ def deploy_container():
             memory_limit = request.form.get('memory_limit')
             cpu_usage = request.form.get('cpu_limit')
 
-        print(con_name)
-        print(command)
-        print(entry)
-        print(net_host)
-        print(con_name)
-        print(net_domain)
-        print(net_ipv6)
-        print(restart)
-        print(console)
-        print(workingdir)
-        print(lable1)
-        print(memory_limit)
-        print(env1)
-        print(host_port)
-        return render_template('containers/add_container.html', images=images)
+            output = containerObj.createContainer(name=con_name, image=image_name)
+
+            flash(output)
+
+        # print(con_name)
+        # print(command)
+        # print(entry)
+        # print(net_host)
+        # print(con_name)
+        # print(net_domain)
+        # print(net_ipv6)
+        # print(restart)
+        # print(console)
+        # print(workingdir)
+        # print(lable1)
+        # print(memory_limit)
+        # print(env1)
+        # print(host_port)
+        return render_template('contaminers/container.html', images=images)
 
 
 @con_bp.route('/<con_id>')

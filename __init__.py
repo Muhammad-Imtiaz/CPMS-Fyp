@@ -74,10 +74,22 @@ def create_app():
     from .container_bp import con_bp
     from .imge_bp import img_bp
     from .volume_bp import vol_bp
+    from .network_bp import net_bp
+    from .service_bp import service_bp
+    from .configuration_bp import configuration_bp
+    from .secrets_bp import secret_bp
+    from .system_bp import system_bp
+    from .swarm_bp import swarm_bp
 
     app.register_blueprint(con_bp)
     app.register_blueprint(img_bp)
     app.register_blueprint(vol_bp)
+    app.register_blueprint(net_bp)
+    app.register_blueprint(service_bp)
+    app.register_blueprint(configuration_bp)
+    app.register_blueprint(secret_bp)
+    app.register_blueprint(system_bp)
+    app.register_blueprint(swarm_bp)
 
     app.debug = True
     return app

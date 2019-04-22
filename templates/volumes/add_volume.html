@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+{% block title%}
+Add-volume
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+
+    {% for i in messages %}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        {{i}}
+    </div>
+    {%endfor%}
+    {% endif %}
+    {%endwith%}
+
+
+    <form action="" method="post">
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="fas fa-server"></span> Add Volume
+                </div>
+                <div class="card-body">
+                    <div class="row col-md-12">
+                        <label class="control-label" align="left"><b>Name</b></label>
+                        <input class="form-control" id="vol_name" name="vol_name" align="right"
+                               placeholder="e.g my volume" required="">
+                    </div>
+                    <br>
+                    <div class="row" id="network">
+                        <div class="row col-md-12">
+                            <div class="col-md-2">
+                                <label class="control-label" align="left">Volume</label>
+                            </div>
+                            <div class="col-md-10" align="right">
+                                <select class="form-control"
+                                        name="volume_dropdown">
+                                    <option selected="" hidden="" value="">Select a
+                                        Driver
+                                    </option>
+                                    <!---->
+                                    <option value="bridge">local
+                                    </option><!---->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row col-md-12">
+                        <button type="submit" class="btn btn-primary" align="left" name="deploy" id="deploy_volume"
+                                value="deploy_volume">Deploy the Network
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        {% block scripts %}
+        {{super() }}
+        <script>
+
+        </script>
+
+        {% endblock %}
+    </form>
+</div>
+
+
+{% endblock %}

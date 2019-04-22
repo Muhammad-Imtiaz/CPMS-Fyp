@@ -3,11 +3,80 @@
 {% block title %}System - {% endblock %}
 
 {% block body %}
-    <div class="col-md-12">
+<div class="container-fluid">
 
-
-
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <span class="fa fa-code"></span> Host details
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <table class="table table-hover table-striped"
+                               style="width:100%">
+                            <tbody>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>Name</b></td>
+                                <td>imtiaz-alam</td>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>OsType</b></td>
+                                <td> Ubuntu 18.04.1 LTS - Linux</td>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>ID</b></td>
+                                <td>4X2G:E4IF:B33B:WUCX:BYKX:KSQZ:PUP4:ZKKK:Y7XL:LDOK:CSQK:H2TN</td>
+                            </tr><tr role="row" class="odd">
+                                <td scope="row"><b>CPUs</b></td>
+                                <td>4</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td><b>Memory</b></td>
+                                <!---->
+                                <td>
+                                    3.759GiB
+                                </td><!---->
+                                <!---->
+                            </tr>
+                            <!---->
+                            <tr role="row" class="odd">
+                                <td><b>Kernal Version</b></td>
+                                <td>4.15.0-47-generic</td>
+                            </tr><!---->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <span class="fa fa-code"></span> Engine details
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <table class="table table-hover table-striped"
+                               style="width:100%">
+                            <tbody>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>Version</b></td>
+                                <td>18.06.1-ce</td>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>Volume Plugins</b></td>
+                                <td> local</td>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>Network Plugins</b></td>
+                                <td>bridge, host, macvlan, null, overlay</td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+</div>
 {% endblock %}

@@ -1,0 +1,118 @@
+{% extends 'layout.html' %}
+{% block title%}
+Add-Networks
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+
+    {% for i in messages %}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        {{i}}
+    </div>
+    {%endfor%}
+    {% endif %}
+    {%endwith%}
+
+
+    <form action="" method="post">
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="fas fa-server"></span> Add Networks
+                </div>
+                <div class="card-body">
+                    <div class="row col-md-12">
+                        <label class="control-label" align="left"><b>Name</b></label>
+                        <input class="form-control" id="con_name" name="container_name" align="right"
+                               placeholder="e.g my container" required="">
+                    </div>
+                    <br>
+                    <div class="row" id="network">
+                        <div class="row col-md-12">
+                            <div class="col-md-2">
+                                <label class="control-label" align="left">Network</label>
+                            </div>
+                            <div class="col-md-10" align="right">
+                                <select class="form-control"
+                                        name="network_dropdown">
+                                    <option selected="" hidden="" value="">Select a
+                                        network
+                                    </option>
+                                    <!---->
+                                    <option value="bridge">bridge
+                                    </option><!---->
+                                    <option value="container">host
+                                    </option><!---->
+                                    <option value="docker_gwbridge">overlay
+                                    </option><!---->
+                                    <option value="host">null
+                                    </option><!---->
+                                    <option value="none">macvaln
+                                    </option><!---->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <label class="control-label row col-md-12" align="left"><b>Network Configurations</b></label>
+                    <br>
+                    <div class="form-group">
+                        <div class="row col-md-12 ">
+                            <div class="col-md-6">
+                                <label class="control-label col-md-3" align="left">Subnet</label>
+                                <input type="text" class="form-control"
+                                       name="subnet" placeholder="e.g. 80 or 1.2.3.4:80 (optional)">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label col-md-3" align="left">Gateway</label>
+                                <input type="text" class="form-control"
+                                       name="gateway" placeholder="e.g. 80 or 1.2.3.4:80 (optional)">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group row  col-md-12">
+                        <div class="col-md-12 row">
+                            <div class="col-md-6">
+                                <label class="control-label col-md-3" align="left">IP Range</label>
+                                <input type="text" class="form-control"
+                                       name="ip_range" placeholder="e.g. 80 or 1.2.3.4:80 (optional)">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="control-label col-md-3" align="left">Excludes IPs</label>
+                                <input type="text" class="form-control"
+                                       name="ex_ips" placeholder="e.g. 80 or 1.2.3.4:80 (optional)">
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row col-md-12">
+                        <button type="submit" class="btn btn-primary" align="left" name="deploy" id="deploy_network"
+                                value="deploy_network">Deploy the Network
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        {% block scripts %}
+        {{super() }}
+        <script>
+
+        </script>
+
+        {% endblock %}
+    </form>
+</div>
+
+
+{% endblock %}

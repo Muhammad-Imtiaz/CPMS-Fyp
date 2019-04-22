@@ -3,6 +3,7 @@
 {% block title %}Container - {% endblock %}
 
 {% block body %}
+
 <div class="container-fluid">
 
     <div class="col-md-12">
@@ -10,7 +11,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        CPU Percentage
+                        <span class="fa fa-chart-area"></span> CPU Percentage
                     </div>
                     <div class="card-body">
                         <div id="chartCPU" style="height: 200px; width: 90%;"></div>
@@ -20,7 +21,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Memory Usage
+                        <span class="fa fa-chart-area"></span> Memory Usage
                     </div>
                     <div class="card-body">
                         <div id="chartMemory" style="height: 200px; width: 90%;"></div>
@@ -36,7 +37,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Disk Usage
+                        <span class="fa fa-chart-area"></span> Disk Usage
                     </div>
                     <div class="card-body">
                         <div id="chartDisk" style="height: 200px; width: 90%;"></div>
@@ -46,7 +47,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        Network Usage
+                        <span class="fa fa-chart-area"></span> Network Usage
                     </div>
                     <div class="card-body">
                         <div id="chartNetwork" style="height: 200px; width: 90%;"></div>
@@ -57,319 +58,291 @@
         </div>
     </div>
 
-    <div class="col-md-12 row ">
-
-        <div class="col-md-6">
-            <div class="card">
-                <a href="/container/">
-                    <div class="card-body">
-                        <div class="col-md-12">
-                            <img src="/static/assets/container_image.png" class="img-rounded img-responsive"
-                                 width="20%"
-                                 height="20%"
-                                 alt="Rounded Image" style="margin-right:10px">
-                            <span> <b>Containers</b></span>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <a href="/container/">
+                        <div class="card-body">
+                            <span class="fas fa-server fa-lg"
+                                  style="margin-right:10px; margin-top:20px; margin-bottom:20px;"
+                                  width="20%" height="100%">  Containers</span>
                         </div>
+                    </a>
+                </div>
+            </div>
 
-                    </div>
-                </a>
+            <div class="col-md-6">
+                <div class="card">
+                    <a href="/images/">
+                        <div class="card-body">
+                            <span class="fas fa-clone fa-lg"
+                                  style="margin-left:20px; margin-top:20px; margin-bottom:20px;"
+                                  width="20%" height="100%"> Images</span>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="card">
-                <a href="/image/">
-                    <div class="card-body">
-                        <div class="col-md-12">
-                            <img src="/static/assets/container_image.png" class="img-rounded img-responsive"
-                                 width="20%"
-                                 height="20%"
-                                 alt="Rounded Image" style="margin-right:10px">
-                            <span> <b>Images</b></span>
-                        </div>
 
-                    </div>
-                </a>
+    </div>
+
+    <div class="col-md-12">
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="card">
+                    <a href="/volumes/">
+                        <div class="card-body">
+                        <span class="fas fa-server fa-lg"
+                              style="margin-right:20px; margin-top:20px; margin-bottom:20px;" width="20%"
+                              height="100%"> Volumes</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <a href="/networks/">
+                        <div class="card-body">
+                        <span class="fas fa-server fa-lg"
+                              style="margin-right:20px; margin-top:20px; margin-bottom:20px;" width="20%"
+                              height="100%"> Networks</span>
+
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="row col-md-12">
+    <div class="col-md-12">
+        <div class="row">
 
-        <div class="col-md-6">
-            <div class="card">
-                <a href="/container/">
-                    <div class="card-body">
-                        <div class="col-md-12">
-                            <img src="/static/assets/container_image.png" class="img-rounded img-responsive"
-                                 width="20%"
-                                 height="20%"
-                                 alt="Rounded Image" style="margin-right:10px">
-                            <span> <b>Networks</b></span>
+            <div class="col-md-6">
+                <div class="card">
+                    <a href="/system/">
+                        <div class="card-body">
+                        <span class="fas fa-server fa-lg"
+                              style="margin-right:20px; margin-top:20px; margin-bottom:20px;" width="20%"
+                              height="100%"> System</span>
                         </div>
-
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <a href="/services/">
+                        <div class="card-body">
+                        <span class="fas fa-server fa-lg"
+                              style="margin-right:20px; margin-top:20px; margin-bottom:20px;" width="20%"
+                              height="100%"> Services </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+
         </div>
 
-        <div class="col-md-6">
-            <div class="card">
-                <a href="/image/">
-                    <div class="card-body">
-                        <div class="col-md-12">
-                            <img src="/static/assets/container_image.png" class="img-rounded img-responsive"
-                                 width="20%"
-                                 height="20%"
-                                 alt="Rounded Image" style="margin-right:10px">
-                            <span> <b>Volumes</b></span>
-                        </div>
 
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="row col-md-12">
-
-        <div class="col-md-6">
-            <div class="card">
-                <a href="/container/">
-                    <div class="card-body">
-                        <div class="col-md-12">
-                            <img src="/static/assets/container_image.png" class="img-rounded img-responsive"
-                                 width="20%"
-                                 height="20%"
-                                 alt="Rounded Image" style="margin-right:10px">
-                            <span> <b>Services</b></span>
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <div class="card">
-                <a href="/image/">
-                    <div class="card-body">
-                        <div class="col-md-12">
-                            <img src="/static/assets/container_image.png" class="img-rounded img-responsive"
-                                 width="20%"
-                                 height="20%"
-                                 alt="Rounded Image" style="margin-right:10px">
-                            <span> <b>System</b></span>
-                        </div>
-
-                    </div>
-                </a>
-            </div>
-        </div>
     </div>
 
 
     {% block scripts %}
     {{super}}
     <script>
-        <!--(function worker() {-->
-          <!--$.ajax({-->
-            <!--url: '/container/cpu/',-->
-            <!--dataType: 'json',-->
-            <!--type: 'get',-->
-            <!--success: function(data) {-->
-                <!--$('.result').html(data.data);-->
-                 <!--console.log(data['cpu']);-->
-            <!--},-->
-            <!--complete: function() {-->
 
-              <!--// Schedule the next request when the current one's complete-->
-              <!--setTimeout(worker, 5000);-->
-            <!--}-->
-          <!--});-->
-        <!--})();-->
+            window.onload = function () {
+                get_cpu();
+                get_memory();
+                get_disk();
+                get_network();
+            }
 
-        window.onload = function () {
-            get_cpu();
-            get_memory();
-            get_disk();
-            get_network();
-        }
+            function get_cpu(){
 
-        function get_cpu(){
+                var dps = []; // dataPoints
+                var chart = new CanvasJS.Chart("chartCPU", {
+                    lineColor: "#C0504E",
+                    axisY: {
+                        includeZero: false
+                    },
+                    data: [{
+                        type: "area",
+                        dataPoints: dps
+                    }]
+                });
 
-            var dps = []; // dataPoints
-            var chart = new CanvasJS.Chart("chartCPU", {
-                lineColor: "#C0504E",
-                axisY: {
-                    includeZero: false
-                },
-                data: [{
-                    type: "area",
-                    dataPoints: dps
-                }]
-            });
+                var xVal = 0;
+                var yVal = 100;
+                var updateInterval = 1000;
+                var dataLength = 20; // number of dataPoints visible at any point
 
-            var xVal = 0;
-            var yVal = 100;
-            var updateInterval = 1000;
-            var dataLength = 20; // number of dataPoints visible at any point
+                var updateChart = function (count) {
 
-            var updateChart = function (count) {
+                    count = count || 1;
 
-                count = count || 1;
+                    for (var j = 0; j < count; j++) {
+                        yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+                        dps.push({
+                            x: xVal,
+                            y: yVal
+                        });
+                        xVal++;
+                    }
 
-                for (var j = 0; j < count; j++) {
-                    yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-                    dps.push({
-                        x: xVal,
-                        y: yVal
-                    });
-                    xVal++;
-                }
+                    if (dps.length > dataLength) {
+                        dps.shift();
+                    }
 
-                if (dps.length > dataLength) {
-                    dps.shift();
-                }
+                    chart.render();
+                };
 
-                chart.render();
-            };
-
-            updateChart(dataLength);
-            setInterval(function(){updateChart()}, updateInterval);
-
-        }
-
-        function get_disk(){
-
-            var dps = []; // dataPoints
-            var chart = new CanvasJS.Chart("chartDisk", {
-
-                axisY: {
-                    includeZero: false
-                },
-                data: [{
-                    type: "area",
-                    dataPoints: dps
-                }]
-            });
-
-            var xVal = 0;
-            var yVal = 100;
-            var updateInterval = 1000;
-            var dataLength = 20; // number of dataPoints visible at any point
-
-            var updateChart = function (count) {
-
-                count = count || 1;
-
-                for (var j = 0; j < count; j++) {
-                    yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-                    dps.push({
-                        x: xVal,
-                        y: yVal
-                    });
-                    xVal++;
-                }
-
-                if (dps.length > dataLength) {
-                    dps.shift();
-                }
-
-                chart.render();
-            };
-
-            updateChart(dataLength);
-            setInterval(function(){updateChart()}, updateInterval);
-
-        }
-
-        function get_network(){
-
-            var dps = []; // dataPoints
-            var chart = new CanvasJS.Chart("chartNetwork", {
-
-                axisY: {
-                    includeZero: false
-                },
-                data: [{
-                    type: "area",
-                    dataPoints: dps
-                }]
-            });
-
-            var xVal = 0;
-            var yVal = 100;
-            var updateInterval = 1000;
-            var dataLength = 20; // number of dataPoints visible at any point
-
-            var updateChart = function (count) {
-
-                count = count || 1;
-
-                for (var j = 0; j < count; j++) {
-                    yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-                    dps.push({
-                        x: xVal,
-                        y: yVal
-                    });
-                    xVal++;
-                }
-
-                if (dps.length > dataLength) {
-                    dps.shift();
-                }
-
-                chart.render();
-            };
-
-            updateChart(dataLength);
-            setInterval(function(){updateChart()}, updateInterval);
-
-        }
-
-        function get_memory(){
-
-            var dps = []; // dataPoints
-            var chart = new CanvasJS.Chart("chartMemory", {
-
-                axisY: {
-                    includeZero: false
-                },
-                data: [{
-                    type: "area",
-                    dataPoints: dps
-                }]
-            });
-
-            var xVal = 0;
-            var yVal = 100;
-            var updateInterval = 1000;
-            var dataLength = 20; // number of dataPoints visible at any point
-
-            var updateChart = function (count) {
-
-                count = count || 1;
-
-                for (var j = 0; j < count; j++) {
-                    yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-                    dps.push({
-                        x: xVal,
-                        y: yVal
-                    });
-                    xVal++;
-                }
-
-                if (dps.length > dataLength) {
-                    dps.shift();
-                }
-
-                chart.render();
-            };
-
-            updateChart(dataLength);
-            setInterval(function(){updateChart()}, updateInterval);
+                updateChart(dataLength);
+                setInterval(function(){updateChart()}, updateInterval);
 
             }
+
+            function get_disk(){
+
+                var dps = []; // dataPoints
+                var chart = new CanvasJS.Chart("chartDisk", {
+
+                    axisY: {
+                        includeZero: false
+                    },
+                    data: [{
+                        type: "area",
+                        dataPoints: dps
+                    }]
+                });
+
+                var xVal = 0;
+                var yVal = 100;
+                var updateInterval = 1000;
+                var dataLength = 20; // number of dataPoints visible at any point
+
+                var updateChart = function (count) {
+
+                    count = count || 1;
+
+                    for (var j = 0; j < count; j++) {
+                        yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+                        dps.push({
+                            x: xVal,
+                            y: yVal
+                        });
+                        xVal++;
+                    }
+
+                    if (dps.length > dataLength) {
+                        dps.shift();
+                    }
+
+                    chart.render();
+                };
+
+                updateChart(dataLength);
+                setInterval(function(){updateChart()}, updateInterval);
+
+            }
+
+            function get_network(){
+
+                var dps = []; // dataPoints
+                var chart = new CanvasJS.Chart("chartNetwork", {
+
+                    axisY: {
+                        includeZero: false
+                    },
+                    data: [{
+                        type: "area",
+                        dataPoints: dps
+                    }]
+                });
+
+                var xVal = 0;
+                var yVal = 100;
+                var updateInterval = 1000;
+                var dataLength = 20; // number of dataPoints visible at any point
+
+                var updateChart = function (count) {
+
+                    count = count || 1;
+
+                    for (var j = 0; j < count; j++) {
+                        yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+                        dps.push({
+                            x: xVal,
+                            y: yVal
+                        });
+                        xVal++;
+                    }
+
+                    if (dps.length > dataLength) {
+                        dps.shift();
+                    }
+
+                    chart.render();
+                };
+
+                updateChart(dataLength);
+                setInterval(function(){updateChart()}, updateInterval);
+
+            }
+
+            function get_memory(){
+
+                var dps = []; // dataPoints
+                var chart = new CanvasJS.Chart("chartMemory", {
+
+                    axisY: {
+                        includeZero: false
+                    },
+                    data: [{
+                        type: "area",
+                        dataPoints: dps
+                    }]
+                });
+
+                var xVal = 0;
+                var yVal = 100;
+                var updateInterval = 1000;
+                var dataLength = 20; // number of dataPoints visible at any point
+
+                var updateChart = function (count) {
+
+                    count = count || 1;
+
+                    for (var j = 0; j < count; j++) {
+                        yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
+                        dps.push({
+                            x: xVal,
+                            y: yVal
+                        });
+                        xVal++;
+                    }
+
+                    if (dps.length > dataLength) {
+                        dps.shift();
+                    }
+
+                    chart.render();
+                };
+
+                    updateChart(dataLength);
+                    setInterval(function(){updateChart()}, updateInterval);
+
+            }
+
+
+
+
 
 
 

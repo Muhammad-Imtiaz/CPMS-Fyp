@@ -13,7 +13,7 @@ Image -
             <form action="" method="post">
                 <div class="card">
                     <div class="card-header">
-                        <span class="fa fa-download"></span>  Pull Image
+                        <span class="fa fa-download"></span> Pull Image
                     </div>
                     <div class="card-body">
                         <div class="row col-md-12">
@@ -66,7 +66,8 @@ Image -
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary" name="my_btn" id="pull_image" value="pull_image" align="left">Pull the Image
+                                <button type="submit" class="btn btn-primary" name="my_btn" id="pull_image"
+                                        value="pull_image" align="left">Pull the Image
                                 </button>
                             </div>
                         </div>
@@ -95,15 +96,17 @@ Image -
                                             disabled>
                                         <span class="fa fa-trash-alt space-right"></span> Remove
                                     </button>
-                                    <a href="/images/build/"> <button type="button" name="my_btn" id="build" class="btn btn-danger"
-                                            value="build"
-                                    >
-                                        <span class="fa fa-plus space-right"></span>  Build a new image
-                                    </button></a>
+                                    <a href="/images/build/">
+                                        <button type="button" name="my_btn" id="build" class="btn btn-danger"
+                                                value="build"
+                                        >
+                                            <span class="fa fa-plus space-right"></span> Build a new image
+                                        </button>
+                                    </a>
                                     <button type="submit" name="my_btn" id="push" class="btn btn-danger"
                                             value="push" disabled
                                     >
-                                        <span class="fa fa-upload space-right"></span>  Push an Image
+                                        <span class="fa fa-upload space-right"></span> Push an Image
                                     </button>
                                 </div>
                             </div>
@@ -208,69 +211,11 @@ Image -
                                                 </tr>
                                                 </tbody>
 
-                                                {% block scripts %}
-                                                {{ super() }}
-                                                <script type="text/javascript">
-
-                                 $('.js-selectall').on('change', function() {
-                                  var isChecked = $(this).prop("checked");
-                                  var selector = $(this).data('target');
-                                  $(selector).prop("checked", isChecked);
-                                   if (isChecked == true){
-                                    $('#remove').prop('disabled', false);
-                                    $('#build').prop('disabled', false);
-                                    $('#push').prop('disabled', false);
-
-                                   }else{
-
-                                        $('#build').prop('disabled', true);
-                                        $('#push').prop('disabled', true);
-                                        $('#remove').prop('disabled', false);
-                                   }
-                                });
-
-                                $(document).ready(function(){
-
-                                    $('input[type="checkbox"]').click(function(){
-
-                                    var id = $(this).closest("tr").find('td:eq(1)').text();
-
-                                    if($(this).prop("checked") == true){
-
-                                        $('#remove').prop('disabled', false);
-                                        $('#build').prop('disabled', false);
-                                        $('#push').prop('disabled', false);
-
-                                    }
-
-                                    else{
-                                        $('#remove').prop('disabled', true);
-                                        $('#build').prop('disabled', false);
-                                        $('#push').prop('disabled', false);
-
-                                    }
-
-                                });
-                               });
-
-
-
-
-
-
-
-
-
-
-                                                </script>
-
-                                                {% endblock %}
-
-
                                                 {% endfor %}
 
                                             </table>
                                         </div>
+
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 col-md-5">
@@ -351,6 +296,55 @@ Image -
         </div>
 
     </div>
+
+    {% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+
+                                 $('.js-selectall').on('change', function() {
+                                  var isChecked = $(this).prop("checked");
+                                  var selector = $(this).data('target');
+                                  $(selector).prop("checked", isChecked);
+                                   if (isChecked == true){
+                                    $('#remove').prop('disabled', false);
+                                    $('#build').prop('disabled', false);
+                                    $('#push').prop('disabled', false);
+
+                                   }else{
+
+                                        $('#build').prop('disabled', true);
+                                        $('#push').prop('disabled', true);
+                                        $('#remove').prop('disabled', false);
+                                   }
+                                });
+
+                                $(document).ready(function(){
+
+                                    $('input[type="checkbox"]').click(function(){
+
+                                    var id = $(this).closest("tr").find('td:eq(1)').text();
+
+                                    if($(this).prop("checked") == true){
+
+                                        $('#remove').prop('disabled', false);
+                                        $('#build').prop('disabled', false);
+                                        $('#push').prop('disabled', false);
+
+                                    }
+
+                                    else{
+                                        $('#remove').prop('disabled', true);
+                                        $('#build').prop('disabled', false);
+                                        $('#push').prop('disabled', false);
+
+                                    }
+
+                                });
+                               });
+
+
+    </script>
+    {% endblock %}
 
 </div>
 

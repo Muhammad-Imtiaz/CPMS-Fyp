@@ -10,3 +10,7 @@ volumeObj = Volume()
 def list_all_volumes():
     volumes = volumeObj.list_all_volumes()
     return render_template('/volumes/volume.html', volumes=volumes)
+
+@vol_bp.route('/add_volume')
+def add_volume():
+    return render_template('/volumes/add_volume.html')

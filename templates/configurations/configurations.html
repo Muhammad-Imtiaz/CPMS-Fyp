@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block title %}Volumes - {% endblock %}
+{% block title %}Configurations - {% endblock %}
 
 {% block body %}
 <div class="col-md-12">
@@ -12,19 +12,19 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                      <span class="fa fa-cubes"></span>  Volumes
+                       <span class="fa fa-file-code"></span> Configs
                     </div>
                     <div class="card-body">
                         <div class="well col-md-12 field is-grouped ">
-                            <div class="control" style="margin-left:10px">
+                            <div class="control">
                                 <button type="submit" name="my_btn" id="remove" class="btn btn-danger" value="remove"
                                         disabled style="margin-left:10px">
                                     Remove
                                 </button>
-                                <a href="/volumes/add_volume">
+                                <a href="#">
                                     <button type="button" name="my_btn" class="btn btn-primary" value="add"
                                             style="margin-left:15px">
-                                        Add Volume
+                                        Add Config
                                     </button>
                                 </a>
                             </div>
@@ -42,7 +42,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                       <span class="fa fa-cubes"></span>  Volume's Table
+                        Configuration's Table
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -98,34 +98,33 @@
                                                     colspan="1"
                                                     aria-label="Position: activate to sort column ascending"
                                                     style="width: 214px;">
-                                                    Driver
+                                                    Configuration Date
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Office: activate to sort column ascending"
                                                     style="width: 98px;">
-                                                    Mount point
+                                                    Ownership
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                            {% for v in volumes %}
                                             <tr role="row" class="odd">
                                                 <td scope="row">
                                                     <label class="customcheckbox">
                                                         <input type="checkbox" name="container"
                                                                class="form-check-input js-selectall"
-                                                               id="{{v['Name']}}"
-                                                               value="{{v['Name']}}">
+                                                        value="" >
+
                                                         <span class="checkmark"></span>
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <a href="#">{{v['Name']}}</a>
+                                                    <a href="#">{{"-"}}</a>
                                                 </td>
-                                                <td>{{v['Driver']}}</td>
-                                                <td>{{v['Mountpoint']}}</td>
+                                                <td>{{"-"}}</td>
+                                                <td>{{"-"}}</td>
                                             </tr>
                                             </tbody>
 
@@ -184,12 +183,11 @@
 
 
 
+
                                             </script>
 
                                             {% endblock %}
 
-
-                                            {% endfor %}
 
                                         </table>
                                     </div>
@@ -198,8 +196,6 @@
                                     <div class="col-sm-12 col-md-5">
                                         <div class="dataTables_info" id="zero_config_info" role="status"
                                              aria-live="polite">
-                                            Showing 11
-                                            to 20 of 57 entries
                                         </div>
                                     </div>
                                     <div class="col-sm-12 col-md-7">

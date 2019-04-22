@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block title %}Volumes - {% endblock %}
+{% block title %}Networks - {% endblock %}
 
 {% block body %}
 <div class="col-md-12">
@@ -12,7 +12,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                      <span class="fa fa-cubes"></span>  Volumes
+                        Actions
                     </div>
                     <div class="card-body">
                         <div class="well col-md-12 field is-grouped ">
@@ -21,10 +21,10 @@
                                         disabled style="margin-left:10px">
                                     Remove
                                 </button>
-                                <a href="/volumes/add_volume">
+                                <a href="/networks/add_network">
                                     <button type="button" name="my_btn" class="btn btn-primary" value="add"
                                             style="margin-left:15px">
-                                        Add Volume
+                                        Add Network
                                     </button>
                                 </a>
                             </div>
@@ -42,7 +42,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                       <span class="fa fa-cubes"></span>  Volume's Table
+                        Network's Table
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -92,7 +92,20 @@
                                                     colspan="1"
                                                     aria-sort="ascending"
                                                     aria-label="Name: activate to sort column descending"
+                                                    style="width: 130px;">Network ID
+                                                <th class="sorting_asc" tabindex="0" aria-controls="zero_config"
+                                                    rowspan="1"
+                                                    colspan="1"
+                                                    aria-sort="ascending"
+                                                    aria-label="Name: activate to sort column descending"
                                                     style="width: 130px;">Name
+                                                </th>
+                                                <th class="sorting_asc" tabindex="0" aria-controls="zero_config"
+                                                    rowspan="1"
+                                                    colspan="1"
+                                                    aria-sort="ascending"
+                                                    aria-label="Scope: activate to sort column descending"
+                                                    style="width: 130px;">Scope
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1"
                                                     colspan="1"
@@ -102,31 +115,55 @@
                                                 </th>
                                                 <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1"
                                                     colspan="1"
+                                                    aria-label="Position: activate to sort column ascending"
+                                                    style="width: 214px;">
+                                                    Attachable
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1"
+                                                    colspan="1"
+                                                    aria-label="Position: activate to sort column ascending"
+                                                    style="width: 214px;">
+                                                    IPAM driver
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1"
+                                                    colspan="1"
+                                                    aria-label="Position: activate to sort column ascending"
+                                                    style="width: 214px;">
+                                                    IPAM subnet
+                                                </th>
+                                                <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1"
+                                                    colspan="1"
                                                     aria-label="Office: activate to sort column ascending"
                                                     style="width: 98px;">
-                                                    Mount point
+                                                    IPAM Gateway
                                                 </th>
                                             </tr>
                                             </thead>
                                             <tbody>
 
-                                            {% for v in volumes %}
+                                            {% for net in list %}
                                             <tr role="row" class="odd">
                                                 <td scope="row">
                                                     <label class="customcheckbox">
                                                         <input type="checkbox" name="container"
                                                                class="form-check-input js-selectall"
-                                                               id="{{v['Name']}}"
-                                                               value="{{v['Name']}}">
+                                                               id="{{net['Id']}}"
+                                                               value="{{net['Id']}}">
                                                         <span class="checkmark"></span>
                                                     </label>
                                                 </td>
                                                 <td>
-                                                    <a href="#">{{v['Name']}}</a>
+                                                    <a href="#">{{net['Id']}}</a>
                                                 </td>
-                                                <td>{{v['Driver']}}</td>
-                                                <td>{{v['Mountpoint']}}</td>
+                                                <td>{{net['Name']}}</td>
+                                                <td>{{net['Scope']}}</td>
+                                                <td>{{net['Driver']}}</td>
+                                                <td>{{net['Attachable']}}</td>
+                                                <td>{{net['IPAM']['Driver']}}</td>
+                                                <td>{{"172.17.0.016"}}</td>
+                                                <td>{{"172.17.0.1"}}</td>
                                             </tr>
+
                                             </tbody>
 
                                             {% block scripts %}
@@ -171,17 +208,6 @@
 
                                 });
                                });
-
-
-
-
-
-
-
-
-
-
-
 
 
                                             </script>

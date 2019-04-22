@@ -1,0 +1,256 @@
+{% extends 'layout.html' %}
+
+{% block title %}Swarm - {% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <span class="fa fa-object-group"></span> Cluster Status
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <table class="table table-hover table-striped"
+                               style="width:100%">
+                            <tbody>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>Nodes</b></td>
+                                <td>1</td>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>Docker API Version</b></td>
+                                <td> 1.38</td>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>Total CPUs</b></td>
+                                <td>4</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>Total Memory</b></td>
+                                <td>4.04</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                   <span class="fa fa-hdd"></span> Nodes
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <div id="zero_config_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="zero_config_length"><label>Show <select
+                                            name="zero_config_length" aria-controls="zero_config"
+                                            class="form-control form-control-sm">
+                                        <option value="10">10</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select> entries</label></div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="zero_config_filter" class="dataTables_filter"><label>Search:<input
+                                            type="search"
+                                            class="form-control form-control-sm"
+                                            placeholder=""
+                                            aria-controls="zero_config"></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="zero_config"
+                                           class="table table-dark table-hoverd table-striped table-bordered dataTable"
+                                           role="grid"
+                                           aria-describedby="zero_config_info">
+
+                                        <thead>
+
+                                        <tr role="row">
+
+                                            <th class="sorting_asc" tabindex="0" aria-controls="zero_config"
+                                                rowspan="1"
+                                                colspan="1"
+                                                aria-sort="ascending"
+                                                aria-label="Name: activate to sort column descending"
+                                                style="width: 130px;">Name
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Position: activate to sort column ascending"
+                                                style="width: 214px;">
+                                                Role
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Office: activate to sort column ascending"
+                                                style="width: 98px;">
+                                                CPU
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Position: activate to sort column ascending"
+                                                style="width: 214px;">
+                                                Memory
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Office: activate to sort column ascending"
+                                                style="width: 98px;">
+                                                Engine
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Office: activate to sort column ascending"
+                                                style="width: 98px;">
+                                                IP Address
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="zero_config" rowspan="1"
+                                                colspan="1"
+                                                aria-label="Office: activate to sort column ascending"
+                                                style="width: 98px;">
+                                                Status
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <a href="#">imtiaz-alam</a>
+                                            </td>
+                                            <td>Manager</td>
+                                            <td>4</td>
+                                            <td>4 GB</td>
+                                            <td>18.06.1-ce</td>
+                                            <td>172.0.0.1</td>
+                                            <td>ready</td>
+                                        </tr>
+                                        </tbody>
+
+                                        {% block scripts %}
+                                        {{ super() }}
+                                        <script type="text/javascript">
+
+                                 $('.js-selectall').on('change', function() {
+                                  var isChecked = $(this).prop("checked");
+                                  var selector = $(this).data('target');
+                                  $(selector).prop("checked", isChecked);
+                                   if (isChecked == true){
+                                    $('#remove').prop('disabled', false);
+                                   }else{
+                                        $('#remove').prop('disabled', true);
+                                   }
+                                });
+
+                                $(document).ready(function(){
+
+                                    $('input[type="checkbox"]').click(function(){
+
+                                    var id = $(this).closest("tr").find('td:eq(1)').text();
+
+                                    if($(this).prop("checked") == true && id === 'running'){
+
+
+                                        $('#remove').prop('disabled', false);
+                                    }
+                                    else if($(this).prop("checked") == true && (id === 'exited' || id === 'created')){
+
+                                        $('#remove').prop('disabled', false);
+
+                                     }
+                                     else if($(this).prop("checked") == true && id === 'paused' ){
+
+                                        $('#remove').prop('disabled', false);
+                                    }
+                                    else{
+
+                                        $('#remove').prop('disabled', true);
+                                    }
+
+                                });
+                               });
+                                        </script>
+
+                                        {% endblock %}
+
+
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-5">
+                                    <div class="dataTables_info" id="zero_config_info" role="status"
+                                         aria-live="polite">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-7">
+                                    <div class="dataTables_paginate paging_simple_numbers"
+                                         id="zero_config_paginate">
+                                        <ul class="pagination">
+                                            <li class="paginate_button page-item previous"
+                                                id="zero_config_previous"><a
+                                                    href="#"
+                                                    aria-controls="zero_config"
+                                                    data-dt-idx="0"
+                                                    tabindex="0"
+                                                    class="page-link">Previous</a>
+                                            </li>
+                                            <li class="paginate_button page-item "><a href="#"
+                                                                                      aria-controls="zero_config"
+                                                                                      data-dt-idx="1" tabindex="0"
+                                                                                      class="page-link">1</a></li>
+                                            <li class="paginate_button page-item active"><a href="#"
+                                                                                            aria-controls="zero_config"
+                                                                                            data-dt-idx="2"
+                                                                                            tabindex="0"
+                                                                                            class="page-link">2</a>
+                                            </li>
+                                            <li class="paginate_button page-item "><a href="#"
+                                                                                      aria-controls="zero_config"
+                                                                                      data-dt-idx="3" tabindex="0"
+                                                                                      class="page-link">3</a></li>
+                                            <li class="paginate_button page-item "><a href="#"
+                                                                                      aria-controls="zero_config"
+                                                                                      data-dt-idx="4" tabindex="0"
+                                                                                      class="page-link">4</a></li>
+                                            <li class="paginate_button page-item "><a href="#"
+                                                                                      aria-controls="zero_config"
+                                                                                      data-dt-idx="5" tabindex="0"
+                                                                                      class="page-link">5</a></li>
+                                            <li class="paginate_button page-item "><a href="#"
+                                                                                      aria-controls="zero_config"
+                                                                                      data-dt-idx="6" tabindex="0"
+                                                                                      class="page-link">6</a></li>
+                                            <li class="paginate_button page-item next" id="zero_config_next"><a
+                                                    href="#"
+                                                    aria-controls="zero_config"
+                                                    data-dt-idx="7"
+                                                    tabindex="0"
+                                                    class="page-link">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -8,14 +8,14 @@ add-container
 <div class="container-fluid">
 
     {% with messages = get_flashed_messages() %}
-        {% if messages %}
+    {% if messages %}
 
-            {% for i in messages %}
-                <div class="alert alert-warning alert-dismissible" role="alert">
-                    {{i}}
-                </div>
-            {%endfor%}
-        {% endif %}
+    {% for i in messages %}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        {{i}}
+    </div>
+    {%endfor%}
+    {% endif %}
     {%endwith%}
 
 
@@ -66,6 +66,7 @@ add-container
                         </div>
                     </div>
                     <hr>
+
                     <div class="form-group row  col-md-12">
                         <label class="control-label col-md-12" align="left"><b>Port mapping</b></label>
                         <div class="col-md-12 row">
@@ -245,12 +246,16 @@ add-container
                                                placeholder="e.g. /path/in/Container"
                                                align="right">
                                     </div>
-                                    <div class="col-md-6">
-                                        <label class="control-label" align="left">Host</label>
-                                        <input type="text"
-                                               class="form-control"
-                                               name="volume_h" id="host_volume" placeholder="e.g. /path/in/host"
-                                               align="right">
+                                    <div class="col-md-6" role="combobox">
+                                        <label class="control-label" align="left"><b>Volume</b></label>
+                                        <select id="volume_name" class="form-control" name="selected_volume">
+                                            {%for vol in volumes %}
+                                            <option label="{{vol['Name']}}" value="{{vol['Name']}}" id="{{vol['Name']}}" >
+
+                                            </option>
+                                            {% endfor %}
+
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -291,36 +296,24 @@ add-container
                                     <div class="col-md-6">
                                         <label class="control-label col-md-3" align="left">Name</label>
                                         <input type="text" class="form-control"
-                                               name="env1" placeholder="foo">
+                                               name="env1" placeholder="PASSWORD">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="control-label col-md-3" align="left">Value</label>
                                         <input type="text" class="form-control"
-                                               name="env2" placeholder="bar">
+                                               name="env2" placeholder="mmno">
                                     </div>
                                 </div>
                                 <div class="col-md-12 row">
                                     <div class="col-md-6">
                                         <label class="control-label col-md-3" align="left">Name</label>
                                         <input type="text" class="form-control"
-                                               name="env3" placeholder="e.g. foo">
+                                               name="env3" placeholder="e.g. password">
                                     </div>
                                     <div class="col-md-6">
                                         <label class="control-label col-md-3" align="left">Value</label>
                                         <input type="text" class="form-control"
-                                               name="env4" placeholder="e.g. bar">
-                                    </div>
-                                </div>
-                                <div class="col-md-12 row">
-                                    <div class="col-md-6">
-                                        <label class="control-label col-md-3" align="left">Name</label>
-                                        <input type="text" class="form-control"
-                                               name="env5" placeholder="e.g. foo">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="control-label col-md-3" align="left">Value</label>
-                                        <input type="text" class="form-control"
-                                               name="env6" placeholder="e.g. bar">
+                                               name="env4" placeholder="e.g. mmno">
                                     </div>
                                 </div>
                             </div>
@@ -368,14 +361,14 @@ add-container
                                         </div>
                                         <div class="col-md-8">
                                             <select class="form-control"
-                                                    id="container_network" name="network_dropdown" >
+                                                    id="container_network" name="network_dropdown">
                                                 <option selected="" hidden="" value="">Select a
                                                     network
                                                 </option>
                                                 <!---->
                                                 <option value="bridge">bridge
                                                 </option><!---->
-                                                <option value="container">container
+                                                <option value="ingress">ingress
                                                 </option><!---->
                                                 <option value="docker_gwbridge">docker_gwbridge
                                                 </option><!---->
@@ -423,29 +416,6 @@ add-container
                                         </div>
                                     </div>
                                     <br>
-                                    <div class="row col-md-12">
-                                        <div class="col-md-2">
-                                            <label class="control-label" align="left">IPV4</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input type="text"
-                                                   class="form-control"
-                                                   name="network_ipv4" placeholder="e.g. 172.16.0.2"
-                                                   align="right">
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="row col-md-12">
-                                        <div class="col-md-2">
-                                            <label class="control-label" align="left">IPV6</label>
-                                        </div>
-                                        <div class="col-md-8">
-                                            <input type="text"
-                                                   class="form-control"
-                                                   name="network_ipv6" placeholder="e.g. a.b.c.d::1234"
-                                                   align="right">
-                                        </div>
-                                    </div>
 
                                 </div>
 
@@ -454,20 +424,6 @@ add-container
 
                             <div class="tab-pane fade" id="runtime" role="tabpanel"
                                  aria-labelledby="runtime-tab">
-                                <div class="col-md-12 row">
-                                    <div class="col-md-4">
-                                        <label class="control-label" align="left"><b> Memory Reservation</b></label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input class="form-control" id="memory_soft_limit" name="memory_soft_limit"
-                                               align="center"
-                                               placeholder="e.g. nMB">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="control-label" align="right">Memory soft limit <b>(MB)</b></label>
-                                    </div>
-                                </div>
-                                <br>
                                 <div class="col-md-12 row">
                                     <div class="col-md-4">
                                         <label class="control-label" align="left"><b> Memory Limit</b></label>
@@ -505,33 +461,6 @@ add-container
         {% block scripts %}
         {{super() }}
         <script>
-
-
-            function addPortsItems(){
-                <!--$(".portsItems").append("<div class='row col-md-12'>-->
-                                    <!--<div class='col-md-2'>-->
-                                        <!--<label class='control-label' align='left'>Command</label>-->
-                                    <!--</div>-->
-                                    <!--<div class='col-md-10'>-->
-                                        <!--<input type='text'-->
-                                               <!--class='form-control'-->
-                                               <!--name='command' id='command_logging'-->
-                                               <!--placeholder='e.g. /usr/bin/nginx -t -c /mynginx.conf'-->
-                                               <!--align='right'>-->
-                                    <!--</div>-->
-                                <!--</div>");-->
-                 $(".portsItems").append("<br> <label class='control-label' class='col-md-5' align='left'>Ports</label>");
-                 $(".portsItems").append("<input type='text' class='col-md-5' align='right' 'placeholder='Add ports here'>");
-
-            }
-
-
-
-
-
-
-
-
 
         </script>
 

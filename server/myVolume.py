@@ -29,7 +29,7 @@ class Volume:
     # Display detailed information on one or more volumes
     def inspect_volume(self, nameVol):
         print('Display detailed information on one or more volumes')
-        print(docker.APIClient(self.resourceID).inspect_volume(nameVol))
+        return docker.APIClient(self.resourceID).inspect_volume(nameVol)
 
     # Remove one or more volumes
     def remove_volume(self, nameVol, force=False):
@@ -40,7 +40,7 @@ class Volume:
 
 
 #
-vol = Volume()
-vol.list_all_volumes()
-# print(vol.list_volume())
-# vol.inspect_volume('0629ac1be2402ed0b2347fcb6af9977cd46226f545f7871378154fce266eb600 ')
+# vol = Volume()
+# # vol.list_volume('91fbfb2d10210dade91e80e6949e84b53e803be69a4826dfef705358e79dbed3')
+# volume = vol.inspect_volume('db704475e207f7fb91d176595024b671cd0f775ca92a6b91f89678cdfaf17feb')
+# print(volume['Name'])

@@ -9,13 +9,17 @@ class Container:
     #                                   , name='myPortainerMonitor1',
     #                                   volumes={'/var/run/docker.sock': {'bind': '/var/run/docker.sock'}})
 
-    # create container
-    def createContainer(self, name, image, command=None, hostname=None, user=None, tty=None, ports=None, environment=None, volume=None,  entrypoint=None,
-                        domainname=None, mac_address=None, labels=None):
-        return self.client.containers.run(image=image, command=command, hostname=hostname,
-                                          user=user,
-                                          tty=tty, ports=ports, environment=environment,
-                                          volumes=volume, name=name,
+    # deploy container
+    def deployContainer(self, name, image, hostname='', user='', ports={},
+                        environment={}, volume={}, entrypoint='',
+                        working_dir='', domainname='', network='', mac_address='', labels={},
+                        restart_policy={}, cpu_limit='', memory_limit=''):
+        # return self.client.containers.run(image=image, name=name, detach=True)
+        return self.client.containers.run(image=image, detach=True, hostname=hostname,
+                                          user=user, ports=ports, working_dir=working_dir,
+                                          network=network, environment=environment,
+                                          volumes=volume, name=name, restart_policy=restart_policy,
+                                          mem_limit=memory_limit, cpuset_cpus=cpu_limit,
                                           entrypoint=entrypoint,
                                           domainname=domainname,
                                           mac_address=mac_address,
@@ -247,16 +251,11 @@ class Container:
         #
         # print("\n")
 
+
 # # #
-# con = Container()
+con = Container()
 # con.calculate_network_IO('15ec352cd1e1')
 # con.calculate_disk_usage('15ec352cd1e1')
-# con.calculate_memory_percent('15ec352cd1e1')
-# print(con.calculate_cpu_percent('15ec352cd1e1'))
-#
-# con.calculate_network_IO('64ff7546650f')
-# con.calculate_disk_usage('64ff7546650f')
-# con.calculate_memory_percent('64ff7546650f')
 # print(con.calculate_cpu_percent('64ff7546650f'))
 # print(con.inspectContainer('15ec352cd1e1'))
 # while True:
@@ -267,3 +266,4 @@ class Container:
 # con.logprint('15ec352cd1e1')
 # con.runningContainer()
 # print(con.listAllContainers())
+# print(con.inspectContainer('455bd78dd1de'))

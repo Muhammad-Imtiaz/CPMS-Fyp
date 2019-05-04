@@ -6,9 +6,7 @@ systemObj = System()
 system_bp = Blueprint('system', __name__, url_prefix='/systems')
 
 @system_bp.route('/')
-def services():
-    return render_template('/system/system.html')
-
-
-
+def systems():
+    system_info = systemObj.docker_system_info()
+    return render_template('/system/system.html', system_info=system_info)
 

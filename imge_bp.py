@@ -47,6 +47,7 @@ def remove_img():
 
         elif request.form['my_btn'] == 'push':
             all_images = request.form.getlist('image')
+
             imageObj.pushImage(all_images)
 
     return render_template("images/image.html", images=imageObj)
@@ -59,21 +60,25 @@ def build_new_image():
 
 @img_bp.route('/build/', methods=('GET', 'POST'))
 def build():
-    if request.method == "POST":
-        if request.method == 'POST':
-            # check if the post request has the file part
-            if 'file' not in request.files:
-                flash('No file part')
-                return redirect(request.url)
-            file = request.files['file']
-            # if user does not select file, browser also
-            # submit an empty part without filename
-            if file.filename == '':
-                flash('No selected file')
-                return redirect(request.url)
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                imageObj.buildImage(os.path.realpath(os.path.realpath(UPLOAD_FOLDER)))
+    if request.method == 'POST':
+        if request.form['build_image'] == 'build':
+            image_tag = request.form.get('image_tag')
+            print('image tag goes here...')
+            print(image_tag)
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             print(os.path.realpath(UPLOAD_FOLDER))
+            imageObj.buildImage(os.path.realpath(os.path.realpath(UPLOAD_FOLDER)), tag=image_tag)
+
     return redirect(url_for('image.images'))

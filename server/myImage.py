@@ -68,16 +68,13 @@ class Image:
             print(image)
         print('\n')
 
-    def buildImage(self, path):
-        output = docker.APIClient(self.resourceID).build(path=path)
-        print(output)
-        return output
+    def buildImage(self, path, tag):
+        return self.client.images.build(path=path, tag=tag)
+
+
+    def login(self):
+        docker.APIClient(self.resourceID).login()
 
 
 #
 img = Image()
-# # # # img.listAllImages()jupyter/scipy-notebook:latest
-# # img.image_detail('wordpress')
-# img.image_detail('sha256:a1dc251941519ee661b262a34c741740bcaee3667804c805c26253b141952b8d')
-
-# img.pushImage('sha256:4456f3d84674248f83245dc11b2f0394b0a175f63726647f1396c229a6feac79')

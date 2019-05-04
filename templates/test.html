@@ -6,266 +6,72 @@
 
 
 <div class="container-fluid">
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        CPU Percentage
-                    </div>
-                    <div class="card-body">
-                        <div id="chartCPU" style="height: 200px; width: 90%;"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        Memory Usage
-                    </div>
-                    <div class="card-body">
-                        <div id="chartMemory" style="height: 200px; width: 90%;"></div>
-                    </div>
-                </div>
-            </div>
 
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Volume mapping</h3>
+            <button id="add_volume">add additional volume</button>
+            <button id="remove_volume">remove additional volume</button>
+        </div>
+    </div>
+    <br><br>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div id="textboxesgroup">
+                <div id="textboxdiv1">
+                    <label>Textbox#1</label><input type="textbox" id="textbox1">
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        Disk Usage
-                    </div>
-                    <div class="card-body">
-                        <div id="chartDisk" style="height: 200px; width: 90%;"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        Network Usage
-                    </div>
-                    <div class="card-body">
-                        <div id="chartNetwork" style="height: 200px; width: 90%;"></div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
+</div>
 
 {% block scripts %}
 {{super}}
 <script>
-        <!--(function worker() {-->
-          <!--$.ajax({-->
-            <!--url: '/container/cpu/',-->
-            <!--dataType: 'json',-->
-            <!--type: 'get',-->
-            <!--success: function(data) {-->
-                <!--$('.result').html(data.data);-->
-                 <!--console.log(data['cpu']);-->
-            <!--},-->
-            <!--complete: function() {-->
+        $(document).ready(function(){
 
-              <!--// Schedule the next request when the current one's complete-->
-              <!--setTimeout(worker, 5000);-->
-            <!--}-->
-          <!--});-->
-        <!--})();-->
+            var counter = 2;
 
-        window.onload = function () {
-            get_cpu();
-            get_memory();
-            get_disk();
-            get_network();
-        }
+            $("#add_volume").click(function(){
 
-        function get_cpu(){
+                if (counter > 10){
+                    alert("you reached maximum limit");
+                    return false;
+                }
 
-            var dps = []; // dataPoints
-            var chart = new CanvasJS.Chart("chartCPU", {
-                lineColor: "#C0504E",
-                axisY: {
-                    includeZero: false
-                },
-                data: [{
-                    type: "area",
-                    dataPoints: dps
-                }]
+                var newtextboxdiv = $(document.createElement('div')).attr("id", 'TextBoxDiv' + counter);
+
+                newtextboxdiv.after().html('<label> Container :</label>'
+                    + '<input type="text" name="textbox' + counter + 'placeholder="e.g my container" ' +
+                    '"id="textbox' + counter + '"value="" > ' + '    ' +
+
+                    '<label> Volume :</label>'
+                    + '<input type="text" name="textbox' + counter +
+                    '"id="textbox' + counter + '"value="" > ');
+
+                    newtextboxdiv.appendTo("#textboxesgroup");
+                    counter++;
+
             });
 
-            var xVal = 0;
-            var yVal = 100;
-            var updateInterval = 1000;
-            var dataLength = 20; // number of dataPoints visible at any point
-
-            var updateChart = function (count) {
-
-                count = count || 1;
-
-                for (var j = 0; j < count; j++) {
-                    yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-                    dps.push({
-                        x: xVal,
-                        y: yVal
-                    });
-                    xVal++;
+            $("#remove_volume").click(function(){
+                if (counter == 1){
+                    alert("Nothing to remove");
+                    return false;
                 }
+                counter--;
+                $("#TextBoxDiv" + counter).remove();
 
-                if (dps.length > dataLength) {
-                    dps.shift();
-                }
-
-                chart.render();
-            };
-
-            updateChart(dataLength);
-            setInterval(function(){updateChart()}, updateInterval);
-
-        }
-
-        function get_disk(){
-
-            var dps = []; // dataPoints
-            var chart = new CanvasJS.Chart("chartDisk", {
-
-                axisY: {
-                    includeZero: false
-                },
-                data: [{
-                    type: "area",
-                    dataPoints: dps
-                }]
             });
 
-            var xVal = 0;
-            var yVal = 100;
-            var updateInterval = 1000;
-            var dataLength = 20; // number of dataPoints visible at any point
-
-            var updateChart = function (count) {
-
-                count = count || 1;
-
-                for (var j = 0; j < count; j++) {
-                    yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-                    dps.push({
-                        x: xVal,
-                        y: yVal
-                    });
-                    xVal++;
-                }
-
-                if (dps.length > dataLength) {
-                    dps.shift();
-                }
-
-                chart.render();
-            };
-
-            updateChart(dataLength);
-            setInterval(function(){updateChart()}, updateInterval);
-
-        }
-
-        function get_network(){
-
-            var dps = []; // dataPoints
-            var chart = new CanvasJS.Chart("chartNetwork", {
-
-                axisY: {
-                    includeZero: false
-                },
-                data: [{
-                    type: "area",
-                    dataPoints: dps
-                }]
-            });
-
-            var xVal = 0;
-            var yVal = 100;
-            var updateInterval = 1000;
-            var dataLength = 20; // number of dataPoints visible at any point
-
-            var updateChart = function (count) {
-
-                count = count || 1;
-
-                for (var j = 0; j < count; j++) {
-                    yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-                    dps.push({
-                        x: xVal,
-                        y: yVal
-                    });
-                    xVal++;
-                }
-
-                if (dps.length > dataLength) {
-                    dps.shift();
-                }
-
-                chart.render();
-            };
-
-            updateChart(dataLength);
-            setInterval(function(){updateChart()}, updateInterval);
-
-        }
-
-        function get_memory(){
-
-            var dps = []; // dataPoints
-            var chart = new CanvasJS.Chart("chartMemory", {
-
-                axisY: {
-                    includeZero: false
-                },
-                data: [{
-                    type: "area",
-                    dataPoints: dps
-                }]
-            });
-
-            var xVal = 0;
-            var yVal = 100;
-            var updateInterval = 1000;
-            var dataLength = 20; // number of dataPoints visible at any point
-
-            var updateChart = function (count) {
-
-                count = count || 1;
-
-                for (var j = 0; j < count; j++) {
-                    yVal = yVal +  Math.round(5 + Math.random() *(-5-5));
-                    dps.push({
-                        x: xVal,
-                        y: yVal
-                    });
-                    xVal++;
-                }
-
-                if (dps.length > dataLength) {
-                    dps.shift();
-                }
-
-                chart.render();
-            };
-
-            updateChart(dataLength);
-            setInterval(function(){updateChart()}, updateInterval);
-
-        }
-
+        });
 
 </script>
 {% endblock %}
-    </div>
 
 
 {% endblock %}

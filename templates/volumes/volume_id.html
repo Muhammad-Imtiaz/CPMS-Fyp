@@ -1,0 +1,45 @@
+{% extends 'layout.html'%}
+{% block title %}
+Volume -
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <span class="fa fa-code"></span> Volume's details
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+
+                        <table class="table table-hover table-striped"
+                               style="width:100%">
+                            <tbody>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>ID</b></td>
+                                <td>{{inspect_vol['Name']}}</td>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>Mount path</b></td>
+                                <td>{{inspect_vol['Mountpoint']}}</td>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>Driver</b></td>
+                                <td>{{inspect_vol['Driver']}}</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>Scope</b></td>
+                                <td>{{inspect_vol['Scope']}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

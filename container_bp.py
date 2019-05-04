@@ -6,9 +6,11 @@ from pygal.style import DarkColorizedStyle, NeonStyle, CleanStyle, LightStyle, D
 
 from .server.myContainer import Container
 from .server.myImage import Image
+from .server.myVolume import Volume
 
 containerObj = Container()
 imageObj = Image()
+volumeObj = Volume()
 
 con_bp = Blueprint('container', __name__, url_prefix='/container')
 
@@ -132,7 +134,8 @@ def start_containers():
 @con_bp.route('/add_container/')
 def add_container():
     images = imageObj.listAllImages()
-    return render_template('containers/add_container.html', images=images)
+    volumes = volumeObj.list_all_volumes()
+    return render_template('containers/add_container.html', images=images, volumes=volumes)
 
 
 @con_bp.route("/add_container/", methods=('GET', 'POST'))
@@ -147,7 +150,7 @@ def deploy_container():
             # Ports
             con_port = request.form.get('container_port')
             host_port = request.form.get('host_port')
-            ports = {host_port: con_port}
+            ports = {con_port + '/tcp': host_port}
 
             # commands and logging
             command = request.form.get('command')
@@ -155,62 +158,52 @@ def deploy_container():
             workingdir = request.form.get('working')
             user = request.form.get('user')
             console = request.form.get('console')
+            print('tty gonna be bool ' + console)
+
             # volumes
             con_vol = request.form.get('volume_c')
-            host_vol = request.form.get('volume_h')
-            volumes = {host_vol: con_vol}
+            vol = request.form.get('selected_volume')
+            print(vol)
+            volumes = {vol: {'bind': con_vol, 'mode': 'rw'}}
             # networks
             network = request.form.get('network_dropdown')  # will get item from list...still not working
             print(network)
             net_host = request.form.get('network_host')
             net_domain = request.form.get('network_domain')
             net_mac = request.form.get('network_mac')
-            net_ipv4 = request.form.get('network_ipv4')
-            net_ipv6 = request.form.get('network_ipv6')
 
             # ENV
             env1 = request.form.get('env_1')
             env2 = request.form.get('env_2')
             env3 = request.form.get('env_3')
             env4 = request.form.get('env_4')
-            env5 = request.form.get('env_5')
-            env6 = request.form.get('env_6')
-            environment = {env1: env2, env3: env4, env5: env6}
+            environment = [str(env1) + "=" + str(env2), str(env3) + "=" + str(env4)]
 
             # labels
             lable1 = request.form.get('lable1')
             lable2 = request.form.get('lable2')
             lable3 = request.form.get('lable3')
             lable4 = request.form.get('lable4')
-            labels = {lable1: lable2, lable3: lable4}
+            labels = {lable1.upper(): lable2, lable3.upper(): lable4}
 
             # Restart policy
             restart = request.form.get('restart_btn')
+            restart_policy = {'Name': restart}
 
             # Resources allocation
-            memory_soft = request.form.get('memory_soft_limit')
             memory_limit = request.form.get('memory_limit')
-            cpu_usage = request.form.get('cpu_limit')
-
-            output = containerObj.createContainer(name=con_name, image=image_name)
-
-            flash(output)
-
-        # print(con_name)
-        # print(command)
-        # print(entry)
-        # print(net_host)
-        # print(con_name)
-        # print(net_domain)
-        # print(net_ipv6)
-        # print(restart)
-        # print(console)
-        # print(workingdir)
-        # print(lable1)
-        # print(memory_limit)
-        # print(env1)
-        # print(host_port)
-        return render_template('contaminers/container.html', images=images)
+            cpuset_cpus = request.form.get('cpu_limit')
+            #
+            output = containerObj.deployContainer(name=con_name, image=image_name,
+                                                  hostname=net_host, user=user,
+                                                  ports=ports, environment=environment, volume=volumes,
+                                                  entrypoint=entry, working_dir=workingdir, domainname=net_domain,
+                                                  network=network, mac_address=net_mac, labels=labels,
+                                                  restart_policy=restart_policy,
+                                                  cpu_limit=cpuset_cpus, memory_limit=memory_limit)
+            #
+            # flash(output)
+        return redirect(url_for('container.containers'))
 
 
 @con_bp.route('/<con_id>')

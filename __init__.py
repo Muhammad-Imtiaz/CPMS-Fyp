@@ -70,6 +70,9 @@ def create_app():
     @app.route('/register')
     def register():
         return render_template('/authentication/register.html')
+    @app.route('/test')
+    def test():
+        return render_template('/test.html')
 
     from .container_bp import con_bp
     from .imge_bp import img_bp

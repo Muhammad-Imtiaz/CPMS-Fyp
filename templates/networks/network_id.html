@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% block title %}Network - {% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <span class="fa fa-code"></span> Network details
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <table class="table table-hover table-striped"
+                               style="width:100%">
+                            <tbody>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>Name</b></td>
+                                <td>{{inspect['Name']}}</td>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>ID</b></td>
+                                <td>{{inspect['Id']}}</td>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>Driver</b></td>
+                                <td>{{inspect['Driver']}}</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td scope="row"><b>Scope</b></td>
+                                <td>{{inspect['Scope']}}</td>
+                            </tr>
+                            <tr role="row" class="odd">
+                                <td><b>Attachable</b></td>
+                                <!---->
+                                <td>
+                                    {{inspect['Attachable']}}
+                                </td><!---->
+                                <!---->
+                            </tr>
+                            <!---->
+                            <tr role="row" class="odd">
+                                <td><b>Internal</b></td>
+                                <td>{{inspect['Internal']}}</td>
+                            </tr><!---->
+                            <tr role="row" class="odd">
+                                <td><b>Subnet-{{inspect['IPAM']['Config']}}</b></td>
+                                <td>Gateway-{{inspect['IPAM']['Config']}}</td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <span class="fa fa-code"></span> Network Options
+                </div>
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <table class="table table-hover table-striped"
+                               style="width:100%">
+                            <tbody>
+                            {% set options = {{inspect['Options']}} %}
+                            {% for i in options: %}
+                                <tr role="row" class="odd">
+                                    <td scope="row">{{i}}</td>
+                                    <td>{{options.get(i)}}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

@@ -5,6 +5,18 @@
 
 <div class="container-fluid">
 
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+
+    {% for i in messages %}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dimiss="alert" aria-label="Close">Close</button>
+            {{i}}
+    </div>
+    {%endfor%}
+    {% endif %}
+    {%endwith%}
+
     <form action="" method="post" enctype="multipart/form-data">
         <div class="col-md-12">
             <div class="card">

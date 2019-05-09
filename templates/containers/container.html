@@ -12,7 +12,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <span class="fas fa-server"></span>  Containers
+                        <span class="fas fa-server"></span> Containers
                     </div>
                     <div class="card-body">
                         <div class="well col-md-12 field is-grouped ">
@@ -27,7 +27,7 @@
                                 </button>
                                 <button type="submit" name="my_btn" id="kill" class="btn btn-danger" value="kill"
                                         disabled style="margin-left:10px">
-                                   <span class="fa fa-bomb space-right"></span> Kill
+                                    <span class="fa fa-bomb space-right"></span> Kill
                                 </button>
                                 <button type="submit" name="my_btn" id="restart" class="btn btn-primary" value="restart"
                                         disabled style="margin-left:10px">
@@ -46,9 +46,12 @@
                                     <span class="fa fa-trash-alt space-right"></span> Remove
                                 </button>
                             </div>
-                            <a href="/container/add_container"><button type="button" name="my_btn" class="btn btn-primary" value="add" style="margin-left:15px">
-                                <span class="fa fa-plus space-right"></span>  Add Container
-                            </button ></a>
+                            <a href="/container/add_container">
+                                <button type="button" name="my_btn" class="btn btn-primary" value="add"
+                                        style="margin-left:15px">
+                                    <span class="fa fa-plus space-right"></span> Add Container
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -255,14 +258,6 @@
                                 });
                                });
 
-
-
-
-
-
-
-
-
                                             </script>
 
                                             {% endblock %}
@@ -274,16 +269,9 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-5">
-                                        <div class="dataTables_info" id="zero_config_info" role="status"
-                                             aria-live="polite">
-                                            Showing 11
-                                            to 20 of 57 entries
-                                        </div>
-                                    </div>
                                     <div class="col-sm-12 col-md-7">
                                         <div class="dataTables_paginate paging_simple_numbers"
-                                             id="zero_config_paginate">
+                                             id="zero_config_paginate" align="right">
                                             <ul class="pagination">
                                                 <li class="paginate_button page-item previous"
                                                     id="zero_config_previous"><a
@@ -293,32 +281,18 @@
                                                         tabindex="0"
                                                         class="page-link">Previous</a>
                                                 </li>
-                                                <li class="paginate_button page-item "><a href="#"
-                                                                                          aria-controls="zero_config"
-                                                                                          data-dt-idx="1" tabindex="0"
-                                                                                          class="page-link">1</a></li>
                                                 <li class="paginate_button page-item active"><a href="#"
                                                                                                 aria-controls="zero_config"
-                                                                                                data-dt-idx="2"
+                                                                                                data-dt-idx="1"
                                                                                                 tabindex="0"
-                                                                                                class="page-link">2</a>
+                                                                                                class="page-link">1</a>
                                                 </li>
                                                 <li class="paginate_button page-item "><a href="#"
                                                                                           aria-controls="zero_config"
-                                                                                          data-dt-idx="3" tabindex="0"
-                                                                                          class="page-link">3</a></li>
-                                                <li class="paginate_button page-item "><a href="#"
-                                                                                          aria-controls="zero_config"
-                                                                                          data-dt-idx="4" tabindex="0"
-                                                                                          class="page-link">4</a></li>
-                                                <li class="paginate_button page-item "><a href="#"
-                                                                                          aria-controls="zero_config"
-                                                                                          data-dt-idx="5" tabindex="0"
-                                                                                          class="page-link">5</a></li>
-                                                <li class="paginate_button page-item "><a href="#"
-                                                                                          aria-controls="zero_config"
-                                                                                          data-dt-idx="6" tabindex="0"
-                                                                                          class="page-link">6</a></li>
+                                                                                          data-dt-idx="2"
+                                                                                          tabindex="0"
+                                                                                          class="page-link">2</a>
+                                                </li>
                                                 <li class="paginate_button page-item next" id="zero_config_next"><a
                                                         href="#"
                                                         aria-controls="zero_config"

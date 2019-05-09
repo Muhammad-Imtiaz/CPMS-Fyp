@@ -6,6 +6,18 @@
 
 <div class="container-fluid">
 
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+
+    {% for i in messages %}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dimiss="alert" aria-label="Close">Close</button>
+            {{i}}
+    </div>
+    {%endfor%}
+    {% endif %}
+    {%endwith%}
+
 
     <div class="row">
 
@@ -15,7 +27,7 @@
                     Image Details
                 </div>
                 <div class="card-body">
-                    <table class="table table-responsive table-bordered table-hover table-striped">
+                    <table class="table table-bordered table-hover table-striped">
                         <tbody>
                         <tr role="row" class="odd">
                             <td scope="row"><b>ID</b></td>
@@ -52,7 +64,7 @@
                     Dockerfile Details
                 </div>
                 <div class="card-body">
-                    <table class="table table-responsive table-bordered table-hover table-striped">
+                    <table class="table table-bordered table-hover table-striped">
                         <tbody>
                         <tr role="row" class="odd">
                             <td scope="row"><b>CMD</b></td>
@@ -78,17 +90,21 @@
                         <tr role="row" class="odd">
                             <td><b>ENV</b></td>
                             <td>
-                                <table class="table table-responsive">
+                                <table class="table">
                                     <thead></thead>
                                     <tbody>
+
+                                    {% if image_details['Env'] != None %}
                                     {% for i in image_details['Env'] %}
-                                    <tr role="row" class="odd">
-                                        <td scope="row">{{i.rsplit('=', 1)[0]}}</td>
-                                        <td>
-                                            {{i.rsplit('=', 1)[1]}}
-                                        </td>
-                                    </tr>
-                                    {% endfor %}
+                                        <tr role="row" class="odd">
+                                            <td scope="row">{{i.rsplit('=', 1)[0]}}</td>
+                                            <td>
+                                                {{i.rsplit('=', 1)[1]}}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    {% endif %}
+
                                     </tbody>
                                 </table>
                             </td>

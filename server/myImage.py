@@ -11,10 +11,20 @@ class Image:
         id = dictionary['Id']
         created = dictionary['Created']
         size = dictionary['Size']
-        cmd = dictionary['ContainerConfig']['Cmd'][3].rsplit(' ', 1)[1]
-        entry_point = dictionary['ContainerConfig']['Entrypoint'][0]
+        try:
+            cmd = dictionary['ContainerConfig']['Cmd'][3].rsplit(' ', 1)[1]
+        except:
+            cmd = None
+        try:
+            entry_point = dictionary['ContainerConfig']['Entrypoint'][0]
+        except:
+            entry_point = None
+
         volumes = dictionary['ContainerConfig']['Volumes']
-        expose_port = dictionary['ContainerConfig']['ExposedPorts']
+        try:
+            expose_port = dictionary['ContainerConfig']['ExposedPorts']
+        except:
+            expose_port = None
         env = dictionary['ContainerConfig']['Env']
         #
         # print(size/(1024*2))
@@ -69,7 +79,9 @@ class Image:
         print('\n')
 
     def buildImage(self, path, tag):
-        return self.client.images.build(path=path, tag=tag)
+        output = self.client.images.build(path=path, tag=tag)
+        print(output)
+        return output
 
 
     def login(self):

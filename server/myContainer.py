@@ -5,25 +5,18 @@ class Container:
     client = docker.from_env()
     resourceID = base_url = 'unix://var/run/docker.sock'
 
-    # container = client.containers.run(image='portainer/portainer', detach=True, ports={'9000/tcp': 9092}
-    #                                   , name='myPortainerMonitor1',
-    #                                   volumes={'/var/run/docker.sock': {'bind': '/var/run/docker.sock'}})
-
     # deploy container
-    def deployContainer(self, name, image, hostname='', user='', ports={},
-                        environment={}, volume={}, entrypoint='',
-                        working_dir='', domainname='', network='', mac_address='', labels={},
-                        restart_policy={}, cpu_limit='', memory_limit=''):
-        # return self.client.containers.run(image=image, name=name, detach=True)
-        return self.client.containers.run(image=image, detach=True, hostname=hostname,
-                                          user=user, ports=ports, working_dir=working_dir,
-                                          network=network, environment=environment,
-                                          volumes=volume, name=name, restart_policy=restart_policy,
-                                          mem_limit=memory_limit, cpuset_cpus=cpu_limit,
-                                          entrypoint=entrypoint,
-                                          domainname=domainname,
-                                          mac_address=mac_address,
-                                          labels=labels)
+    def deployContainer(self, image, name, command=None, entrypoint='', working_dir='', user='', network='',
+                        hostname='', domainname='', mac_address='', ports={}, volumes={}, environment={}, labels={},
+                        restart_policy={}, memory_limit='', cpuset_cpus=''):
+        # return self.client.containers.run(image, command, detach=True, name=name, )
+        return self.client.containers.run(image, command=command, detach=True, name=name, entrypoint=entrypoint,
+                                          working_dir=working_dir,
+                                          user=user, network=network, hostname=hostname, domainname=domainname,
+                                          mac_address=mac_address, ports=ports, volumes=volumes,
+                                          environment=environment, labels=labels,
+                                          restart_policy=restart_policy, mem_limit=memory_limit,
+                                          cpuset_cpus=cpuset_cpus)
 
     def dockerstats(self, containerID=None):
         print("Printing stats")
@@ -215,7 +208,8 @@ class Container:
             print('Status:  ' + dictionary['State']['Status'])
             print('Image name:  ' + dictionary['Config']['Image'])
 
-            print('Image name:  ' + dictionary['NetworkSettings']['Networks']['bridge']['IPAddress'])
+            print('IP:  ' + dictionary['NetworkSettings']['Networks']['bridge']['IPAddress'])
+            print( dictionary['NetworkSettings']['Ports'])
             # print('Exposed port:  ' + dictionary['ExposedPorts'])
             # print('Host port:  ' + dictionary['NetworkSettings']['Networks']['bridge']['IPAddress'])
             # break
@@ -254,6 +248,7 @@ class Container:
 
 # # #
 con = Container()
+print(con.runningContainer())
 # con.calculate_network_IO('15ec352cd1e1')
 # con.calculate_disk_usage('15ec352cd1e1')
 # print(con.calculate_cpu_percent('64ff7546650f'))

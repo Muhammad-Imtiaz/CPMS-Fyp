@@ -14,11 +14,20 @@ class Network:
     def get_network_by_id(self, net_id):
         return docker.APIClient(self.resourceID).inspect_network(net_id)
 
-    def create_network(self, name, driver, ipm):
-        return self.client.networks.create(name=name, driver=driver, ipam=ipm)
+    def create_network(self, name, driver, *args):
+        arg = None
+        for i in args:
+            arg = i
+        output = self.client.networks.create(name, driver,
+                                           ipam=arg)
+
+        return output
 
 
 #
-# net = Network()
+#
+net = Network()
 # # net.list_all_networks()
-# print(net.get_network_by_id('1c358ae30e77a524e86f17f11e7b96407bc228fb9895cf843f6ed05b95ba6f88')['IPAM']['Config'][0])
+# print(net.get_network_by_id('26c8963080a0f2e9921e6193482943e1e74c80f97fa5a3ef4ba1377c128eb0ea'))
+
+# print(net.remove_network('26c8963080a0f2e9921e6193482943e1e74c80f97fa5a3ef4ba1377c128eb0ea'))

@@ -5,73 +5,73 @@
 
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="fa fa-chart-area"></span> CPU Percentage
+    <form action="" method="post">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="fa fa-chart-area"></span> CPU Percentage
+                            </div>
+                            <div class="card-body">
+                                <div id="chartCPU" style="height: 150px; width: 100%;"></div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <div id="chartCPU" style="height: 150px; width: 100%;"></div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="fa fa-chart-area"></span> Memory Usage
+                            </div>
+                            <div class="card-body">
+                                <div id="chartMemory" style="height: 150px; width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="fa fa-chart-area"></span> Disk Usage
+                            </div>
+                            <div class="card-body">
+                                <div id="chartDisk" style="height: 150px; width: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card">
+                            <div class="card-header">
+                                <span class="fa fa-chart-area"></span> Network Usage
+                            </div>
+                            <div class="card-body">
+                                <div id="chartNetwork" style="height: 150px; width: 100%;"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="fa fa-chart-area"></span> Memory Usage
-                        </div>
-                        <div class="card-body">
-                            <div id="chartMemory" style="height: 150px; width: 100%;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="fa fa-chart-area"></span> Disk Usage
-                        </div>
-                        <div class="card-body">
-                            <div id="chartDisk" style="height: 150px; width: 100%;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <span class="fa fa-chart-area"></span> Network Usage
-                        </div>
-                        <div class="card-body">
-                            <div id="chartNetwork" style="height: 150px; width: 100%;"></div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
-
         </div>
-    </div>
 
 
-    <!--<div class="row">-->
-    <!--<div class="col-md-12">-->
-    <!--<div class="input-group" id="adv-search">-->
-    <!--<input type="text" class="form-control" placeholder="Search for snippets">-->
-    <!--<div class="input-group-btn">-->
-    <!--<div class="btn-group" role="group">-->
-    <!--<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search"-->
-    <!--&gt;</span> Search-->
-    <!--</button>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
+        <!--<div class="row">-->
+        <!--<div class="col-md-12">-->
+        <!--<div class="input-group" id="adv-search">-->
+        <!--<input type="text" class="form-control" placeholder="Search for snippets">-->
+        <!--<div class="input-group-btn">-->
+        <!--<div class="btn-group" role="group">-->
+        <!--<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search"-->
+        <!--&gt;</span> Search-->
+        <!--</button>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
 
-    <div class="row">
-        <div class="col-lg-12">
-            <form>
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
                         <span class="fa fa-cogs"></span> Actions
@@ -110,20 +110,19 @@
                                 <span class="fas fa-trash-alt space-right"></span> Remove
                             </button>
                             <!--<button type="submit" name="my_btn" id="duplicate" class="btn btn-primary" value="duplicate"-->
-                                    <!--disabled>-->
-                                <!--<span class="fas fa-duplicate space-right"></span> Duplicate-->
+                            <!--disabled>-->
+                            <!--<span class="fas fa-duplicate space-right"></span> Duplicate-->
                             <!--</button>-->
                             <!--<button type="submit" name="my_btn" class="btn btn-primary" value="add">-->
-                                <!--<span class="fas fa-play space-right"></span> Recreate-->
+                            <!--<span class="fas fa-play space-right"></span> Recreate-->
                             <!--</button>-->
                         </div>
                     </div>
                 </div>
-            </form>
 
-            {% block scripts %}
-            {{ super() }}
-            <script>
+                {% block scripts %}
+                {{ super() }}
+                <script>
 
                         window.onload = function () {
                             get_cpu();
@@ -308,255 +307,303 @@
 
             }
 
+        $(document).ready(function(){
+
+        var status = document.getElementById("status");
+        var cells = status.getElementsByTagName("td");
+        var value = cells[1].innerText;
 
 
+        if( value === 'running'){
 
-            </script>
-            {% endblock %}
+            $('#start').prop('disabled', true);
+            $('#resume').prop('disabled', true);
+            $('#stop').prop('disabled', false);
+            $('#restart').prop('disabled', false);
+            $('#kill').prop('disabled', false);
+            $('#pause').prop('disabled', false);
+            $('#remove').prop('disabled', true);
+        }
+        else if(value === 'exited' || value === 'stopped'){
+            $('#stop').prop('disabled', true);
+            $('#pause').prop('disabled', true);
+            $('#resume').prop('disabled', true);
+
+            $('#start').prop('disabled', false);
+            $('#restart').prop('disabled', true);
+            $('#kill').prop('disabled', true);
+            $('#remove').prop('disabled', false);
+
+         }
+         else if(value === 'paused'){
+            $('#stop').prop('disabled', true);
+            $('#pause').prop('disabled', true);
+            $('#start').prop('disabled', true);
+
+            $('#resume').prop('disabled', false);
+            $('#restart').prop('disabled', false);
+            $('#kill').prop('disabled', false);
+            $('#remove').prop('disabled', false);
+        }
+        else{
+            $('#start').prop('disabled', true);
+            $('#resume').prop('disabled', true);
+            $('#stop').prop('disabled', true);
+            $('#restart').prop('disabled', true);
+            $('#kill').prop('disabled', true);
+            $('#pause').prop('disabled', true);
+            $('#remove').prop('disabled', true);
+        }
+   });
 
 
-        </div>
-    </div>
+                </script>
+                {% endblock %}
 
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <span class="fa fa-server"></span> Container Status
-                </div>
-                <div class="card-body">
-                    <div class="col-md-12">
-                        <table class="table table-responsive table-bordered table-hover table-striped"
-                               style="width:100%">
-                            <tbody>
-                            <tr role="row" class="odd">
-                                <td scope="row"><b>ID</b></td>
-                                <td>{{container_status['ID']}}</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                                <td><b>Name</b></td>
-                                <!---->
-                                <td>
-                                    {{container_status['Container_name']}}
-                                </td><!---->
-                                <!---->
-                            </tr>
-                            <!---->
-                            <tr role="row" class="odd">
-                                <td><b>IP address</b></td>
-                                <td>{{container_status['IPAddress']}}</td>
-                            </tr><!---->
-                            <tr role="row" class="odd">
-                                <td><b>Status</b></td>
-                                <td>
-                                    {{container_status['Status']}}
-                                </td>
-                            </tr>
-                            <tr role="row" class="odd">
-                                <td scope="row"><b>Created</b></td>
-                                <td>{{container_status['Created']}}</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                                <td scope="row"><b>Start Time</b></td>
-                                <td>{{container_status['Start_time']}}</td>
-                            </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
-    <!--Container detail....from inspect-->
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <span class="fa fa-server"></span> Container Details
-                </div>
-                <div class="card-body">
 
-                    <div class="col-md-12">
-                        <table class="table table-responsive table-bordered table-hover table-striped"
-                               style="width:100%">
-                            <thead></thead>
-                            <tbody>
-                            <tr role="row" class="odd">
-                                <td scope="row"><b>Image</b></td>
-                                <td>{{container_status['Image_name']}}</td>
-                            </tr>
-                            <tr role="row" class="odd">
-                                <td><b>CMD</b></td>
-                                <!---->
-                                <td>
-                                    {{container_status['Cmd']}}
-                                </td><!---->
-                                <!---->
-                            </tr>
-                            <!---->
-                            <tr role="row">
-                                <td><b>ENV</b></td>
-                                <td>
-                                    <table class="table table-bordered table-responsive">
-                                        <thead></thead>
-                                        <tbody>
-                                        {% for i in container_status['Env'] %}
-                                        <tr role="row" class="odd">
-                                            <td scope="row" class="row-borderd">{{i.rsplit('=', 1)[0]}}</td>
-                                            <td>
-                                                {{i.rsplit('=', 1)[1]}}
-                                            </td>
-                                        </tr>
-                                        {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </td>
-                            </tr><!---->
-
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Creating Image-->
-
-    <div class="row">
-        <div class="col-md-12">
-            <form>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <span class="fa fa-clone"></span> <b>Create Image</b>
+                        <span class="fa fa-server"></span> Container Status
                     </div>
                     <div class="card-body">
-                        <div class="row col-sm-12">
+                        <div class="col-md-12">
+                            <table class="table  table-bordered table-hover table-striped"
+                                   style="width:100%">
+                                <tbody>
+
+                                <tr role="row" class="odd">
+                                    <td scope="row"><b>ID</b></td>
+                                    <td>{{container_status['ID']}}</td>
+                                </tr>
+                                <tr role="row" class="odd">
+                                    <td><b>Name</b></td>
+                                    <!---->
+                                    <td>
+                                        {{container_status['Container_name']}}
+                                    </td><!---->
+                                    <!---->
+                                </tr>
+                                <!---->
+                                <tr role="row" class="odd">
+                                    <td><b>IP address</b></td>
+                                    <td>{{container_status['IPAddress']}}</td>
+                                </tr><!---->
+                                <tr role="row" class="odd" id="status">
+                                    <td><b>Status</b></td>
+                                    <td>
+                                        {{container_status['Status']}}
+                                    </td>
+                                </tr>
+                                <tr role="row" class="odd">
+                                    <td scope="row"><b>Created</b></td>
+                                    <td>{{container_status['Created']}}</td>
+                                </tr>
+                                <tr role="row" class="odd">
+                                    <td scope="row"><b>Start Time</b></td>
+                                    <td>{{container_status['Start_time']}}</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Container detail....from inspect-->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="fa fa-server"></span> Container Details
+                    </div>
+                    <div class="card-body">
+
+                        <div class="col-md-12">
+                            <table class="table table-bordered table-hover table-striped"
+                                   style="width:100%">
+                                <thead></thead>
+                                <tbody>
+                                <tr role="row" class="odd">
+                                    <td scope="row"><b>Image</b></td>
+                                    <td>{{container_status['Image_name']}}</td>
+                                </tr>
+                                <tr role="row" class="odd">
+                                    <td><b>CMD</b></td>
+                                    <!---->
+                                    <td>
+                                        {{container_status['Cmd']}}
+                                    </td><!---->
+                                    <!---->
+                                </tr>
+                                <!---->
+                                <tr role="row">
+                                    <td><b>ENV</b></td>
+                                    <td>
+                                        <table class="table table-bordered table-responsive">
+                                            <thead></thead>
+                                            <tbody>
+                                            {% for i in container_status['Env'] %}
+                                            <tr role="row" class="odd">
+                                                <td scope="row" class="row-borderd">{{i.rsplit('=', 1)[0]}}</td>
+                                                <td>
+                                                    {{i.rsplit('=', 1)[1]}}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr><!---->
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Creating Image-->
+
+        <div class="row">
+            <div class="col-md-12">
+                <form>
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="fa fa-clone"></span> <b>Create Image</b>
+                        </div>
+                        <div class="card-body">
+                            <div class="row col-sm-12">
                                             <span class="medium text-muted">
                                               You can create an image from this container, this allows you to backup important data or save
                                               helpful configurations. You'll be able to spin up another container based on this image afterward.
                                             </span>
-                        </div>
+                            </div>
 
-                        <div class="col-md-12">
-                            <div class="row col-md-12" align="left">
-                                <div class="col-md-6" role="combobox">
-                                    <label class="control-label" align="left"><b>Image</b></label>
-                                    <input id="image_name" class="form-control " placeholder="e.g. myimage:tag">
+                            <div class="col-md-12">
+                                <div class="row col-md-12" align="left">
+                                    <div class="col-md-6" role="combobox">
+                                        <label class="control-label" align="left"><b>Image</b></label>
+                                        <input id="image_name" class="form-control " placeholder="e.g. myimage:tag">
 
-                                </div>
-                                <div class="col-md-6" role="combobox">
-                                    <div class="form-group">
-                                        <label for="image_registry"
-                                               class="control-label ">
-                                            <b>Registry</b>
-                                        </label>
-                                        <select id="image_registry" class="form-control ">
-                                            <option label="DockerHub"
-                                                    selected="selected">
-                                                DockerHub
-                                            </option>
-                                        </select>
+                                    </div>
+                                    <div class="col-md-6" role="combobox">
+                                        <div class="form-group">
+                                            <label for="image_registry"
+                                                   class="control-label ">
+                                                <b>Registry</b>
+                                            </label>
+                                            <select id="image_registry" class="form-control ">
+                                                <option label="DockerHub"
+                                                        selected="selected">
+                                                    DockerHub
+                                                </option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-sm-12 col-md-12">
+                            <div class="col-sm-12 col-md-12">
                                                         <span class="medium text-muted">Note: if you don't specify the tag in the image name, <span
                                                                 class="label label-default">latest</span> will be used.</span>
-                        </div>
-                        <hr>
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <button type="button" class="btn btn-primary btn-md"
-                                        disabled="disabled">Create
-                                </button>
                             </div>
+                            <hr>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn btn-primary btn-md"
+                                            disabled="disabled">Create
+                                    </button>
+                                </div>
+                            </div>
+
                         </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <!--Volume details-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="fa fa-cubes"></span> Volumes
+                    </div>
+                    <div class="card-body">
+
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th><b>Host/volume</b></th>
+                                <th><b>Path in container</b></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <!---->
+                            <tr role="row">
+                                <!---->
+                                <!---->
+                                <td><a
+                                        href="/volumes/{{container_status['Vol_name']}}">{{container_status['Vol_name']}}</a>
+                                </td><!---->
+                                <td>{{container_status['Vol_destination']}}</td>
+                            </tr><!---->
+                            <tr role="row">
+                                <!---->
+                                <td>{{container_status['Vol_host']}}</td><!---->
+                                <!---->
+                                <td>{{container_status['Vol_container']}}</td>
+                            </tr><!---->
+                            </tbody>
+                        </table>
 
                     </div>
                 </div>
-            </form>
-
-        </div>
-    </div>
-
-    <!--Volume details-->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <span class="fa fa-cubes"></span> Volumes
-                </div>
-                <div class="card-body">
-
-                    <table class="table table-responsive table-bordered table-hover table-striped">
-                        <thead>
-                        <tr>
-                            <th><b>Host/volume</b></th>
-                            <th><b>Path in container</b></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <!---->
-                        <tr role="row">
-                            <!---->
-                            <!---->
-                            <td><a
-                                    href="/volumes/{{container_status['Vol_name']}}">{{container_status['Vol_name']}}</a>
-                            </td><!---->
-                            <td>{{container_status['Vol_destination']}}</td>
-                        </tr><!---->
-                        <tr role="row">
-                            <!---->
-                            <td>{{container_status['Vol_host']}}</td><!---->
-                            <!---->
-                            <td>{{container_status['Vol_container']}}</td>
-                        </tr><!---->
-                        </tbody>
-                    </table>
-
-                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    Container Log
-                </div>
-                <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Container Log
+                    </div>
+                    <div class="card-body">
 
-                    {{ container_log }}
+                        {{ container_log }}
 
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    Container Inspect
-                </div>
-                <div class="card-body">
-
-                    {{ container_inspect }}
-
+                    </div>
                 </div>
             </div>
         </div>
 
-    </div>
 
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Container Inspect
+                    </div>
+                    <div class="card-body">
+
+                        {{ container_inspect }}
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
 </div>
 
 {% endblock %}

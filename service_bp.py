@@ -7,7 +7,8 @@ service_bp = Blueprint('service', __name__, url_prefix='/services')
 
 @service_bp.route('/')
 def services():
-    return render_template('/services/services.html')
+    service = serviceObj.list_all_services()
+    return render_template('/services/services.html', service=service)
 
 
 

@@ -90,7 +90,7 @@ def start_containers():
     graph_data4 = get_graph_4()
 
     if request.method == "GET":
-        return render_template("containers/container.html", containers=containerObj, )
+        return render_template("containers/container.html", containers=containerObj)
     elif request.method == "POST":
         if request.form['my_btn'] == 'start':
             con_ids = request.form.getlist('container')
@@ -151,6 +151,7 @@ def deploy_container():
             con_port = request.form.get('container_port')
             host_port = request.form.get('host_port')
             ports = {con_port + '/tcp': host_port}
+            print(ports)
 
             # commands and logging
             command = request.form.get('command')
@@ -165,6 +166,7 @@ def deploy_container():
             vol = request.form.get('selected_volume')
             print(vol)
             volumes = {vol: {'bind': con_vol, 'mode': 'rw'}}
+            print(volumes)
             # networks
             network = request.form.get('network_dropdown')  # will get item from list...still not working
             print(network)
@@ -177,37 +179,61 @@ def deploy_container():
             env2 = request.form.get('env_2')
             env3 = request.form.get('env_3')
             env4 = request.form.get('env_4')
-            environment = [str(env1) + "=" + str(env2), str(env3) + "=" + str(env4)]
-
+            environment = {str(env1) + "=" + str(env2), str(env3) + "=" + str(env4)}
+            print(environment)
             # labels
             lable1 = request.form.get('lable1')
             lable2 = request.form.get('lable2')
             lable3 = request.form.get('lable3')
             lable4 = request.form.get('lable4')
-            labels = {lable1.upper(): lable2, lable3.upper(): lable4}
+            labels = {lable1: lable2, lable3: lable4}
+            print(labels)
 
             # Restart policy
             restart = request.form.get('restart_btn')
-            restart_policy = {'Name': restart}
+            restart_policy = {'Name': restart, "MaximumRetryCount": 5}
+            print(restart_policy)
 
             # Resources allocation
             memory_limit = request.form.get('memory_limit')
             cpuset_cpus = request.form.get('cpu_limit')
-            #
-            output = containerObj.deployContainer(name=con_name, image=image_name,
-                                                  hostname=net_host, user=user,
-                                                  ports=ports, environment=environment, volume=volumes,
-                                                  entrypoint=entry, working_dir=workingdir, domainname=net_domain,
-                                                  network=network, mac_address=net_mac, labels=labels,
-                                                  restart_policy=restart_policy,
-                                                  cpu_limit=cpuset_cpus, memory_limit=memory_limit)
-            #
-            # flash(output)
+
+            try:
+                containerObj.deployContainer(image_name, con_name, command, entry, workingdir, user
+                                             , network, net_host, net_domain, net_mac, ports, volumes, environment,
+                                             labels, restart_policy, memory_limit, cpuset_cpus)
+            except:
+                flash("Erro while deploying new container...")
         return redirect(url_for('container.containers'))
 
 
 @con_bp.route('/<con_id>')
 def get_container_by_id(con_id):
+    inspect = containerObj.inspectContainer(con_id)
+    log = containerObj.logprint(con_id)
+    container_status = containerObj.container_status(con_id)
+    return render_template('containers/container_id.html', container_inspect=inspect, container_log=log,
+                           container_status=container_status)
+
+
+@con_bp.route('/<con_id>', methods=['GET', 'POST'])
+def operation_on_container(con_id):
+    if request.method == "POST":
+        if request.form['my_btn'] == 'start':
+            containerObj.startContainer(con_id)
+        elif request.form['my_btn'] == 'stop':
+            containerObj.stopContainer(con_id)
+        elif request.form['my_btn'] == 'remove':
+            containerObj.removeContainer(con_id)
+        elif request.form['my_btn'] == 'pause':
+            containerObj.pauseContainer(con_id)
+        elif request.form['my_btn'] == 'resume':
+            containerObj.unpauseContainer(con_id)
+        elif request.form['my_btn'] == 'kill':
+            containerObj.killContainer(con_id)
+        elif request.form['my_btn'] == 'restart':
+            containerObj.restartContainer(con_id)
+
     inspect = containerObj.inspectContainer(con_id)
     log = containerObj.logprint(con_id)
     container_status = containerObj.container_status(con_id)

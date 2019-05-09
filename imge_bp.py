@@ -38,7 +38,10 @@ def remove_img():
     if request.method == 'POST':
         if request.form['my_btn'] == 'pull_image':
             image_name = request.form.get('image_name')
-            imageObj.pullImage(image_name)
+            try:
+                imageObj.pullImage(image_name)
+            except:
+                flash("Error occured while pulling the image....")
 
         elif request.form['my_btn'] == 'remove':
             all_images = request.form.getlist('image')
@@ -47,8 +50,10 @@ def remove_img():
 
         elif request.form['my_btn'] == 'push':
             all_images = request.form.getlist('image')
-
-            imageObj.pushImage(all_images)
+            try:
+                output = imageObj.pushImage(all_images)
+            except:
+                flash(output)
 
     return render_template("images/image.html", images=imageObj)
 
@@ -79,6 +84,9 @@ def build():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             print(os.path.realpath(UPLOAD_FOLDER))
-            imageObj.buildImage(os.path.realpath(os.path.realpath(UPLOAD_FOLDER)), tag=image_tag)
+            try:
+                output = imageObj.buildImage(os.path.realpath(os.path.realpath(UPLOAD_FOLDER)), tag=image_tag)
+            except:
+                flash(output)
 
-    return redirect(url_for('image.images'))
+    return redirect(url_for('image.build_new_image'))

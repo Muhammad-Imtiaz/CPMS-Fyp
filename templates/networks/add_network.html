@@ -12,7 +12,8 @@ Add-Networks
 
     {% for i in messages %}
     <div class="alert alert-warning alert-dismissible" role="alert">
-        {{i}}
+        <button type="button" class="close" data-dimiss="alert" aria-label="Close">Close</button>
+            {{i}}
     </div>
     {%endfor%}
     {% endif %}
@@ -29,8 +30,8 @@ Add-Networks
                 <div class="card-body">
                     <div class="row col-md-12">
                         <label class="control-label" align="left"><b>Name</b></label>
-                        <input class="form-control" id="con_name" name="container_name" align="right"
-                               placeholder="e.g my container" required="">
+                        <input class="form-control" id="net_name" name="network_name" align="right"
+                               placeholder="e.g my network" required="">
                     </div>
                     <br>
                     <div class="row" id="network">
